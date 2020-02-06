@@ -109,15 +109,32 @@ class GameBoard{
 	}
 
 	public void movePawn(int index, int amt){
-		spaces[(index+amt)%60] = spaces[index];
+		//spaces[(index+amt)%60] = spaces[index];
+		spaces[nextSpace(index)] = spaces[index];
 		spaces[index] = null;
 	}
 
 	public int nextSpace(int curr){
-		if(spaces[curr]){
-
-		}else{
+		if(curr == 2 && spaces[curr].myColor == Color.RED){
+			return 60;
+		}else if(curr == 17 && spaces[curr].myColor == Color.YELLOW){
+			return 65;
+		}else if(curr == 32 && spaces[curr].myColor == Color.GREEN){
+			return 70;
+		}else if(curr == 47 && spaces[curr].myColor == Color.BLUE){
+			return 75;
+		}else if(curr < 60){
 			return (curr+1)%60;
+		}else if(curr >= 75){
+			return curr+1;
+		}else if(curr >= 70){
+			return curr+1;
+		}else if(curr >= 65){
+			return curr+1;
+		}else if(curr >= 60){
+			return curr+1;
+		}else{
+			return -1;
 		}
 	}
 
