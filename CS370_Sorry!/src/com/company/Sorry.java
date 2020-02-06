@@ -1,7 +1,7 @@
 //Run this class to start a new game of Sorry!
 //This script handles turns and creates a board
 class Sorry{
-	gameBoard gb;
+	GameBoard gb;
 	int players;
 	int turn;
 
@@ -29,7 +29,7 @@ class Sorry{
 	//This will not work if the space is empty or the color doesn't match
 	public void takeTurn(int index){
 		if(gb.spaces[index] != null){
-			if(gb.spaces[index].pawnColor == Color.values()[turn]){
+			if(gb.spaces[index].getPawnColor() == Color.values()[turn]){
 				gb.advancePawn(index, 1);
 			}
 		}
@@ -66,17 +66,17 @@ class GameBoard{
 	
 	//Do not confuse with movePawn. This moves a pawn a set number of spaces.
 	//Takes a pre-existing pawn from an index and moves it a certain number of spaces forward or backwards
-	//This will make the space it used to occupy null and will knock out any pawn at the new position
+	//Calls movePawn to change position
 	public void advancePawn(int index, int spaces){
 		int start = index;
 		if(spaces >= 0){
 			for(int i = 0; i < spaces; i++){
-				index = nextSpace(index,spaces[start].pawnColor);
+				index = nextSpace(index,this.spaces[start].getPawnColor());
 			}
 			movePawn(start,index);
 		}else{
 			for(int i = 0; i > spaces; i--){
-				index = nextSpace(index,spaces[start].pawnColor);
+				index = nextSpace(index,this.spaces[start].getPawnColor());
 			}
 			movePawn(start,index);
 		}
@@ -137,15 +137,39 @@ class GameBoard{
 			return -1;
 		}	
 	}
+	public int getValue(Color k)
+	{
+	if(k==Color.RED)
+	{
+	return 0;
+	}
+	if(k==Color.YELLOW)
+	{
+	return 1;
+	}
+	if(k==Color.GREEN)
+	{
+	return 2;
+	}
+	if(k==Color.BLUE)
+	{
+	return 3;	
+	}
+	else return -1;
+	}
 }
 
 //A basic pawn who holds a color
 class Pawn{
-	Color pawnColor;
+	private Color pawnColor;
 
 	//Basic Pawn constructor that assigns it with a user defined color
 	public Pawn(Color c){
 		pawnColor = c;
+	}
+	public Color getPawnColor()
+	{
+		return pawnColor;
 	}
 }
 
