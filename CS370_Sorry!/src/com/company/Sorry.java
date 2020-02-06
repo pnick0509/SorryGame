@@ -1,7 +1,7 @@
 //Run this class to start a new game of Sorry!
 //This script handles turns and creates a board
 class Sorry{
-	oameBoard gb;
+	gameBoard gb;
 	int players;
 	int turn;
 
