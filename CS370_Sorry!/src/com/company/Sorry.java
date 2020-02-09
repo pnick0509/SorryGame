@@ -1,25 +1,54 @@
 //Run this class to start a new game of Sorry!
 //This script handles turns and creates a board
+import java.util.ArrayList;
+import java.util.Random;
 class Sorry{
 	GameBoard gb;
 	int players;
 	int turn;
-
+	ArrayList<Integer> cards;
+	Random rand;
 	//Starts a new game with four players
 	public Sorry(){
 		gb = new GameBoard();
-		int players = 4;
-		int turn = 0; //0: Red, 1: Yellow, 2: Green, 3: Blue
+		players = 4;
+		turn = 0; //0: Red, 1: Yellow, 2: Green, 3: Blue
+		createCards();
+		rand = new Random();
 	}
 
 	//Starts a new game with a variable amount of players
 	//Value should be in the range of 1 and 4
 	public Sorry(int num){
 		gb = new GameBoard();
-		int players = num;
-		int turn = 0;
+		players = num;
+		turn = 0;
+		createCards();
+		rand = new Random();
 	}
-
+	public void createCards()
+	{
+		for(int y=1; y<=13; y++)
+		{
+			if(y==6||y==9)
+			{
+				y++;
+			}
+		
+			for (int x=0; x<5; x++)
+				{
+					cards.add(y);
+				}
+			}
+		cards.add(1);
+	}
+	public int drawCard()
+	{
+		int temp= rand.nextInt()%cards.size();
+		int card = cards.get(temp);
+		cards.remove(temp);
+		return card;
+	}
 	//This script ensures that the turn is always set to an active player
 	public void nextTurn(){
 		turn = (turn+1)%players;
