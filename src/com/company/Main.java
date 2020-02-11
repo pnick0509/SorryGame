@@ -10,8 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.util.Random;
-
 
 public class Main extends Application {
 
@@ -22,6 +20,8 @@ public class Main extends Application {
         //Grid pane to hold the grid of squares, a borderbane to hold the grid or game board in
         GridPane squareGrid = new GridPane();
         BorderPane gameBoard = new BorderPane();
+        Sorry game = new Sorry();
+        Pawn[] screen = game.getSpaces();
 
         //For loop that constructs the gameboard by going through rows/columns
         //As it goes through it checks for specific column and row values to put buttons in
@@ -45,8 +45,7 @@ public class Main extends Application {
                         @Override
                         public void handle (ActionEvent event) {
                             int click = getInput(finalRow,finalCol);
-                            if(click != -1) {
-                                System.out.println(click);
+                            if(click != -1 && takeTurn(click)) {
                             }
 
                         }

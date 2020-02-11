@@ -3,11 +3,11 @@ package com.company;//Run this class to start a new game of Sorry!
 import java.util.ArrayList;
 import java.util.Random;
 class Sorry{
-    GameBoard gb;
-    int players;
-    int turn;
-    ArrayList<Integer> cards;
-    Random rand;
+    private GameBoard gb;
+    private int players;
+    private int turn;
+    private ArrayList<Integer> cards;
+    private Random rand;
     //Starts a new game with four players
     public Sorry(){
         gb = new GameBoard();
@@ -42,7 +42,7 @@ class Sorry{
         }
         cards.add(1);
     }
-    public int drawCard()
+    public int pullCard()
     {
         int temp= rand.nextInt()%cards.size();
         int card = cards.get(temp);
@@ -56,22 +56,34 @@ class Sorry{
 
     //This script takes in the index of a pawn you want to move.
     //This will not work if the space is empty or the color doesn't match
-    public void takeTurn(int index){
-        if(gb.spaces[index] != null){
-            if(gb.spaces[index].getPawnColor() == Color.values()[turn]){
+    public boolean takeTurn(int click){
+        boolean valid = false;
+        int index = click;
+        if(gb.getSpaces()[index] != null){
+            if(gb.getSpaces()[index].getPawnColor() == Color.values()[turn]){
                 gb.advancePawn(index, 1);
+                valid=true;
             }
         }
+        if(valid)
+        {
+            nextTurn();
+        }
+        return valid;
     }
 }
 
 //This class handles and maintains the board array(s)
 class GameBoard{
-    Pawn[] spaces;
-    int sideLength; //The amount of spaces on each side of the board
-    int safeLength; //The amount of spaces of each safe zone
-    int sides;      //The number of sides on the board (should be kept at 4, made to prevent magic numbers)
+    private Pawn[] spaces;
+    private int sideLength; //The amount of spaces on each side of the board
+    private int safeLength; //The amount of spaces of each safe zone
+    private int sides;      //The number of sides on the board (should be kept at 4, made to prevent magic numbers)
 
+    public Pawn[] getSpaces()
+    {
+        return spaces; 
+    }
     //Creates a default gameboard
     public GameBoard(){
         sideLength = 16;
