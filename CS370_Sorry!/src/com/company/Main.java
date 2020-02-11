@@ -44,22 +44,9 @@ public class Main extends Application {
                     bt.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle (ActionEvent event) {
-                                if (finalRow == 0) { //Top row
-                                    System.out.println(" " + finalCol);
-                                } else if (finalRow == 15) { //Bottom row
-                                    System.out.println(" " + (45 - finalCol));
-                                } else if (finalCol == 15) { //Right col
-                                    System.out.println(" " + (finalRow + 15));
-                                } else if (finalCol == 0) { //Left col
-                                    System.out.println(" " + (60 - finalRow));
-                                } else if (finalCol == 2 && finalRow <=5){ // Top Left Home
-                                    System.out.println(" " + (59 + finalRow));
-                                } else if (finalRow == 13 && finalCol <= 5) { // Bottom left home
-                                    System.out.println(" " + (74 + finalCol));
-                                } else if (finalCol == 13 && finalRow >= 10){
-                                    System.out.println(" " + (84 - finalRow)); // Bottom Right Home
-                                } else if (finalCol >= 10 && finalRow == 2 ){
-                                    System.out.println(" " + (79 - finalCol));
+                                int click = getInput(finalRow,finalCol);
+                                if(click != -1) {
+                                    System.out.println(click);
                                 }
 
                             }
@@ -92,5 +79,27 @@ public class Main extends Application {
 
 
 
+    }
+
+    public int getInput(int row, int col){
+        if (row == 0) { //Top row
+            return col;
+        } else if (row == 15) { //Bottom row
+            return 45-col;
+        } else if (col == 15) { //Right col
+            return row+15;
+        } else if (col == 0) { //Left col
+            return 60-row;
+        } else if (col == 2 && row <=5){ // Top Left Home
+            return 59+row;
+        } else if (row == 13 && col <= 5) { // Bottom left home
+            return 74+col;
+        } else if (col == 13 && row >= 10){ // Bottom Right Home
+            return 84-row;
+        } else if (col >= 10 && row == 2 ){
+            return 79-col;
+        } else {
+            return -1; //Error case
+        }
     }
 }
