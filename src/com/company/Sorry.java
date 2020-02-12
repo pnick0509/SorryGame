@@ -121,16 +121,20 @@ class GameBoard{
     //Do not confuse with movePawn. This moves a pawn a set number of spaces.
     //Takes a pre-existing pawn from an index and moves it a certain number of spaces forward or backwards
     //Calls movePawn to change position
-    public void advancePawn(int index, int spaces){
+    public void advancePawn(int index, int amount){
         int start = index;
-        if(spaces >= 0){
-            for(int i = 0; i < spaces; i++){
-                index = nextSpace(index,this.spaces[start].getPawnColor());
+        if(amount >= 0){
+            for(int i = 0; i < amount; i++){
+                index = nextSpace(index,spaces[start].getPawnColor());
             }
-            movePawn(start,index);
+            if(index == -2){
+                spaces[start] = null; //Pawn in home
+            }else {
+                movePawn(start, index);
+            }
         }else{
-            for(int i = 0; i > spaces; i--){
-                index = nextSpace(index,this.spaces[start].getPawnColor());
+            for(int i = 0; i > amount; i--){
+                index = lastSpace(index,spaces[start].getPawnColor());
             }
             movePawn(start,index);
         }
@@ -159,6 +163,8 @@ class GameBoard{
             return curr+1;
         }else if(curr == 59){ //Special case to go around the board
             return 0;
+        }else if(curr == 64 || curr == 69 || curr == 74 || curr == 79){ //Sentinel for home
+            return -2;
         }else{
             return -1;
         }
@@ -166,7 +172,7 @@ class GameBoard{
 
     //This takes in an index of a space on the board and the pawn color and returns the previous space
     //Exception: If there is no previous space, a -1 will be returned.
-    public int backSpace(int curr, pColor c){
+    public int lastSpace(int curr, pColor c){
         if(curr == 60){
             return 2;
         }else if(curr == 65){

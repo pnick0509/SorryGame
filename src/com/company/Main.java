@@ -93,18 +93,6 @@ public class Main extends Application {
                     }
 
                     squareGrid.getChildren().addAll(bt);
-
-                    /*if(getInput(row,col) != -1) {
-                        if (screen[getInput(row, col)] != null) {
-                            Circle gamePiece = new Circle();
-                            gamePiece.setRadius(15);
-                            squareGrid.setRowIndex(gamePiece, row);
-                            squareGrid.setColumnIndex(gamePiece, col);
-                            squareGrid.getChildren().addAll(gamePiece);
-
-                            System.out.println(getInput(row,col));
-                        }
-                    }*/
                 }
             }
         }
@@ -120,9 +108,6 @@ public class Main extends Application {
         primaryStage.setTitle("Sorry! v .01");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
-
     }
 
     public int getInput(int row, int col){
