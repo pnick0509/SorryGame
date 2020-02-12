@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -69,9 +71,30 @@ public class Main extends Application {
                     squareGrid.setRowIndex(bt, row);
                     squareGrid.setColumnIndex(bt, col);
 
+                    if(getInput(row,col) != -1) {
+                        if (screen[getInput(row, col)] != null) {
+                            Image image;
+                            if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
+                                image = new Image(getClass().getResourceAsStream("Red.png"));
+                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
+                                image = new Image(getClass().getResourceAsStream("Yellow.png"));
+                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
+                                image = new Image(getClass().getResourceAsStream("Green.png"));
+                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
+                                image = new Image(getClass().getResourceAsStream("Blue.png"));
+                            }else{
+                                image = new Image(getClass().getResourceAsStream("Red.png"));
+                            }
+                            ImageView imageView = new ImageView(image);
+                            imageView.setFitWidth(30);
+                            imageView.setFitHeight(30);
+                            bt.setGraphic(imageView);
+                        }
+                    }
+
                     squareGrid.getChildren().addAll(bt);
 
-                    if(getInput(row,col) != -1) {
+                    /*if(getInput(row,col) != -1) {
                         if (screen[getInput(row, col)] != null) {
                             Circle gamePiece = new Circle();
                             gamePiece.setRadius(15);
@@ -81,7 +104,7 @@ public class Main extends Application {
 
                             System.out.println(getInput(row,col));
                         }
-                    }
+                    }*/
                 }
             }
         }

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7094ba8c-4d69-41b4-b224-6416011d3902" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Red.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Sorry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Sorry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +33,17 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/company" />
     <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\cygwin64\home\preston\SorryNew\out\production\SorryGameNew\com\company" />
+      <recent name="C:\cygwin64\home\preston\SorryNew\out" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\cygwin64\home\preston\SorryNew\src\com\company" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -63,7 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1581456767345</updated>
       <workItem from="1581456773873" duration="419000" />
-      <workItem from="1581460683259" duration="4532000" />
+      <workItem from="1581460683259" duration="7032000" />
     </task>
     <servers />
   </component>
@@ -71,22 +81,22 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1812" height="292" key="GridCell.Tab.0.bottom" timestamp="1581465831659">
+    <state width="1812" height="292" key="GridCell.Tab.0.bottom" timestamp="1581468492503">
       <screen x="0" y="0" width="1855" height="1080" />
     </state>
-    <state width="1812" height="292" key="GridCell.Tab.0.bottom/0.0.1855.1080@0.0.1855.1080" timestamp="1581465831659" />
-    <state width="1812" height="292" key="GridCell.Tab.0.center" timestamp="1581465831659">
+    <state width="1812" height="292" key="GridCell.Tab.0.bottom/0.0.1855.1080@0.0.1855.1080" timestamp="1581468492503" />
+    <state width="1812" height="292" key="GridCell.Tab.0.center" timestamp="1581468492502">
       <screen x="0" y="0" width="1855" height="1080" />
     </state>
-    <state width="1812" height="292" key="GridCell.Tab.0.center/0.0.1855.1080@0.0.1855.1080" timestamp="1581465831659" />
-    <state width="1812" height="292" key="GridCell.Tab.0.left" timestamp="1581465831659">
+    <state width="1812" height="292" key="GridCell.Tab.0.center/0.0.1855.1080@0.0.1855.1080" timestamp="1581468492502" />
+    <state width="1812" height="292" key="GridCell.Tab.0.left" timestamp="1581468492502">
       <screen x="0" y="0" width="1855" height="1080" />
     </state>
-    <state width="1812" height="292" key="GridCell.Tab.0.left/0.0.1855.1080@0.0.1855.1080" timestamp="1581465831659" />
-    <state width="1812" height="292" key="GridCell.Tab.0.right" timestamp="1581465831659">
+    <state width="1812" height="292" key="GridCell.Tab.0.left/0.0.1855.1080@0.0.1855.1080" timestamp="1581468492502" />
+    <state width="1812" height="292" key="GridCell.Tab.0.right" timestamp="1581468492503">
       <screen x="0" y="0" width="1855" height="1080" />
     </state>
-    <state width="1812" height="292" key="GridCell.Tab.0.right/0.0.1855.1080@0.0.1855.1080" timestamp="1581465831659" />
+    <state width="1812" height="292" key="GridCell.Tab.0.right/0.0.1855.1080@0.0.1855.1080" timestamp="1581468492503" />
     <state x="584" y="250" key="run.anything.popup" timestamp="1581464929255">
       <screen x="0" y="0" width="1855" height="1080" />
     </state>
