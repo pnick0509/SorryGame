@@ -7,21 +7,29 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
 
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage){
+        Sorry game = new Sorry();
+
+        for(int i = 0; i < 3; i++) {
+            update(primaryStage,game);
+        }
+    }
+
+    public void update(Stage primaryStage, Sorry game) {
 
         //Grid and board parameters
         int rowNum = 16, colNum = 16, gridH = 16, gridW = 16;
         //Grid pane to hold the grid of squares, a borderbane to hold the grid or game board in
         GridPane squareGrid = new GridPane();
         BorderPane gameBoard = new BorderPane();
-        Sorry game = new Sorry();
-        Pawn[] screen = game.getSpaces();
+        Pawn[] screen = game.getBoard().getSpaces();
 
         //For loop that constructs the gameboard by going through rows/columns
         //As it goes through it checks for specific column and row values to put buttons in
@@ -45,9 +53,9 @@ public class Main extends Application {
                         @Override
                         public void handle (ActionEvent event) {
                             int click = getInput(finalRow,finalCol);
-                            if(click != -1 && takeTurn(click)) {
+                            if(click != -1 && game.takeTurn(click)){
+                                update(primaryStage,game);
                             }
-
                         }
                     });
 
@@ -57,9 +65,23 @@ public class Main extends Application {
                     gameSquare.setStroke(Color.BLACK);
                     gameSquare.setStrokeWidth(3);
                     gameSquare.setFill(Color.WHITE);
+
                     squareGrid.setRowIndex(bt, row);
                     squareGrid.setColumnIndex(bt, col);
+
                     squareGrid.getChildren().addAll(bt);
+
+                    if(getInput(row,col) != -1) {
+                        if (screen[getInput(row, col)] != null) {
+                            Circle gamePiece = new Circle();
+                            gamePiece.setRadius(15);
+                            squareGrid.setRowIndex(gamePiece, row);
+                            squareGrid.setColumnIndex(gamePiece, col);
+                            squareGrid.getChildren().addAll(gamePiece);
+
+                            System.out.println(getInput(row,col));
+                        }
+                    }
                 }
             }
         }

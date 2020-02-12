@@ -6,14 +6,14 @@ class Sorry{
     private GameBoard gb;
     private int players;
     private int turn;
-    private ArrayList<Integer> cards;
+    //private ArrayList<Integer> cards;
     private Random rand;
     //Starts a new game with four players
     public Sorry(){
         gb = new GameBoard();
         players = 4;
         turn = 0; //0: Red, 1: Yellow, 2: Green, 3: Blue
-        createCards();
+        //createCards();
         rand = new Random();
     }
 
@@ -23,10 +23,10 @@ class Sorry{
         gb = new GameBoard();
         players = num;
         turn = 0;
-        createCards();
+        //createCards();
         rand = new Random();
     }
-    public void createCards()
+    /*public void createCards()
     {
         for(int y=1; y<=13; y++)
         {
@@ -41,14 +41,15 @@ class Sorry{
             }
         }
         cards.add(1);
-    }
+    }*/
+    /*
     public int pullCard()
     {
         int temp= rand.nextInt()%cards.size();
         int card = cards.get(temp);
         cards.remove(temp);
         return card;
-    }
+    }*/
     //This script ensures that the turn is always set to an active player
     public void nextTurn(){
         turn = (turn+1)%players;
@@ -60,7 +61,7 @@ class Sorry{
         boolean valid = false;
         int index = click;
         if(gb.getSpaces()[index] != null){
-            if(gb.getSpaces()[index].getPawnColor() == Color.values()[turn]){
+            if(gb.getSpaces()[index].getPawnColor() == pColor.values()[turn]){
                 gb.advancePawn(index, 1);
                 valid=true;
             }
@@ -69,7 +70,12 @@ class Sorry{
         {
             nextTurn();
         }
+        System.out.println("Valid? "+valid);
         return valid;
+    }
+
+    public GameBoard getBoard(){
+        return gb;
     }
 }
 
@@ -82,7 +88,7 @@ class GameBoard{
 
     public Pawn[] getSpaces()
     {
-        return spaces; 
+        return spaces;
     }
     //Creates a default gameboard
     public GameBoard(){
@@ -90,10 +96,16 @@ class GameBoard{
         safeLength = 5;
         sides = 4;
         spaces = new Pawn[(sideLength*sides)-sides+safeLength*sides];
+
+        //Temp
+        newPawn(pColor.RED,0);
+        newPawn(pColor.YELLOW,6);
+        newPawn(pColor.GREEN,12);
+        newPawn(pColor.BLUE,18);
     }
 
     //Creates a new pawn and places it somewhere on the board
-    public void newPawn(Color c, int index){
+    public void newPawn(pColor c, int index){
         spaces[index] = new Pawn(c);
     }
 
@@ -103,6 +115,7 @@ class GameBoard{
     public void movePawn(int pre, int post){
         spaces[post] = spaces[pre];
         spaces[pre] = null;
+        System.out.println(pre+" --> "+post);
     }
 
     //Do not confuse with movePawn. This moves a pawn a set number of spaces.
@@ -125,14 +138,14 @@ class GameBoard{
 
     //This takes in an index of a space on the board and the pawn color and returns the next space
     //Exception: If there is no next space, a -1 will be returned.
-    public int nextSpace(int curr, Color c){
-        if(curr == 2 && c == Color.RED){
+    public int nextSpace(int curr, pColor c){
+        if(curr == 2 && c == pColor.RED){
             return 60;
-        }else if(curr == 17 && c == Color.YELLOW){
+        }else if(curr == 17 && c == pColor.YELLOW){
             return 65;
-        }else if(curr == 32 && c == Color.GREEN){
+        }else if(curr == 32 && c == pColor.GREEN){
             return 70;
-        }else if(curr == 47 && c == Color.BLUE){
+        }else if(curr == 47 && c == pColor.BLUE){
             return 75;
         }else if(curr >= 60 && curr <= 63){ //Final space on runway not counted because there is no next space
             return curr+1;
@@ -153,7 +166,7 @@ class GameBoard{
 
     //This takes in an index of a space on the board and the pawn color and returns the previous space
     //Exception: If there is no previous space, a -1 will be returned.
-    public int backSpace(int curr, Color c){
+    public int backSpace(int curr, pColor c){
         if(curr == 60){
             return 2;
         }else if(curr == 65){
@@ -178,21 +191,21 @@ class GameBoard{
             return -1;
         }
     }
-    public int getValue(Color k)
+    public int getValue(pColor k)
     {
-        if(k==Color.RED)
+        if(k==pColor.RED)
         {
             return 0;
         }
-        if(k==Color.YELLOW)
+        if(k==pColor.YELLOW)
         {
             return 1;
         }
-        if(k==Color.GREEN)
+        if(k==pColor.GREEN)
         {
             return 2;
         }
-        if(k==Color.BLUE)
+        if(k==pColor.BLUE)
         {
             return 3;
         }
@@ -202,13 +215,13 @@ class GameBoard{
 
 //A basic pawn who holds a color
 class Pawn{
-    private Color pawnColor;
+    private pColor pawnColor;
 
     //Basic Pawn constructor that assigns it with a user defined color
-    public Pawn(Color c){
+    public Pawn(pColor c){
         pawnColor = c;
     }
-    public Color getPawnColor()
+    public pColor getPawnColor()
     {
         return pawnColor;
     }
@@ -216,6 +229,6 @@ class Pawn{
 
 //The color enum for 4 different Sorry! players.
 //The players will always move in this turn order.
-enum Color{
+enum pColor{
     RED, YELLOW, GREEN, BLUE;
 }
