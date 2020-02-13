@@ -102,6 +102,10 @@ class GameBoard{
         newPawn(pColor.YELLOW,6);
         newPawn(pColor.GREEN,12);
         newPawn(pColor.BLUE,18);
+        newPawn(pColor.RED,24);
+        newPawn(pColor.YELLOW,30);
+        newPawn(pColor.GREEN,36);
+        newPawn(pColor.BLUE,40);
     }
 
     //Creates a new pawn and places it somewhere on the board
