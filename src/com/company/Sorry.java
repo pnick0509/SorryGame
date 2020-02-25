@@ -6,14 +6,18 @@ class Sorry{
     private GameBoard gb;
     private int players;
     private int turn;
-    //private ArrayList<Integer> cards;
+    private cardMethods rules;
+    private ArrayList<Integer> cards;
     private Random rand;
+    private int prevButton=-1;
     //Starts a new game with four players
     public Sorry(){
         gb = new GameBoard();
+        rules = new cardMethods(this);
         players = 4;
         turn = 0; //0: Red, 1: Yellow, 2: Green, 3: Blue
-        //createCards();
+        cards = new ArrayList<Integer>();
+        createCards();
         rand = new Random();
     }
 
@@ -23,10 +27,11 @@ class Sorry{
         gb = new GameBoard();
         players = num;
         turn = 0;
-        //createCards();
+        cards = new ArrayList<Integer>();
+        createCards();
         rand = new Random();
     }
-    /*public void createCards()
+    public void createCards()
     {
         for(int y=1; y<=13; y++)
         {
@@ -41,18 +46,38 @@ class Sorry{
             }
         }
         cards.add(1);
-    }*/
-    /*
+    }
+    
     public int pullCard()
     {
         int temp= rand.nextInt()%cards.size();
         int card = cards.get(temp);
         cards.remove(temp);
         return card;
-    }*/
+    }
+/*
+Uses the class cardMethods to handle card choices.
+*/ 
+public boolean useCard(int cardNumber,int button)
+{
+    return(rules.useCard(cardNumber,button));
+}
     //This script ensures that the turn is always set to an active player
-    public void nextTurn(){
+    public void nextTurn()
+    {
         turn = (turn+1)%players;
+    }
+    public void goAgain()
+    {
+        if(turn==0)
+        {
+            turn = players-1;
+        }
+        else 
+        {
+            turn--;
+        }
+    
     }
 
     //This script takes in the index of a pawn you want to move.
@@ -143,7 +168,28 @@ class GameBoard{
             movePawn(start,index);
         }
     }
-
+    /*
+    Finds the distance between two spaces
+    */
+    public int distanceBetweenSpaces(int startSpace,int endSpace, pColor c)
+    {   
+        int i =0;
+        while(nextSpace(startSpace,c)<endSpace)
+        {
+            i++;
+        }
+        return i;
+    }
+    /*
+    Swaps the position of two pawns
+    NEEDS TO BE UPDATED TO NOT ALLOW SWAPS AT END POSITIONS (not done since this requires knowledge of the new squares)
+    */
+    public void SwapPawn(int startSpace,int endSpace)
+    {
+        Pawn temp = space[endSpace];
+        spaces[endSpace]=space[startSpace];
+        spaces[startSpace]=space[endSpace];
+    }
     //This takes in an index of a space on the board and the pawn color and returns the next space
     //Exception: If there is no next space, a -1 will be returned.
     public int nextSpace(int curr, pColor c){
