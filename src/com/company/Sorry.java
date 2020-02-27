@@ -11,8 +11,10 @@ class Sorry{
     private ArrayList<Integer> cards;
     private Random rand;
     private int prevButton=-1;
+    private int currCard;
 
     public boolean debug_noTurn = true;
+
     //Starts a new game with four players
     public Sorry(){
         gb = new GameBoard();
@@ -22,6 +24,7 @@ class Sorry{
         cards = new ArrayList<Integer>();
         createCards();
         rand = new Random();
+        currCard = pullCard();
     }
 
     //Starts a new game with a variable amount of players
@@ -34,9 +37,10 @@ class Sorry{
         createCards();
         rand = new Random();
     }
+
     public void createCards()
     {
-        for(int y=1; y<=13; y++)
+        for(int y=1; y<=5/*13*/; y++) //Temporarily changed for Cycle 1.2
         {
             if(y==6||y==9)
             {
@@ -53,10 +57,14 @@ class Sorry{
     
     public int pullCard()
     {
-        int temp= rand.nextInt()%cards.size();
+        int temp = Math.abs(rand.nextInt())%cards.size();
         int card = cards.get(temp);
         cards.remove(temp);
         return card;
+    }
+
+    public int getCard(){
+        return currCard;
     }
 
     //Uses the class cardMethods to handle card choices.
@@ -68,6 +76,7 @@ class Sorry{
     public void nextTurn()
     {
         turn = (turn+1)%players;
+        currCard = pullCard();
     }
 
     public void goAgain()
@@ -78,7 +87,7 @@ class Sorry{
         else {
             turn--;
         }
-    
+        currCard = pullCard();
     }
 
     //This script takes in the index of a pawn you want to move.
@@ -87,8 +96,9 @@ class Sorry{
         boolean valid = false;
         int index = click;
         if(gb.getSpaces()[index] != null){
+            //Add a check here to make sure pawn isn't wasting their turn if they try to move a pawn that cannot move into home.
             if(gb.getSpaces()[index].getPawnColor() == pColor.values()[turn] || debug_noTurn){
-                gb.advancePawn(index, 1);
+                useCard(currCard,index);
                 valid=true;
             }
         }
@@ -170,14 +180,16 @@ class GameBoard{
             }
             if(index == -2){
                 spaces[start] = null; //Pawn in home
-            }else {
+            }else if(index != -1){
                 movePawn(start, index);
             }
         }else{
             for(int i = 0; i > amount; i--){
                 index = lastSpace(index,spaces[start].getPawnColor());
             }
-            movePawn(start,index);
+            if(index != -1){
+                movePawn(start,index);
+            }
         }
     }
 
@@ -203,17 +215,20 @@ class GameBoard{
     //This takes in an index of a space on the board and the pawn color and returns the next space
     //Exception: If there is no next space, a -1 will be returned.
     public int nextSpace(int curr, pColor c){
-        if(curr == getValue(c)*homeSpaces+homeOffset && curr < marginCount){ //Enter Safe Area
+        if(curr == -1 || curr == -2){
+            return -1;
+        }else if(curr == getValue(c)*homeSpaces+homeOffset && curr < marginCount){ //Enter Safe Area
             return marginCount+(getValue(c)*safeLength);
         }else if(curr == marginCount-1){ //Go around the board
             return 0;
-        }else if((curr-marginCount)%safeLength == safeLength-1){ //Enter Home
+        }else if(/*(curr-marginCount)%safeLength == safeLength-1*/curr == marginCount+(getValue(c)+1)*safeLength-1){ //Enter Home
             return -2;
         }else if(curr < marginCount){ //Move forward while in margin
             return curr+1;
         }else if(curr >= marginCount && (curr-marginCount)%safeLength < safeLength-1){ //Move forward in safe area
             return curr+1;
         }else{ //Fail state
+            System.out.println("Error"+(marginCount+(getValue(c)+1)*safeLength-1));
             return -1;
         }
     }

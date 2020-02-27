@@ -18,9 +18,10 @@ import static javafx.scene.paint.Color.GREEN;
 
 
 public class Main extends Application {
+    Sorry game;
 
     public void start(Stage primaryStage){
-        Sorry game = new Sorry();
+        game = new Sorry();
 
         for(int i = 0; i < 3; i++) {
             update(primaryStage,game);
@@ -114,7 +115,7 @@ public class Main extends Application {
         }
 
         //Draw and position the card in screen
-        Image cardImage = new Image(getNextCard(1));
+        Image cardImage = new Image(setNextCard(game.getCard()));
         ImageView cardView = new ImageView(cardImage);
         cardView.setFitWidth(250);
         cardView.setFitHeight(350);
@@ -135,18 +136,18 @@ public class Main extends Application {
 
 
         //Construct the scene and launch
-        primaryStage.setTitle("Sorry! v .01");
+        primaryStage.setTitle("Sorry! Cycle 1.2");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     //Gets the next card to draw
-    public String getNextCard(int nextCard){
+    public String setNextCard(int nextCard){
         switch(nextCard){
             case 1: return "One.png";
             case 2: return "Two.png";
             case 3: return "Three.png";
-            case 4: return "4.png";
+            case 4: return "Four.png";
             case 5: return "Five.png";
             case 7: return "Seven.png";
             case 8: return "Eight.png";
