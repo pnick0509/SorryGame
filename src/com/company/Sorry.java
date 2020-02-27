@@ -2,6 +2,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Random;
 //Run this class to start a new game of Sorry!
+
 class Sorry{
     private GameBoard gb;
     private int players;
@@ -10,6 +11,8 @@ class Sorry{
     private ArrayList<Integer> cards;
     private Random rand;
     private int prevButton=-1;
+
+    public boolean debug_noTurn = true;
     //Starts a new game with four players
     public Sorry(){
         gb = new GameBoard();
@@ -86,7 +89,7 @@ public boolean useCard(int cardNumber,int button)
         boolean valid = false;
         int index = click;
         if(gb.getSpaces()[index] != null){
-            if(gb.getSpaces()[index].getPawnColor() == pColor.values()[turn]){
+            if(gb.getSpaces()[index].getPawnColor() == pColor.values()[turn] || debug_noTurn){
                 gb.advancePawn(index, 1);
                 valid=true;
             }
@@ -109,6 +112,8 @@ class GameBoard{
     private Pawn[] spaces;
     private int marginCount; //The amount of spaces on the perimeter of the board
     private int safeLength; //The amount of spaces of each safe zone
+    private int homeOffset = 7;
+    private int homeSpaces = 15;
 
     public Pawn[] getSpaces()
     {
@@ -130,6 +135,10 @@ class GameBoard{
         newPawn(pColor.YELLOW,30);
         newPawn(pColor.GREEN,36);
         newPawn(pColor.BLUE,40);
+        newPawn(pColor.ORANGE,46);
+        newPawn(pColor.PURPLE,52);
+        newPawn(pColor.ORANGE,58);
+        newPawn(pColor.PURPLE,64);
     }
 
     //Creates a new pawn and places it somewhere on the board
@@ -143,7 +152,7 @@ class GameBoard{
     public void movePawn(int pre, int post){
         spaces[post] = spaces[pre];
         spaces[pre] = null;
-        //System.out.println(pre+" --> "+post);
+        System.out.println(pre+" --> "+post);
     }
 
     //Do not confuse with movePawn. This moves a pawn a set number of spaces.
@@ -183,7 +192,7 @@ class GameBoard{
     Swaps the position of two pawns
     NEEDS TO BE UPDATED TO NOT ALLOW SWAPS AT END POSITIONS (not done since this requires knowledge of the new squares)
     */
-    public void SwapPawn(int startSpace,int endSpace)
+    public void swapPawn(int startSpace,int endSpace)
     {
         Pawn temp = spaces[endSpace];
         spaces[endSpace]=spaces[startSpace];
@@ -192,29 +201,17 @@ class GameBoard{
     //This takes in an index of a space on the board and the pawn color and returns the next space
     //Exception: If there is no next space, a -1 will be returned.
     public int nextSpace(int curr, pColor c){
-        if(curr == 2 && c == pColor.RED){
-            return 60;
-        }else if(curr == 17 && c == pColor.YELLOW){
-            return 65;
-        }else if(curr == 32 && c == pColor.GREEN){
-            return 70;
-        }else if(curr == 47 && c == pColor.BLUE){
-            return 75;
-        }else if(curr >= 60 && curr <= 63){ //Final space on runway not counted because there is no next space
-            return curr+1;
-        }else if(curr >= 65 && curr <= 68){
-            return curr+1;
-        }else if(curr >= 70 && curr <= 73){
-            return curr+1;
-        }else if(curr >= 75 && curr <= 78){
-            return curr+1;
-        }else if(curr >= 0 && curr <= 58){
-            return curr+1;
-        }else if(curr == 59){ //Special case to go around the board
+        if(curr == getValue(c)*homeSpaces+homeOffset && curr < marginCount){ //Enter Safe Area
+            return marginCount+(getValue(c)*safeLength);
+        }else if(curr == marginCount-1){ //Go around the board
             return 0;
-        }else if(curr == 64 || curr == 69 || curr == 74 || curr == 79){ //Sentinel for home
+        }else if((curr-marginCount)%safeLength == safeLength-1){ //Enter Home
             return -2;
-        }else{
+        }else if(curr < marginCount){ //Move forward while in margin
+            return curr+1;
+        }else if(curr >= marginCount /*&& (curr-marginCount)%safeLength < safeLength-1*/){ //Move forward in safe area
+            return curr+1;
+        }else{ //Fail state
             return -1;
         }
     }

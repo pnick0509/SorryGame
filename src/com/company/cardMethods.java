@@ -123,7 +123,7 @@ public class cardMethods{
         }
         else
         {
-            gb.SwapPawn(previousSpace,space);
+            gb.swapPawn(previousSpace,space);
             previousSpace=-1;
             return true;
         }
@@ -137,7 +137,7 @@ public class cardMethods{
         }
         else
         {
-            gb.SwapPawn(previousSpace,space);
+            gb.swapPawn(previousSpace,space);
             previousSpace=-1;
             return true;
         }

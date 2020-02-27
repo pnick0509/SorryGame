@@ -94,6 +94,10 @@ public class Main extends Application {
                                 image = new Image(getClass().getResourceAsStream("Green.png"));
                             }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
                                 image = new Image(getClass().getResourceAsStream("Blue.png"));
+                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
+                                image = new Image(getClass().getResourceAsStream("Orange.png"));
+                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
+                                image = new Image(getClass().getResourceAsStream("Purple.png"));
                             }else{
                                 image = new Image(getClass().getResourceAsStream("Unknown.png"));
                             }
