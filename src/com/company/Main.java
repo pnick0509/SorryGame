@@ -66,6 +66,7 @@ public class Main extends Application {
                         @Override
                         public void handle (ActionEvent event) {
                             int click = getInput(finalRow,finalCol);
+                            System.out.println("Input: "+click);
                             if(click != -1 && game.takeTurn(click)){
                                 update(primaryStage,game);
                             }
@@ -94,7 +95,7 @@ public class Main extends Application {
                             }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
                                 image = new Image(getClass().getResourceAsStream("Blue.png"));
                             }else{
-                                image = new Image(getClass().getResourceAsStream("Red.png"));
+                                image = new Image(getClass().getResourceAsStream("Unknown.png"));
                             }
                             ImageView imageView = new ImageView(image);
                             imageView.setFitWidth(30);
@@ -154,7 +155,30 @@ public class Main extends Application {
     }
 
     public int getInput(int row, int col){
-        if (row == 0) { //Top row
+        if(row == 0) { //Top row
+            return col;
+        }else if(row == 15){
+            return 75-col;
+        }else if(col == 0){
+            return 90-row;
+        }else if(col == 30){
+            return 30+row;
+        }else if(col == 7 && row <= 5){ //Red Home
+            return row+89;
+        }else if(col == 22 && row <= 5){ //Orange Home
+            return row+94;
+        }else if(row == 7 && col >= 25){ //Yellow Home
+            return 104-col+25;
+        }else if(col == 23 && row >= 10){ //Green Home
+            return 109-row+10;
+        }else if(col == 8 && row >= 10){ //Blue Home
+            return 114-row+10;
+        }else if(row == 8 && col <= 5){
+            return 114+col;
+        }else{
+            return -1;
+        }
+        /*if (row == 0) { //Top row
             return col;
         } else if (row == 15) { //Bottom row
             return 75-col;
@@ -172,6 +196,6 @@ public class Main extends Application {
             return 79-col;
         } else {
             return -1; //Error case
-        }
+        }*/
     }
 }

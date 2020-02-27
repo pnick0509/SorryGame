@@ -1,7 +1,7 @@
-package com.company;//Run this class to start a new game of Sorry!
-//This script handles turns and creates a board
+package com.company;
 import java.util.ArrayList;
 import java.util.Random;
+//Run this class to start a new game of Sorry!
 class Sorry{
     private GameBoard gb;
     private int players;
@@ -14,8 +14,8 @@ class Sorry{
     public Sorry(){
         gb = new GameBoard();
         rules = new cardMethods(this);
-        players = 4;
-        turn = 0; //0: Red, 1: Yellow, 2: Green, 3: Blue
+        players = 6;
+        turn = 0; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
         createCards();
         rand = new Random();
@@ -95,7 +95,7 @@ public boolean useCard(int cardNumber,int button)
         {
             nextTurn();
         }
-        System.out.println("Valid? "+valid);
+        //System.out.println("Valid? "+valid);
         return valid;
     }
 
@@ -107,9 +107,8 @@ public boolean useCard(int cardNumber,int button)
 //This class handles and maintains the board array(s)
 class GameBoard{
     private Pawn[] spaces;
-    private int sideLength; //The amount of spaces on each side of the board
+    private int marginCount; //The amount of spaces on the perimeter of the board
     private int safeLength; //The amount of spaces of each safe zone
-    private int sides;      //The number of sides on the board (should be kept at 4, made to prevent magic numbers)
 
     public Pawn[] getSpaces()
     {
@@ -117,10 +116,10 @@ class GameBoard{
     }
     //Creates a default gameboard
     public GameBoard(){
-        sideLength = 16;
+        marginCount = 90;
         safeLength = 5;
-        sides = 4;
-        spaces = new Pawn[(sideLength*sides)-sides+safeLength*sides];
+        //spaces = new Pawn[(sideLength*sides)-sides+safeLength*sides];
+        spaces = new Pawn[marginCount+safeLength*6];
 
         //Temp
         newPawn(pColor.RED,0);
@@ -144,7 +143,7 @@ class GameBoard{
     public void movePawn(int pre, int post){
         spaces[post] = spaces[pre];
         spaces[pre] = null;
-        System.out.println(pre+" --> "+post);
+        //System.out.println(pre+" --> "+post);
     }
 
     //Do not confuse with movePawn. This moves a pawn a set number of spaces.
@@ -186,9 +185,9 @@ class GameBoard{
     */
     public void SwapPawn(int startSpace,int endSpace)
     {
-        Pawn temp = space[endSpace];
-        spaces[endSpace]=space[startSpace];
-        spaces[startSpace]=space[endSpace];
+        Pawn temp = spaces[endSpace];
+        spaces[endSpace]=spaces[startSpace];
+        spaces[startSpace]=spaces[endSpace];
     }
     //This takes in an index of a space on the board and the pawn color and returns the next space
     //Exception: If there is no next space, a -1 will be returned.
@@ -249,23 +248,21 @@ class GameBoard{
     }
     public int getValue(pColor k)
     {
-        if(k==pColor.RED)
-        {
+        if(k==pColor.RED){
             return 0;
-        }
-        if(k==pColor.YELLOW)
-        {
+        }else if(k==pColor.ORANGE){
             return 1;
-        }
-        if(k==pColor.GREEN)
-        {
+        }else if(k==pColor.YELLOW){
             return 2;
-        }
-        if(k==pColor.BLUE)
-        {
+        }else if(k==pColor.GREEN){
             return 3;
+        }else if(k==pColor.BLUE) {
+            return 4;
+        }else if(k==pColor.PURPLE){
+            return 5;
+        }else{
+            return -1;
         }
-        else return -1;
     }
 }
 
@@ -286,5 +283,5 @@ class Pawn{
 //The color enum for 4 different Sorry! players.
 //The players will always move in this turn order.
 enum pColor{
-    RED, YELLOW, GREEN, BLUE;
+    RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
 }

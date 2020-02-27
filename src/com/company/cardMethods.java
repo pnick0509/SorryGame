@@ -1,147 +1,146 @@
+package com.company;
+
 import javax.lang.model.util.ElementScanner6;
 
-public class cardMethods
-{
-private Sorry game;
-private Gameboard gb;
-private int previousSelection;
-private int remainingSpaces;
-public cardMethods(Sorry game)
-{
-this.game = game;
-game.gb=gb;
-previousSelection = -1;
-remainingSpaces=0;
-}
-public boolean one(int space)
-{
-gb.advancepawn(space,1);
-return true;
-}
-public boolean two(int space)
-{
-gb.advance(space,2);
-game.goAgain();
-return true;
-}
-public boolean three(int space)
-{
-gb.advance(space,3);
-return true;
-}
-public boolean four(int space)
-{
-gb.advance(space,-4);    
-return true;
-}
-public boolean five(int space)
-{
-gb.advance(space,5);
-return true;
-}
-/*
-In case we add it
-*/
-public boolean six(int space)
-{
-return true;
-} 
-public boolean seven(int space)
-{
-if(remainingSpaces==0)
-    {
-        remainingSpaces=7;
-    }
-if(previousSpace==-1)
-    {   
-        previousSpace = space;
-        return false;
-    }
-else if(remainingSpaces!=7)
-{
-    advancePawn(space,remainingSpaces);
-    previousSpace=-1;
-    remainingSpaces=0;
-    return true;
-}
-else if(distanceBetweenSpaces(previousSpace,space)<7)
-{
-    int temp =distanceBetweenSpace(previousSpace,space);
-    remainingSpaces=remainingSpaces-temp;
-    advancePawn(previousSpace,temp);
-    if(remainingSpaces==0)
-    {
-        previousSpace=-1;
-        return true;
-    }
-    else 
-    {
-        return false;
-    }
-}
-}
-public boolean eight(int space)
-{
-    advancePawn(space,8);
-    return true;
-}
-public boolean nine(int space)
-{
-    return true;
-}
-public boolean ten(int space)
-{
-    if(previousSpace==-1)
-    {
-        previousSpace = space;
-        return false;
-    }
-    else if(space<previousSpace)
-    {
+public class cardMethods{
+    private Sorry game;
+    private GameBoard gb;
+    private int previousSpace;
+    private int remainingSpaces;
+    public cardMethods(Sorry game) {
+        this.game = game;
+        this.gb = game.getBoard();
         previousSpace = -1;
-        advancePawn(space,-1);
+        remainingSpaces=0;
+    }
+    public boolean one(int space) {
+        gb.advancePawn(space,1);
         return true;
     }
-    else
-    {   
-        previousSpace = -1;
-        advancePawn(space,10);
+    public boolean two(int space) {
+        gb.advancePawn(space,2);
+        game.goAgain();
         return true;
     }
-}
-public boolean eleven(int space)
-{   
-    if(previousSpace==-1)
+    public boolean three(int space)
     {
-        previousSpace=space;
+        gb.advancePawn(space,3);
+        return true;
+    }
+    public boolean four(int space)
+    {
+        gb.advancePawn(space,-4);
+        return true;
+    }
+    public boolean five(int space)
+    {
+        gb.advancePawn(space,5);
+        return true;
+    }
+    /*
+    In case we add it
+    */
+    public boolean six(int space)
+    {
+    return true;
+    }
+    public boolean seven(int space)
+    {
+        if(remainingSpaces==0)
+            {
+                remainingSpaces=7;
+            }
+            if(previousSpace==-1)
+            {
+                previousSpace = space;
+                return false;
+            }
+        else if(remainingSpaces!=7)
+        {
+            gb.advancePawn(space,remainingSpaces);
+            previousSpace=-1;
+            remainingSpaces=0;
+            return true;
+        }
+        else if(gb.distanceBetweenSpaces(previousSpace,space,gb.getSpaces()[space].getPawnColor())<7)
+        {
+            int temp =gb.distanceBetweenSpaces(previousSpace,space,gb.getSpaces()[space].getPawnColor());
+            remainingSpaces=remainingSpaces-temp;
+            gb.advancePawn(previousSpace,temp);
+            if(remainingSpaces==0)
+            {
+                previousSpace=-1;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         return false;
     }
-    else if(distanceBetweenSpaces(previousSpace,space)==11)
+    public boolean eight(int space)
     {
-        advancePawn(previousSpace,11);
-        previousSpace=-1;
+        gb.advancePawn(space,8);
         return true;
     }
-    else
+    public boolean nine(int space)
     {
-        swap(previousSpace,space);
-        previousSpace=-1;
         return true;
     }
-}
-public boolean twelve(int space)
-{
-    if(previousSpace==-1)
+    public boolean ten(int space)
     {
-        previousSpace=space;
-        return false;
+        if(previousSpace==-1)
+        {
+            previousSpace = space;
+            return false;
+        }
+        else if(space<previousSpace)
+        {
+            previousSpace = -1;
+            gb.advancePawn(space,-1);
+            return true;
+        }
+        else
+        {
+            previousSpace = -1;
+            gb.advancePawn(space,10);
+            return true;
+        }
     }
-    else  
+    public boolean eleven(int space)
     {
-        swap(previousSpace,space);
-        previousSpace=-1;
-        return true;
+        if(previousSpace==-1)
+        {
+            previousSpace=space;
+            return false;
+        }
+        else if(gb.distanceBetweenSpaces(previousSpace,space,gb.getSpaces()[space].getPawnColor())==11)
+        {
+            gb.advancePawn(previousSpace,11);
+            previousSpace=-1;
+            return true;
+        }
+        else
+        {
+            gb.SwapPawn(previousSpace,space);
+            previousSpace=-1;
+            return true;
+        }
     }
+    public boolean twelve(int space)
+    {
+        if(previousSpace==-1)
+        {
+            previousSpace=space;
+            return false;
+        }
+        else
+        {
+            gb.SwapPawn(previousSpace,space);
+            previousSpace=-1;
+            return true;
+        }
 }
 public boolean useCard(int cardNumber, int button)
     {
@@ -173,7 +172,7 @@ public boolean useCard(int cardNumber, int button)
             case 12:
                 return twelve(button);
             default:
-                return -1;
+                return false;
 
         }
     }
