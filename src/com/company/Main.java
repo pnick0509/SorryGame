@@ -114,7 +114,7 @@ public class Main extends Application {
         }
 
         //Draw and position the card in screen
-        Image cardImage = new Image(getNextCard(2));
+        Image cardImage = new Image(getNextCard(1));
         ImageView cardView = new ImageView(cardImage);
         cardView.setFitWidth(250);
         cardView.setFitHeight(350);

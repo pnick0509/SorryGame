@@ -139,6 +139,13 @@ class GameBoard{
         newPawn(pColor.PURPLE,52);
         newPawn(pColor.ORANGE,58);
         newPawn(pColor.PURPLE,64);
+
+        newPawn(pColor.RED,92);
+        newPawn(pColor.ORANGE,97);
+        newPawn(pColor.YELLOW,102);
+        newPawn(pColor.GREEN,107);
+        newPawn(pColor.BLUE,112);
+        newPawn(pColor.PURPLE,117);
     }
 
     //Creates a new pawn and places it somewhere on the board
@@ -209,7 +216,7 @@ class GameBoard{
             return -2;
         }else if(curr < marginCount){ //Move forward while in margin
             return curr+1;
-        }else if(curr >= marginCount /*&& (curr-marginCount)%safeLength < safeLength-1*/){ //Move forward in safe area
+        }else if(curr >= marginCount && (curr-marginCount)%safeLength < safeLength-1){ //Move forward in safe area
             return curr+1;
         }else{ //Fail state
             return -1;
@@ -219,30 +226,19 @@ class GameBoard{
     //This takes in an index of a space on the board and the pawn color and returns the previous space
     //Exception: If there is no previous space, a -1 will be returned.
     public int lastSpace(int curr, pColor c){
-        if(curr == 60){
-            return 2;
-        }else if(curr == 65){
-            return 17;
-        }else if(curr == 70){
-            return 32;
-        }else if(curr == 75){
-            return 47;
-        }else if(curr >= 61 && curr <= 64){
+        if(curr >= marginCount && (curr-marginCount)%safeLength == 0){ //Leave safe zone
+            return homeOffset+(getValue(c)*homeSpaces);
+        }if(curr == 0){ //Go around the board
+            return marginCount-1;
+        }else if(curr > 0 && curr < marginCount){ //Go backwards while in margin
             return curr-1;
-        }else if(curr >= 66 && curr <= 69){
+        }else if(curr >= marginCount){
             return curr-1;
-        }else if(curr >= 71 && curr <= 74){
-            return curr-1;
-        }else if(curr >= 76 && curr <= 79){
-            return curr-1;
-        }else if(curr >= 1 && curr <= 59){
-            return curr-1;
-        }else if(curr == 0){
-            return 59;
-        }else{
+        }else{ //Fail state
             return -1;
         }
     }
+
     public int getValue(pColor k)
     {
         if(k==pColor.RED){
