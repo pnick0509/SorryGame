@@ -177,29 +177,10 @@ public class Main extends Application {
             return 109-row+10;
         }else if(col == 8 && row >= 10){ //Blue Home
             return 114-row+10;
-        }else if(row == 8 && col <= 5){
+        }else if(row == 8 && col <= 5){ //Purple Home
             return 114+col;
         }else{
             return -1;
         }
-        /*if (row == 0) { //Top row
-            return col;
-        } else if (row == 15) { //Bottom row
-            return 75-col;
-        } else if (col == 15) { //Right col
-            return row+15;
-        } else if (col == 0) { //Left col
-            return 60-row;
-        } else if (col == 2 && row <=5){ // Top Left Home
-            return 59+row;
-        } else if (row == 13 && col <= 5) { // Bottom left home
-            return 74+col;
-        } else if (col == 13 && row >= 10){ // Bottom Right Home
-            return 84-row;
-        } else if (col >= 10 && row == 2 ){
-            return 79-col;
-        } else {
-            return -1; //Error case
-        }*/
     }
 }

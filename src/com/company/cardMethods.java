@@ -7,43 +7,49 @@ public class cardMethods{
     private GameBoard gb;
     private int previousSpace;
     private int remainingSpaces;
+
     public cardMethods(Sorry game) {
         this.game = game;
         this.gb = game.getBoard();
         previousSpace = -1;
         remainingSpaces=0;
     }
+
     public boolean one(int space) {
         gb.advancePawn(space,1);
         return true;
     }
+
     public boolean two(int space) {
         gb.advancePawn(space,2);
         game.goAgain();
         return true;
     }
+
     public boolean three(int space)
     {
         gb.advancePawn(space,3);
         return true;
     }
+
     public boolean four(int space)
     {
         gb.advancePawn(space,-4);
         return true;
     }
+
     public boolean five(int space)
     {
         gb.advancePawn(space,5);
         return true;
     }
-    /*
-    In case we add it
-    */
+
+    /* In case we add it */
     public boolean six(int space)
     {
-    return true;
+        return true;
     }
+
     public boolean seven(int space)
     {
         if(remainingSpaces==0)
@@ -79,15 +85,19 @@ public class cardMethods{
         }
         return false;
     }
+
     public boolean eight(int space)
     {
         gb.advancePawn(space,8);
         return true;
     }
+
+    /* In case we add it */
     public boolean nine(int space)
     {
         return true;
     }
+
     public boolean ten(int space)
     {
         if(previousSpace==-1)
@@ -108,6 +118,7 @@ public class cardMethods{
             return true;
         }
     }
+
     public boolean eleven(int space)
     {
         if(previousSpace==-1)
@@ -128,6 +139,7 @@ public class cardMethods{
             return true;
         }
     }
+
     public boolean twelve(int space)
     {
         if(previousSpace==-1)
@@ -142,6 +154,7 @@ public class cardMethods{
             return true;
         }
 }
+
 public boolean useCard(int cardNumber, int button)
     {
 

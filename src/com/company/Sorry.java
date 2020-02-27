@@ -58,26 +58,24 @@ class Sorry{
         cards.remove(temp);
         return card;
     }
-/*
-Uses the class cardMethods to handle card choices.
-*/ 
-public boolean useCard(int cardNumber,int button)
-{
-    return(rules.useCard(cardNumber,button));
-}
+
+    //Uses the class cardMethods to handle card choices.
+    public boolean useCard(int cardNumber,int button) {
+        return(rules.useCard(cardNumber,button));
+    }
+
     //This script ensures that the turn is always set to an active player
     public void nextTurn()
     {
         turn = (turn+1)%players;
     }
+
     public void goAgain()
     {
-        if(turn==0)
-        {
+        if(turn==0) {
             turn = players-1;
         }
-        else 
-        {
+        else {
             turn--;
         }
     
@@ -94,8 +92,7 @@ public boolean useCard(int cardNumber,int button)
                 valid=true;
             }
         }
-        if(valid)
-        {
+        if(valid) {
             nextTurn();
         }
         //System.out.println("Valid? "+valid);
@@ -183,9 +180,8 @@ class GameBoard{
             movePawn(start,index);
         }
     }
-    /*
-    Finds the distance between two spaces
-    */
+
+    //Finds the distance between two spaces
     public int distanceBetweenSpaces(int startSpace,int endSpace, pColor c)
     {   
         int i =0;
@@ -195,10 +191,9 @@ class GameBoard{
         }
         return i;
     }
-    /*
-    Swaps the position of two pawns
-    NEEDS TO BE UPDATED TO NOT ALLOW SWAPS AT END POSITIONS (not done since this requires knowledge of the new squares)
-    */
+
+    //Swaps the position of two pawns
+    //NEEDS TO BE UPDATED TO NOT ALLOW SWAPS AT END POSITIONS (not done since this requires knowledge of the new squares)
     public void swapPawn(int startSpace,int endSpace)
     {
         Pawn temp = spaces[endSpace];
