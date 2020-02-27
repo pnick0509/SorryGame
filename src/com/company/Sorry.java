@@ -13,7 +13,7 @@ class Sorry{
     private int prevButton=-1;
     private int currCard;
 
-    public boolean debug_noTurn = true;
+    public boolean debug_noTurn = false;
 
     //Starts a new game with four players
     public Sorry(){
@@ -60,6 +60,12 @@ class Sorry{
         int temp = Math.abs(rand.nextInt())%cards.size();
         int card = cards.get(temp);
         cards.remove(temp);
+
+        //Reshuffle cards
+        if(cards.size() <= 0){
+            createCards();
+        }
+
         return card;
     }
 
