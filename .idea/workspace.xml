@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7094ba8c-4d69-41b4-b224-6416011d3902" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/GameBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/GameBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Pawn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Pawn.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/cardMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/cardMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/pColor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/pColor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Sorry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Sorry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/cardMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/cardMethods.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +80,8 @@
       <workItem from="1581460683259" duration="11484000" />
       <workItem from="1582767155236" duration="8223000" />
       <workItem from="1582775735274" duration="3531000" />
-      <workItem from="1582835560298" duration="165000" />
+      <workItem from="1582835560298" duration="765000" />
+      <workItem from="1583269901769" duration="4100000" />
     </task>
     <servers />
   </component>
@@ -83,38 +89,42 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1810" height="91" key="GridCell.Tab.0.bottom" timestamp="1582835730484">
+    <state width="1810" height="91" key="GridCell.Tab.0.bottom" timestamp="1583274072167">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="91" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1582835730484" />
+    <state width="1810" height="91" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1583274072167" />
     <state width="1812" height="292" key="GridCell.Tab.0.bottom/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="91" key="GridCell.Tab.0.center" timestamp="1582835730483">
+    <state width="1810" height="91" key="GridCell.Tab.0.center" timestamp="1583274072167">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="91" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1582835730483" />
+    <state width="1810" height="91" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1583274072167" />
     <state width="1812" height="292" key="GridCell.Tab.0.center/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="91" key="GridCell.Tab.0.left" timestamp="1582835730483">
+    <state width="1810" height="91" key="GridCell.Tab.0.left" timestamp="1583274072166">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="91" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1582835730483" />
+    <state width="1810" height="91" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1583274072166" />
     <state width="1812" height="292" key="GridCell.Tab.0.left/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="91" key="GridCell.Tab.0.right" timestamp="1582835730484">
+    <state width="1810" height="91" key="GridCell.Tab.0.right" timestamp="1583274072167">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="91" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1582835730484" />
+    <state width="1810" height="91" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1583274072167" />
     <state width="1812" height="292" key="GridCell.Tab.0.right/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
     <state x="859" y="189" key="SettingsEditor" timestamp="1582769279491">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
     <state x="859" y="189" key="SettingsEditor/0.0.1853.1080@0.0.1853.1080" timestamp="1582769279491" />
-    <state x="635" y="369" key="com.intellij.ide.util.TipDialog" timestamp="1582835563058">
+    <state x="635" y="369" key="com.intellij.ide.util.TipDialog" timestamp="1583269901950">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state x="635" y="369" key="com.intellij.ide.util.TipDialog/0.0.1853.1080@0.0.1853.1080" timestamp="1582835563058" />
+    <state x="635" y="369" key="com.intellij.ide.util.TipDialog/0.0.1853.1080@0.0.1853.1080" timestamp="1583269901950" />
     <state x="584" y="250" key="run.anything.popup" timestamp="1581464929255">
       <screen x="0" y="0" width="1855" height="1080" />
     </state>
     <state x="584" y="250" key="run.anything.popup/0.0.1855.1080@0.0.1855.1080" timestamp="1581464929255" />
+    <state x="589" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1583271435773">
+      <screen x="0" y="0" width="1853" height="1080" />
+    </state>
+    <state x="589" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1583271435773" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SorryNew$Main.ic" NAME="Main Coverage Results" MODIFIED="1582769930534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -12,7 +12,7 @@ class Sorry{
     private Random rand;
     private int prevButton=-1;
     private int currCard;
-
+    private boolean firstGo;
     public boolean debug_noTurn = false;
 
     //Starts a new game with four players
@@ -25,6 +25,7 @@ class Sorry{
         createCards();
         rand = new Random();
         currCard = pullCard();
+        firstGo = true;
     }
 
     //Starts a new game with a variable amount of players
@@ -36,11 +37,12 @@ class Sorry{
         cards = new ArrayList<Integer>();
         createCards();
         rand = new Random();
+        firstGo = true;
     }
 
     public void createCards()
     {
-        for(int y=1; y<=5/*13*/; y++) //Temporarily changed for Cycle 1.2
+        for(int y=1; y<=/*13*/12; y++) //Temporarily changed for Cycle 1.2
         {
             if(y==6||y==9)
             {
@@ -82,6 +84,7 @@ class Sorry{
     public void nextTurn()
     {
         turn = (turn+1)%players;
+        System.out.println("Turn: "+turn);
         currCard = pullCard();
     }
 
@@ -103,13 +106,18 @@ class Sorry{
         int index = click;
         if(gb.getSpaces()[index] != null){
             //Add a check here to make sure pawn isn't wasting their turn if they try to move a pawn that cannot move into home.
-            if(gb.getSpaces()[index].getPawnColor() == pColor.values()[turn] || debug_noTurn){
-                useCard(currCard,index);
-                valid=true;
+            if(gb.getSpaces()[index].getPawnColor() == pColor.values()[turn] || !firstGo){
+                if(useCard(currCard,index))
+                {
+                    valid=true;
+                }
+                firstGo = false;
+
             }
         }
         if(valid) {
             nextTurn();
+            firstGo=true;
         }
         //System.out.println("Valid? "+valid);
         return valid;
@@ -203,8 +211,10 @@ class GameBoard{
     public int distanceBetweenSpaces(int startSpace,int endSpace, pColor c)
     {   
         int i =0;
-        while(nextSpace(startSpace,c)<endSpace)
+        int curr = startSpace;
+        while(curr != endSpace)
         {
+            curr=nextSpace(curr, c);
             i++;
         }
         return i;

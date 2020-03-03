@@ -68,9 +68,11 @@ public class cardMethods{
             remainingSpaces=0;
             return true;
         }
-        else if(gb.distanceBetweenSpaces(previousSpace,space,gb.getSpaces()[space].getPawnColor())<7)
+        else if(gb.distanceBetweenSpaces(previousSpace,space,gb.getSpaces()[space].getPawnColor())<=7)
         {
+            System.out.println("Previous space: "+previousSpace);
             int temp =gb.distanceBetweenSpaces(previousSpace,space,gb.getSpaces()[space].getPawnColor());
+            System.out.println("Temp: "+temp);
             remainingSpaces=remainingSpaces-temp;
             gb.advancePawn(previousSpace,temp);
             if(remainingSpaces==0)
@@ -105,7 +107,7 @@ public class cardMethods{
             previousSpace = space;
             return false;
         }
-        else if(space<previousSpace)
+        else if(gb.distanceBetweenSpaces(previousSpace,space,gb.getSpaces()[space].getPawnColor())!=10)
         {
             previousSpace = -1;
             gb.advancePawn(space,-1);
@@ -142,18 +144,10 @@ public class cardMethods{
 
     public boolean twelve(int space)
     {
-        if(previousSpace==-1)
-        {
-            previousSpace=space;
-            return false;
-        }
-        else
-        {
-            gb.swapPawn(previousSpace,space);
-            previousSpace=-1;
+        gb.advancePawn(space,12);
             return true;
-        }
-}
+    }
+
 
 public boolean useCard(int cardNumber, int button)
     {
