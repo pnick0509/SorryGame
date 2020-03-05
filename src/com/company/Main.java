@@ -59,6 +59,9 @@ public class Main extends Application {
                     bt.setMaxSize(60, 60);
                     bt.setMinHeight(50);
                     bt.setMinWidth(50);
+                    if(game.getOptions().contains(getInput(row,col))){
+                        bt.setStyle("-fx-border-color: #00ff00");
+                    }
 
                     //Set the button action, make sure the row/col are final before we go in- as temp variables
                     int finalCol = col;
@@ -68,9 +71,8 @@ public class Main extends Application {
                         public void handle (ActionEvent event) {
                             int click = getInput(finalRow,finalCol);
                             System.out.println("Input: "+click);
-                            if(click != -1 && game.takeTurn(click)){
-                                update(primaryStage,game);
-                            }
+                            game.takeTurn(click);
+                            update(primaryStage,game);
                         }
                     });
 
@@ -87,34 +89,61 @@ public class Main extends Application {
                     if(getInput(row,col) != -1) {
                         if (screen[getInput(row, col)] != null) {
                             Image image;
-                            if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
-                                image = new Image(getClass().getResourceAsStream("Red.png"));
-                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
-                                image = new Image(getClass().getResourceAsStream("Yellow.png"));
-                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
-                                image = new Image(getClass().getResourceAsStream("Green.png"));
-                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
-                                image = new Image(getClass().getResourceAsStream("Blue.png"));
-                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
-                                image = new Image(getClass().getResourceAsStream("Orange.png"));
-                            }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
-                                image = new Image(getClass().getResourceAsStream("Purple.png"));
+                            if(getInput(row,col) == game.getSelected()){
+                                if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
+                                    image = new Image("RedSelect.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
+                                    image = new Image("OrangeSelect.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
+                                    image = new Image("YellowSelect.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
+                                    image = new Image("GreenSelect.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
+                                    image = new Image("BlueSelect.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
+                                    image = new Image("PurpleSelect.png");
+                                }else{
+                                    image = new Image("RedPawn.png");
+                                }
                             }else{
-                                image = new Image(getClass().getResourceAsStream("Unknown.png"));
+                                if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
+                                    image = new Image("RedPawn.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
+                                    image = new Image("OrangePawn.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
+                                    image = new Image("YellowPawn.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
+                                    image = new Image("GreenPawn.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
+                                    image = new Image("BluePawn.png");
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
+                                    image = new Image("PurplePawn.png");
+                                }else{
+                                    image = new Image("RedPawn.png");
+                                }
                             }
+                            //}else{
+                            //    image = new Image(getClass().getResourceAsStream("Unknown.png"));
+                            //}
                             ImageView imageView = new ImageView(image);
                             imageView.setFitWidth(30);
                             imageView.setFitHeight(30);
                             bt.setGraphic(imageView);
                         }
                     }
-
                     squareGrid.getChildren().addAll(bt);
                 }
             }
         }
 
         //Draw and position the card in screen
+        Image cardBack = new Image(setNextBack(game.getTurn()));
+        ImageView backview = new ImageView(cardBack);
+        backview.setFitWidth(250);
+        backview.setFitHeight(350);
+        backview.setX(650);
+        backview.setY(225);
+
         Image cardImage = new Image(setNextCard(game.getCard()));
         ImageView cardView = new ImageView(cardImage);
         cardView.setFitWidth(250);
@@ -126,7 +155,7 @@ public class Main extends Application {
         Group root = new Group();
 
         //Put the card and board into Root, then add Root into scene later
-        root.getChildren().addAll(cardView, gameBoard);
+        root.getChildren().addAll(backview, cardView, gameBoard);
         //Put the gameboard into the borderpane
         gameBoard.setCenter(squareGrid);
 
@@ -136,7 +165,7 @@ public class Main extends Application {
 
 
         //Construct the scene and launch
-        primaryStage.setTitle("Sorry! Cycle 1.2");
+        primaryStage.setTitle("Sorry! Cycle 1.3");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -156,6 +185,17 @@ public class Main extends Application {
             case 12: return "Twelve.png";
             case 13: return "Sorry.png";
             default: return "none.jpg";
+        }
+    }
+
+    public String setNextBack(int turn){
+        switch(turn){
+            case 0: return "RedCard.png";
+            case 1: return "OrangeCard.png";
+            case 2: return "YellowCard.png";
+            case 3: return "GreenCard.png";
+            case 4: default: return "BlueCard.png";
+            case 5: return "PurpleCard.png";
         }
     }
 

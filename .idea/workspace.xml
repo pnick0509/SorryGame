@@ -3,13 +3,95 @@
   <component name="ChangeListManager">
     <list default="true" id="7094ba8c-4d69-41b4-b224-6416011d3902" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/SorryGameNew.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx-swt.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx.base.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx.controls.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx.fxml.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx.graphics.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx.media.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx.swing.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/lib/javafx.web.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Eight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Eleven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Five.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Four.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/One.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Seven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Sorry.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Ten.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Three.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Twelve.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/Two.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/GameBoard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Main$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Pawn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Purple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Sorry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Unknown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/Yellow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/com/company/pColor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/out/production/SorryGameNew/none.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Eight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Eleven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Five.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/One.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Seven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Sorry.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Ten.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Three.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Twelve.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/Two.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/com/company/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/com/company/One.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/com/company/Sorry.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SorryGame-master/src/none.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Eight.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Eight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Eleven.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Eleven.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Five.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Five.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Four.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Four.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/One.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/One.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Seven.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Seven.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Sorry.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Sorry.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Ten.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Ten.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Three.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Three.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Twelve.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Twelve.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Two.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/Two.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Blue.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/GameBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/GameBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/One.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Orange.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Pawn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Pawn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Purple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Red.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/cardMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/cardMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Unknown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Yellow.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/pColor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/pColor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Eight.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Eleven.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eleven.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Five.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Five.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/One.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/One.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Seven.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Seven.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sorry.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sorry.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ten.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ten.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Three.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Three.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Twelve.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twelve.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Two.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Two.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/One.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Sorry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Sorry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/cardMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/cardMethods.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +163,8 @@
       <workItem from="1582767155236" duration="8223000" />
       <workItem from="1582775735274" duration="3531000" />
       <workItem from="1582835560298" duration="765000" />
-      <workItem from="1583269901769" duration="4100000" />
+      <workItem from="1583269901769" duration="5807000" />
+      <workItem from="1583360497888" duration="6561000" />
     </task>
     <servers />
   </component>
@@ -89,25 +172,25 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1810" height="91" key="GridCell.Tab.0.bottom" timestamp="1583274072167">
+    <state width="1810" height="91" key="GridCell.Tab.0.bottom" timestamp="1583367139187">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="91" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1583274072167" />
+    <state width="1810" height="91" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1583367139187" />
     <state width="1812" height="292" key="GridCell.Tab.0.bottom/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="91" key="GridCell.Tab.0.center" timestamp="1583274072167">
+    <state width="1810" height="91" key="GridCell.Tab.0.center" timestamp="1583367139187">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="91" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1583274072167" />
+    <state width="1810" height="91" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1583367139187" />
     <state width="1812" height="292" key="GridCell.Tab.0.center/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="91" key="GridCell.Tab.0.left" timestamp="1583274072166">
+    <state width="1810" height="91" key="GridCell.Tab.0.left" timestamp="1583367139187">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="91" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1583274072166" />
+    <state width="1810" height="91" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1583367139187" />
     <state width="1812" height="292" key="GridCell.Tab.0.left/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="91" key="GridCell.Tab.0.right" timestamp="1583274072167">
+    <state width="1810" height="91" key="GridCell.Tab.0.right" timestamp="1583367139187">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="91" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1583274072167" />
+    <state width="1810" height="91" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1583367139187" />
     <state width="1812" height="292" key="GridCell.Tab.0.right/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
     <state x="859" y="189" key="SettingsEditor" timestamp="1582769279491">
       <screen x="0" y="0" width="1853" height="1080" />

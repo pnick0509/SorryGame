@@ -13,19 +13,25 @@ class Sorry{
     private int prevButton=-1;
     private int currCard;
     private boolean firstGo;
-    public boolean debug_noTurn = false;
+    int remainder = 0;
+
+    private int selected = -1;
+    private ArrayList<Integer> options;
 
     //Starts a new game with four players
     public Sorry(){
         gb = new GameBoard();
         rules = new cardMethods(this);
         players = 6;
-        turn = 0; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
+        turn = -1; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
         createCards();
         rand = new Random();
         currCard = pullCard();
         firstGo = true;
+
+        options = new ArrayList<Integer>();
+        nextTurn();
     }
 
     //Starts a new game with a variable amount of players
@@ -33,16 +39,17 @@ class Sorry{
     public Sorry(int num){
         gb = new GameBoard();
         players = num;
-        turn = 0;
+        turn = -1;
         cards = new ArrayList<Integer>();
         createCards();
         rand = new Random();
         firstGo = true;
+        nextTurn();
     }
 
     public void createCards()
     {
-        for(int y=1; y<=/*13*/12; y++) //Temporarily changed for Cycle 1.2
+        for(int y=1; y<=13; y++)
         {
             if(y==6||y==9)
             {
@@ -83,9 +90,20 @@ class Sorry{
     //This script ensures that the turn is always set to an active player
     public void nextTurn()
     {
+        selected = -1;
         turn = (turn+1)%players;
         System.out.println("Turn: "+turn);
         currCard = pullCard();
+        if(currCard == 13){
+            options.clear();
+            for(int i = 0; i < gb.getMarginCount(); i++){
+                if(gb.getSpaces()[i] != null){
+                    if(gb.getSpaces()[i].getPawnColor() != getTurnColor()){
+                        options.add(i);
+                    }
+                }
+            }
+        }
     }
 
     public void goAgain()
@@ -101,9 +119,8 @@ class Sorry{
 
     //This script takes in the index of a pawn you want to move.
     //This will not work if the space is empty or the color doesn't match
-    public boolean takeTurn(int click){
-        boolean valid = false;
-        int index = click;
+    public void takeTurn(int index){
+        /*
         if(gb.getSpaces()[index] != null){
             //Add a check here to make sure pawn isn't wasting their turn if they try to move a pawn that cannot move into home.
             if(gb.getSpaces()[index].getPawnColor() == pColor.values()[turn] || !firstGo){
@@ -120,11 +137,140 @@ class Sorry{
             firstGo=true;
         }
         //System.out.println("Valid? "+valid);
-        return valid;
+        return valid;*/
+        if(currCard != 13){
+            if(selected == -1){
+                if(gb.getSpaces()[index] != null){
+                    if(gb.getSpaces()[index].getPawnColor() == getTurnColor()){
+                        selected = index;
+                        setOptions(selected,gb.getSpaces()[index].getPawnColor(),currCard);
+                        if(options.size() == 0){
+                            selected = -1;
+                        }
+
+                    }
+                }
+            }else{
+                if(options.contains(index)){
+                    //Take turn
+                    options.clear();
+                    if(currCard != 11){
+                        gb.movePawn(selected,index);
+                    }else{
+                        Pawn temp = gb.getSpaces()[index];
+                        gb.movePawn(selected,index);
+                        gb.setSpace(selected,temp);
+                    }
+                    //Next move
+                    if(currCard == 7){
+                        System.out.println("Remain "+remainder);
+                        if(remainder == 0){
+                            remainder = 7-gb.distanceBetweenSpaces(selected,index,gb.getSpaces()[index].getPawnColor());
+                            if(remainder != 0){
+                                selected = -1;
+                            }else{
+                                nextTurn();
+                            }
+                        }else{
+                            remainder = 0;
+                            nextTurn();
+                        }
+                    }else{
+                        nextTurn();
+                    }
+                }
+            }
+        }else{
+            if(options.contains(index)){
+                gb.newPawn(getTurnColor(),index);
+                nextTurn();
+            }
+        }
+    }
+
+    public void setOptions(int index, pColor c, int card) {
+        options.clear();
+        if(card == 1){
+            safeAdd(gb.countForward(index, 1, c));
+        }else if(card == 2){
+            safeAdd(gb.countForward(index, 2, c));
+        }else if(card == 3){
+            safeAdd(gb.countForward(index, 3, c));
+        }else if(card == 4){
+            safeAdd(gb.countBackward(index, 4, c));
+        }else if(card == 5){
+            safeAdd(gb.countForward(index, 5, c));
+        }else if(card == 7){
+            if(remainder == 0){
+                safeAdd(gb.countForward(index, 1, c));
+                safeAdd(gb.countForward(index, 2, c));
+                safeAdd(gb.countForward(index, 3, c));
+                safeAdd(gb.countForward(index, 4, c));
+                safeAdd(gb.countForward(index, 5, c));
+                safeAdd(gb.countForward(index, 6, c));
+                safeAdd(gb.countForward(index, 7, c));
+            }else{
+                System.out.println(remainder);
+                safeAdd(gb.countForward(index, remainder, c));
+            }
+        }else if(card == 8){
+            safeAdd(gb.countForward(index,8,c));
+        }else if(card == 10){
+            safeAdd(gb.countForward(index,10,c));
+            safeAdd(gb.countBackward(index,1,c));
+        }else if(card == 11){
+            safeAdd(gb.countForward(index,11,c));
+            addMargins();
+        }else if(card == 12){
+            safeAdd(gb.countForward(index,12,c));
+        }
+        options.removeIf(a -> a.equals(-1));
+        options.removeIf(a -> a.equals(-2));
+        System.out.println(options);
+    }
+
+    public void safeAdd(int i){
+        if(i >= 0){
+            if(gb.getSpaces()[i] != null){
+                if(gb.getSpaces()[i].getPawnColor() != gb.getSpaces()[selected].getPawnColor()){
+                    options.add(i);
+                }
+            }else{
+                options.add(i);
+            }
+        }
+    }
+
+    public void addMargins(){
+        if(selected < gb.getMarginCount()){
+            for(int i = 0; i < gb.getMarginCount(); i++){
+                if(gb.getSpaces()[i] != null){
+                    if(gb.getSpaces()[i].getPawnColor() != gb.getSpaces()[selected].getPawnColor()){
+                        safeAdd(i);
+                    }
+                }
+            }
+        }
     }
 
     public GameBoard getBoard(){
         return gb;
+    }
+
+    public pColor getTurnColor(){
+        return pColor.values()[turn];
+    }
+
+    public int getTurn(){
+        return turn;
+    }
+
+    public int getSelected(){
+        return selected;
+    }
+
+    public ArrayList getOptions(){
+        return options;
     }
 }
 
@@ -135,6 +281,7 @@ class GameBoard{
     private int safeLength; //The amount of spaces of each safe zone
     private int homeOffset = 7;
     private int homeSpaces = 15;
+    private int maxPlayers = 6;
 
     public Pawn[] getSpaces()
     {
@@ -145,7 +292,7 @@ class GameBoard{
         marginCount = 90;
         safeLength = 5;
         //spaces = new Pawn[(sideLength*sides)-sides+safeLength*sides];
-        spaces = new Pawn[marginCount+safeLength*6];
+        spaces = new Pawn[marginCount+safeLength*maxPlayers];
 
         //Temp
         newPawn(pColor.RED,0);
@@ -237,7 +384,7 @@ class GameBoard{
             return marginCount+(getValue(c)*safeLength);
         }else if(curr == marginCount-1){ //Go around the board
             return 0;
-        }else if(/*(curr-marginCount)%safeLength == safeLength-1*/curr == marginCount+(getValue(c)+1)*safeLength-1){ //Enter Home
+        }else if(curr == marginCount+(getValue(c)+1)*safeLength-1){ //Enter Home
             return -2;
         }else if(curr < marginCount){ //Move forward while in margin
             return curr+1;
@@ -265,6 +412,20 @@ class GameBoard{
         }
     }
 
+    public int countForward(int index, int count, pColor c){
+        for(int i = 0; i < count; i++){
+            index = nextSpace(index,c);
+        }
+        return index;
+    }
+
+    public int countBackward(int index, int count, pColor c){
+        for(int i = 0; i < count; i++){
+            index = lastSpace(index,c);
+        }
+        return index;
+    }
+
     public int getValue(pColor k)
     {
         if(k==pColor.RED){
@@ -282,6 +443,14 @@ class GameBoard{
         }else{
             return -1;
         }
+    }
+
+    public int getMarginCount() {
+        return marginCount;
+    }
+
+    public void setSpace(int i, Pawn p){
+        spaces[i] = p;
     }
 }
 
