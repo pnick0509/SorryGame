@@ -60,7 +60,7 @@ public class Main extends Application {
                     bt.setMinHeight(50);
                     bt.setMinWidth(50);
                     if(game.getOptions().contains(getInput(row,col))){
-                        bt.setStyle("-fx-border-color: #00ff00");
+                        bt.setStyle("-fx-border-color: #ff0000");
                     }
 
                     //Set the button action, make sure the row/col are final before we go in- as temp variables

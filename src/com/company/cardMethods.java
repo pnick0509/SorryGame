@@ -1,4 +1,4 @@
-package com.company;
+/*package com.company;
 
 import javax.lang.model.util.ElementScanner6;
 
@@ -44,7 +44,7 @@ public class cardMethods{
         return true;
     }
 
-    /* In case we add it */
+    // In case we add it
     public boolean six(int space)
     {
         return true;
@@ -94,7 +94,7 @@ public class cardMethods{
         return true;
     }
 
-    /* In case we add it */
+    // In case we add it
     public boolean nine(int space)
     {
         return true;
@@ -183,4 +183,4 @@ public boolean useCard(int cardNumber, int button)
 
         }
     }
-}
+}*/

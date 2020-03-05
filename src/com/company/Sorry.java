@@ -1,18 +1,15 @@
 package com.company;
 import java.util.ArrayList;
 import java.util.Random;
-//Run this class to start a new game of Sorry!
 
+//Run this class to start a new game of Sorry!
 class Sorry{
     private GameBoard gb;
     private int players;
     private int turn;
-    private cardMethods rules;
     private ArrayList<Integer> cards;
     private Random rand;
-    private int prevButton=-1;
     private int currCard;
-    private boolean firstGo;
     int remainder = 0;
 
     private int selected = -1;
@@ -21,14 +18,12 @@ class Sorry{
     //Starts a new game with four players
     public Sorry(){
         gb = new GameBoard();
-        rules = new cardMethods(this);
         players = 6;
         turn = -1; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
         createCards();
         rand = new Random();
         currCard = pullCard();
-        firstGo = true;
 
         options = new ArrayList<Integer>();
         nextTurn();
@@ -39,31 +34,30 @@ class Sorry{
     public Sorry(int num){
         gb = new GameBoard();
         players = num;
-        turn = -1;
+        turn = -1; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
         createCards();
         rand = new Random();
-        firstGo = true;
+        currCard = pullCard();
+
+        options = new ArrayList<Integer>();
         nextTurn();
     }
 
     public void createCards()
     {
-        for(int y=1; y<=13; y++)
-        {
-            if(y==6||y==9)
-            {
+        for(int y=1; y<=13; y++) {
+            if(y==6||y==9){
                 y++;
             }
-
-            for (int x=0; x<5; x++)
-            {
+            for (int x=0; x<5; x++) {
                 cards.add(y);
             }
         }
         cards.add(1);
     }
-    
+
+    //Remove a random card from the deck
     public int pullCard()
     {
         int temp = Math.abs(rand.nextInt())%cards.size();
@@ -78,13 +72,9 @@ class Sorry{
         return card;
     }
 
+    //Get the card that is currently set to currCard
     public int getCard(){
         return currCard;
-    }
-
-    //Uses the class cardMethods to handle card choices.
-    public boolean useCard(int cardNumber,int button) {
-        return(rules.useCard(cardNumber,button));
     }
 
     //This script ensures that the turn is always set to an active player
@@ -94,6 +84,7 @@ class Sorry{
         turn = (turn+1)%players;
         System.out.println("Turn: "+turn);
         currCard = pullCard();
+        //For the Sorry! card you don't have to select a pawn
         if(currCard == 13){
             options.clear();
             for(int i = 0; i < gb.getMarginCount(); i++){
@@ -106,39 +97,10 @@ class Sorry{
         }
     }
 
-    public void goAgain()
-    {
-        if(turn==0) {
-            turn = players-1;
-        }
-        else {
-            turn--;
-        }
-        currCard = pullCard();
-    }
-
     //This script takes in the index of a pawn you want to move.
     //This will not work if the space is empty or the color doesn't match
     public void takeTurn(int index){
-        /*
-        if(gb.getSpaces()[index] != null){
-            //Add a check here to make sure pawn isn't wasting their turn if they try to move a pawn that cannot move into home.
-            if(gb.getSpaces()[index].getPawnColor() == pColor.values()[turn] || !firstGo){
-                if(useCard(currCard,index))
-                {
-                    valid=true;
-                }
-                firstGo = false;
-
-            }
-        }
-        if(valid) {
-            nextTurn();
-            firstGo=true;
-        }
-        //System.out.println("Valid? "+valid);
-        return valid;*/
-        if(currCard != 13){
+        if(currCard != 13){ //For every card but the Sorry! card
             if(selected == -1){
                 if(gb.getSpaces()[index] != null){
                     if(gb.getSpaces()[index].getPawnColor() == getTurnColor()){
@@ -157,6 +119,7 @@ class Sorry{
                     if(currCard != 11){
                         gb.movePawn(selected,index);
                     }else{
+                        //Swap
                         Pawn temp = gb.getSpaces()[index];
                         gb.movePawn(selected,index);
                         gb.setSpace(selected,temp);
@@ -164,30 +127,37 @@ class Sorry{
                     //Next move
                     if(currCard == 7){
                         System.out.println("Remain "+remainder);
-                        if(remainder == 0){
+                        if(remainder == 0){ //First move with 7
                             remainder = 7-gb.distanceBetweenSpaces(selected,index,gb.getSpaces()[index].getPawnColor());
                             if(remainder != 0){
                                 selected = -1;
                             }else{
                                 nextTurn();
                             }
-                        }else{
+                        }else{ //Second move with 7
                             remainder = 0;
                             nextTurn();
                         }
+                    }else if(currCard == 2){
+                        //Go again
+                        System.out.println("Go Again");
+                        turn--;
+                        nextTurn();
                     }else{
                         nextTurn();
                     }
                 }
             }
-        }else{
+        }else{ //Sorry! Card
             if(options.contains(index)){
                 gb.newPawn(getTurnColor(),index);
+                options.clear();
                 nextTurn();
             }
         }
     }
 
+    //Clears the options array list and sets it with all the available spaces to move
     public void setOptions(int index, pColor c, int card) {
         options.clear();
         if(card == 1){
@@ -229,6 +199,7 @@ class Sorry{
         System.out.println(options);
     }
 
+    //Ensures that the pawn movement would be valid. For example, it cannot move onto a pawn of the same color or a negative space.
     public void safeAdd(int i){
         if(i >= 0){
             if(gb.getSpaces()[i] != null){
@@ -241,6 +212,7 @@ class Sorry{
         }
     }
 
+    //Add all the pawns around the side of the board of different colors.
     public void addMargins(){
         if(selected < gb.getMarginCount()){
             for(int i = 0; i < gb.getMarginCount(); i++){
@@ -295,25 +267,29 @@ class GameBoard{
         spaces = new Pawn[marginCount+safeLength*maxPlayers];
 
         //Temp
-        newPawn(pColor.RED,0);
-        newPawn(pColor.YELLOW,6);
-        newPawn(pColor.GREEN,12);
-        newPawn(pColor.BLUE,18);
-        newPawn(pColor.RED,24);
-        newPawn(pColor.YELLOW,30);
-        newPawn(pColor.GREEN,36);
-        newPawn(pColor.BLUE,40);
-        newPawn(pColor.ORANGE,46);
-        newPawn(pColor.PURPLE,52);
-        newPawn(pColor.ORANGE,58);
-        newPawn(pColor.PURPLE,64);
+        newPawn(pColor.RED,7);
+        newPawn(pColor.RED,8);
+        newPawn(pColor.RED,9);
 
-        newPawn(pColor.RED,92);
-        newPawn(pColor.ORANGE,97);
-        newPawn(pColor.YELLOW,102);
-        newPawn(pColor.GREEN,107);
-        newPawn(pColor.BLUE,112);
-        newPawn(pColor.PURPLE,117);
+        newPawn(pColor.ORANGE,22);
+        newPawn(pColor.ORANGE,23);
+        newPawn(pColor.ORANGE,24);
+
+        newPawn(pColor.YELLOW,37);
+        newPawn(pColor.YELLOW,38);
+        newPawn(pColor.YELLOW,39);
+
+        newPawn(pColor.GREEN,52);
+        newPawn(pColor.GREEN,53);
+        newPawn(pColor.GREEN,54);
+
+        newPawn(pColor.BLUE,67);
+        newPawn(pColor.BLUE,68);
+        newPawn(pColor.BLUE,69);
+
+        newPawn(pColor.PURPLE,82);
+        newPawn(pColor.PURPLE,83);
+        newPawn(pColor.PURPLE,84);
     }
 
     //Creates a new pawn and places it somewhere on the board
