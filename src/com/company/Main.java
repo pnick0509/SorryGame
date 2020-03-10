@@ -55,7 +55,22 @@ public class Main extends Application {
                     Rectangle gameSquare = new Rectangle();
 
 
+                    bt.setStyle("-fx-focus-color: transparent;");
                     bt.setShape(gameSquare);
+
+                    if(   (col == 7 && row >= 1 && row < 7) || (col == 9 && row == 1) )
+                        bt.setStyle("-fx-background-color: #ff6258; -fx-border-color: rgba(202,8,6,0.57)");// Top left Start & Home
+                    else if ( (col == 22 && row < 7 && row >= 1) || (col == 24 && row == 1) )
+                        bt.setStyle("-fx-background-color: #ffa048; -fx-border-color: rgba(202,100,11,0.57)");// Top right Start & Home
+                    else if ( (col > 23 && col < 30 && row == 7) || (col == 29 && row == 9) )
+                        bt.setStyle("-fx-background-color: #fffc5c; -fx-border-color: rgba(198,202,32,0.57)");// Rightmost start & home
+                    else if ( (col == 23 && row > 8 && row < 15) || ( col == 21 && row == 14) )
+                        bt.setStyle("-fx-background-color: #66ff90; -fx-border-color: rgba(8,202,0,0.57)");//Bottom right start & home
+                    else if ( (col == 8 && row > 8 && row < 15) || (col == 6 && row == 14))
+                        bt.setStyle("-fx-background-color: #2eb7ff; -fx-border-color: rgba(18,65,227,0.46)");// Bottom left start & home
+                    else if ( (col < 7 && col > 0 && row == 8) || (col == 1 && row == 6) )
+                        bt.setStyle("-fx-background-color: #f88bff; -fx-border-color: rgba(232,0,238,0.69)");// Leftmost start & home
+
                     bt.setMaxSize(60, 60);
                     bt.setMinHeight(50);
                     bt.setMinWidth(50);
@@ -70,7 +85,7 @@ public class Main extends Application {
                         @Override
                         public void handle (ActionEvent event) {
                             int click = getInput(finalRow,finalCol);
-                            System.out.println("Input: "+click);
+                            System.out.println("Input: "+click+" Row:"+finalRow+" Col:"+finalCol);
                             game.takeTurn(click);
                             update(primaryStage,game);
                         }
@@ -87,49 +102,52 @@ public class Main extends Application {
                     squareGrid.setColumnIndex(bt, col);
 
                     if(getInput(row,col) != -1) {
-                        if (screen[getInput(row, col)] != null) {
-                            Image image;
-                            if(getInput(row,col) == game.getSelected()){
-                                if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
-                                    image = new Image("RedSelect.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
-                                    image = new Image("OrangeSelect.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
-                                    image = new Image("YellowSelect.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
-                                    image = new Image("GreenSelect.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
-                                    image = new Image("BlueSelect.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
-                                    image = new Image("PurpleSelect.png");
+                        if (getInput(row,col) < screen.length) {
+                            if(screen[getInput(row, col)] != null){
+                                Image image;
+                                if(getInput(row,col) == game.getSelected()){
+                                    if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
+                                        image = new Image("RedSelect.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
+                                        image = new Image("OrangeSelect.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
+                                        image = new Image("YellowSelect.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
+                                        image = new Image("GreenSelect.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
+                                        image = new Image("BlueSelect.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
+                                        image = new Image("PurpleSelect.png");
+                                    }else{
+                                        image = new Image("RedPawn.png");
+                                    }
                                 }else{
-                                    image = new Image("RedPawn.png");
+                                    if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
+                                        image = new Image("RedPawn.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
+                                        image = new Image("OrangePawn.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
+                                        image = new Image("YellowPawn.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
+                                        image = new Image("GreenPawn.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
+                                        image = new Image("BluePawn.png");
+                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
+                                        image = new Image("PurplePawn.png");
+                                    }else{
+                                        image = new Image("RedPawn.png");
+                                    }
                                 }
-                            }else{
-                                if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
-                                    image = new Image("RedPawn.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
-                                    image = new Image("OrangePawn.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
-                                    image = new Image("YellowPawn.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
-                                    image = new Image("GreenPawn.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
-                                    image = new Image("BluePawn.png");
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
-                                    image = new Image("PurplePawn.png");
-                                }else{
-                                    image = new Image("RedPawn.png");
-                                }
+                                //}else{
+                                //    image = new Image(getClass().getResourceAsStream("Unknown.png"));
+                                //}
+                                ImageView imageView = new ImageView(image);
+                                imageView.setFitWidth(30);
+                                imageView.setFitHeight(30);
+                                bt.setGraphic(imageView);
                             }
-                            //}else{
-                            //    image = new Image(getClass().getResourceAsStream("Unknown.png"));
-                            //}
-                            ImageView imageView = new ImageView(image);
-                            imageView.setFitWidth(30);
-                            imageView.setFitHeight(30);
-                            bt.setGraphic(imageView);
                         }
+
                     }
                     squareGrid.getChildren().addAll(bt);
                 }
@@ -208,18 +226,42 @@ public class Main extends Application {
             return 90-row;
         }else if(col == 30){
             return 30+row;
-        }else if(col == 7 && row <= 5){ //Red Home
+        }else if(col == 7 && row <= 5){ //Red Safety
             return row+89;
-        }else if(col == 22 && row <= 5){ //Orange Home
+        }else if(col == 22 && row <= 5){ //Orange Safety
             return row+94;
-        }else if(row == 7 && col >= 25){ //Yellow Home
+        }else if(row == 7 && col >= 25){ //Yellow Safety
             return 104-col+25;
-        }else if(col == 23 && row >= 10){ //Green Home
+        }else if(col == 23 && row >= 10){ //Green Safety
             return 109-row+10;
-        }else if(col == 8 && row >= 10){ //Blue Home
+        }else if(col == 8 && row >= 10){ //Blue Safety
             return 114-row+10;
-        }else if(row == 8 && col <= 5){ //Purple Home
+        }else if(row == 8 && col <= 5){ //Purple Safety
             return 114+col;
+        }else if(row == 1 && col == 9){ //Red Start
+            return 120;
+        }else if(row == 1 && col == 24){ //Orange start
+            return 121;
+        }else if(row == 9 && col == 29){ //Yellow start
+            return 122;
+        }else if(row == 14 && col == 21){ //Green start
+            return 123;
+        }else if(row == 14 && col == 6){ //Blue start
+            return 124;
+        }else if(row == 6 && col == 1){ //Purple start
+            return 125;
+        }else if(row == 6 && col == 7){ //Red home
+            return 126;
+        }else if(row == 6 && col == 22){ //Orange home
+            return 127;
+        }else if(row == 7 && col == 24){ //Yellow home
+            return 128;
+        }else if(row == 9 && col == 23){ //Green home
+            return 129;
+        }else if(row == 9 && col == 8){ //Blue home
+            return 130;
+        }else if(row == 8 && col == 6){ //Purple home
+            return 131;
         }else{
             return -1;
         }
