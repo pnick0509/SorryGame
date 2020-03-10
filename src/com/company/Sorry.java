@@ -62,6 +62,7 @@ class Sorry{
         }
         cards.add(1);*/
         cards.add(1);
+        cards.add(13);
     }
 
     //Remove a random card from the deck
@@ -94,6 +95,7 @@ class Sorry{
         currCard = pullCard();
         //For the Sorry! card you don't have to select a pawn
         if(currCard == 13){
+            System.out.println("13 OPTIONS CLEARED");
             options.clear();
             for(int i = 0; i < gb.getMarginCount(); i++){
                 if(gb.getSpaces()[i] != null){
@@ -102,10 +104,29 @@ class Sorry{
                     }
                 }
             }
-        }else if(currCard == 1){
-            options.clear();
-            safeAdd(gb.myStart(getTurn()));
+            System.out.println("OPTIONS: "+options);
+        }else if(currCard == 1 || currCard == 2){
+            if(gb.getSpaces()[gb.mySpawn(getTurn())] == null){
+                options.clear();
+                safeAdd(gb.myStart(getTurn()));
+            }else{
+                if(gb.getSpaces()[gb.mySpawn(getTurn())].getPawnColor() != getTurnColor()){
+                    options.clear();
+                    safeAdd(gb.myStart(getTurn()));
+                }
+            }
         }
+
+        System.out.print("[");
+        for(int i = 0; i < 6; i++){
+            System.out.print(gb.startAmount(i)+" ");
+        }
+        System.out.print("] [");
+        for(int i = 0; i < 6; i++){
+            System.out.print(gb.homeAmount(i)+" ");
+        }
+        System.out.println("]");
+        //System.out.println(gb.startAmount(turn)+" "+gb.homeAmount(turn));
     }
 
     //This script takes in the index of a pawn you want to move.
@@ -170,31 +191,39 @@ class Sorry{
         }else{ //Home and start
             if(options.contains(index)){
                 if(index >= 120 && index <= 125 && index == gb.myStart(getTurn())){ //Start
-                    /*switch(getTurn()){
-                        case 120:
-                            gb.newPawn(getTurnColor(),9);
-                            break;
-                        case 121:
-                            gb.newPawn(getTurnColor(),24);
-                            break;
-                        case 122:
-                            gb.newPawn(getTurnColor(),39);
-                            break;
-                        case 123:
-                            gb.newPawn(getTurnColor(),54);
-                            break;
-                        case 124:
-                            gb.newPawn(getTurnColor(),69);
-                            break;
-                        case 125:
-                            gb.newPawn(getTurnColor(),84);
-                            break;
-                    }*/
                     gb.newPawn(getTurnColor(),gb.mySpawn(getTurn()));
+                    gb.startSubtract(getTurn());
                     nextTurn();
+                    options.clear();
                 }else if(index >= 126 && index <= 131){ //Home
+                    pColor tempColor = gb.getSpaces()[selected].getPawnColor();
                     gb.destroyPawn(selected);
+                    gb.homeAdd(getTurn());
+                    options.clear();
 
+                    //Terrible idea here:
+                    if(currCard == 7){
+                        System.out.println("Remain "+remainder);
+                        if(remainder == 0){ //First move with 7
+                            remainder = 7-gb.distanceBetweenSpaces(selected,index,tempColor);
+                            if(remainder != 0){
+                                selected = -1;
+                            }else{
+                                nextTurn();
+                            }
+                        }else{ //Second move with 7
+                            remainder = 0;
+                            nextTurn();
+                        }
+                    }else if(currCard == 2){
+                        //Go again
+                        System.out.println("Go Again");
+                        turn--;
+                        nextTurn();
+                    }else{
+                        nextTurn();
+                    }
+                    //Terrible idea ends here
                 }
             }
         }
@@ -207,7 +236,7 @@ class Sorry{
             safeAdd(gb.countForward(index, 1, c));
         }else if(card == 2){
             safeAdd(gb.countForward(index, 2, c));
-            safeAdd(gb.myStart(getTurn()));
+            //safeAdd(gb.myStart(getTurn()));
         }else if(card == 3){
             safeAdd(gb.countForward(index, 3, c));
         }else if(card == 4){
@@ -350,37 +379,46 @@ class GameBoard{
         newPawn(pColor.PURPLE,84);
     }
 
-    public void startAdd(int player){
-        start[player]++;
-    }
+    //Keeps track of how many pawns in start and home
+        //Adds a pawn to the start count
+        public void startAdd(int player){
+            start[player]++;
+        }
 
-    public void startSubtract(int player){
-        start[player]--;
-    }
+        //Removes a pawn form the start count
+        public void startSubtract(int player){
+            start[player]--;
+        }
 
-    public void homeAdd(int player){
-        home[player]++;
-    }
+        //Adds a pawn to the home count
+        public void homeAdd(int player){
+            home[player]++;
+        }
 
-    public int startAmount(int player){
-        return start[player];
-    }
+        //Returns the number of pawns at start
+        public int startAmount(int player){
+            return start[player];
+        }
 
-    public int homeAmount(int player){
-        return home[player];
-    }
+        //Returns the number of pawns at home
+        public int homeAmount(int player){
+            return home[player];
+        }
 
-    public int myStart(int player){
-        return 120+player;
-    }
+        //Returns the button id of the start position
+        public int myStart(int player){
+            return 120+player;
+        }
 
-    public int myHome(int player){
-        return 126+player;
-    }
+        //Returns the button id of the end position
+        public int myHome(int player){
+            return 126+player;
+        }
 
-    public int mySpawn(int player){
-        return homeOffset+2+player*homeSpaces;
-    }
+        //Return the button id of the "spawn" position of the pawn. A.k.a. the position in front of the start.
+        public int mySpawn(int player){
+            return homeOffset+2+player*homeSpaces;
+        }
 
     //Creates a new pawn and places it somewhere on the board
     public void newPawn(pColor c, int index){
@@ -391,6 +429,10 @@ class GameBoard{
     //Takes a pre-existing pawn from and index and moves it to a new index on the array.
     //This will make the space it used to occupy null and will knock out any pawn at the new position
     public void movePawn(int pre, int post){
+        if(spaces[post] != null){
+            startAdd(getValue(spaces[post].getPawnColor()));
+        }
+
         spaces[post] = spaces[pre];
         spaces[pre] = null;
         System.out.println(pre+" --> "+post);
