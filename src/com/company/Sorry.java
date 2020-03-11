@@ -52,7 +52,7 @@ class Sorry{
 
     public void createCards()
     {
-        /*for(int y=1; y<=13; y++) {
+        for(int y=1; y<=13; y++) {
             if(y==6||y==9){
                 y++;
             }
@@ -60,9 +60,7 @@ class Sorry{
                 cards.add(y);
             }
         }
-        cards.add(1);*/
         cards.add(1);
-        cards.add(13);
     }
 
     //Remove a random card from the deck
@@ -94,17 +92,18 @@ class Sorry{
         System.out.println("Turn: "+turn);
         currCard = pullCard();
         //For the Sorry! card you don't have to select a pawn
+        //System.out.println("CURRCARD: "+currCard);
         if(currCard == 13){
-            System.out.println("13 OPTIONS CLEARED");
             options.clear();
-            for(int i = 0; i < gb.getMarginCount(); i++){
-                if(gb.getSpaces()[i] != null){
-                    if(gb.getSpaces()[i].getPawnColor() != getTurnColor()){
-                        options.add(i);
+            if(gb.startAmount(turn) > 0){
+                for(int i = 0; i < gb.getMarginCount(); i++){
+                    if(gb.getSpaces()[i] != null){
+                        if(gb.getSpaces()[i].getPawnColor() != getTurnColor()){
+                            options.add(i);
+                        }
                     }
                 }
             }
-            System.out.println("OPTIONS: "+options);
         }else if(currCard == 1 || currCard == 2){
             if(gb.getSpaces()[gb.mySpawn(getTurn())] == null){
                 options.clear();
@@ -126,6 +125,16 @@ class Sorry{
             System.out.print(gb.homeAmount(i)+" ");
         }
         System.out.println("]");
+
+        /*if(options.isEmpty()){ //This won't work.
+            System.out.print("Empty: "+options);
+            nextTurn();
+        }*/
+
+        //Ensure there is a valid move
+        //ArrayList<Integer> temp = options;
+        //int i = 0;
+
         //System.out.println(gb.startAmount(turn)+" "+gb.homeAmount(turn));
     }
 
@@ -153,9 +162,10 @@ class Sorry{
                             gb.movePawn(selected,index);
                         }else{
                             //Swap
-                            Pawn temp = gb.getSpaces()[index];
-                            gb.movePawn(selected,index);
-                            gb.setSpace(selected,temp);
+                            Pawn one = gb.getSpaces()[index];
+                            Pawn two = gb.getSpaces()[selected];
+                            gb.setSpace(index,two);
+                            gb.setSpace(selected,one);
                         }
                         //Next move
                         if(currCard == 7){
@@ -183,6 +193,8 @@ class Sorry{
                 }
             }else{ //Sorry! Card
                 if(options.contains(index)){
+                    gb.startAdd(gb.getValue(gb.getSpaces()[index].getPawnColor()));
+                    gb.startSubtract(turn);
                     gb.newPawn(getTurnColor(),index);
                     options.clear();
                     nextTurn();
@@ -193,8 +205,17 @@ class Sorry{
                 if(index >= 120 && index <= 125 && index == gb.myStart(getTurn())){ //Start
                     gb.newPawn(getTurnColor(),gb.mySpawn(getTurn()));
                     gb.startSubtract(getTurn());
-                    nextTurn();
                     options.clear();
+                    //nextTurn();
+
+                    if(currCard == 2){
+                        //Go again
+                        System.out.println("Go Again");
+                        turn--;
+                        nextTurn();
+                    }else{
+                        nextTurn();
+                    }
                 }else if(index >= 126 && index <= 131){ //Home
                     pColor tempColor = gb.getSpaces()[selected].getPawnColor();
                     gb.destroyPawn(selected);
@@ -274,7 +295,7 @@ class Sorry{
 
     //Ensures that the pawn movement would be valid. For example, it cannot move onto a pawn of the same color or a negative space.
     public void safeAdd(int i){
-        System.out.println("Safe "+i);
+        //System.out.println("Safe "+i);
         if(i >= 0 /*&& i < gb.getSpaces().length*/){
             if(i < gb.getSpaces().length){
                 if(gb.getSpaces()[i] != null){
@@ -322,6 +343,11 @@ class Sorry{
     public ArrayList getOptions(){
         return options;
     }
+
+    public void deselectPawn(){
+        options.clear();
+        selected = -1;
+    }
 }
 
 //This class handles and maintains the board array(s)
@@ -349,15 +375,16 @@ class GameBoard{
         start = new int[maxPlayers];
         home = new int[maxPlayers];
         for(int i = 0; i < maxPlayers; i++){
-            start[i] = i;
-            home[i] = i;
+            start[i] = 4;
+            home[i] = 0;
         }
 
         //Temp
-        newPawn(pColor.RED,7);
-        newPawn(pColor.RED,8);
-        newPawn(pColor.RED,9);
+        //newPawn(pColor.RED,7);
+        //newPawn(pColor.RED,8);
+        //newPawn(pColor.RED,9);
 
+        /*
         newPawn(pColor.ORANGE,22);
         newPawn(pColor.ORANGE,23);
         newPawn(pColor.ORANGE,24);
@@ -376,7 +403,7 @@ class GameBoard{
 
         newPawn(pColor.PURPLE,82);
         newPawn(pColor.PURPLE,83);
-        newPawn(pColor.PURPLE,84);
+        newPawn(pColor.PURPLE,84);*/
     }
 
     //Keeps track of how many pawns in start and home

@@ -30,12 +30,41 @@ public class Main extends Application {
 
     public void update(Stage primaryStage, Sorry game) {
 
+        System.out.println("Update");
+
         //Grid and board parameters
         int rowNum = 16, colNum = 31, gridH = 16, gridW = 16;
         //Grid pane to hold the grid of squares, a borderbane to hold the grid or game board in
         GridPane squareGrid = new GridPane();
         BorderPane gameBoard = new BorderPane();
         Pawn[] screen = game.getBoard().getSpaces();
+
+        Button skip = new Button();
+        skip.setLayoutX(700);
+        skip.setLayoutY(650);
+        skip.setMinSize(150,50);
+        skip.setMaxSize(150,50);
+        if(game.getSelected() == -1){
+            skip.setText("Skip Turn");
+            skip.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle (ActionEvent event) {
+                    System.out.println("Thank you, next.");
+                    game.nextTurn();
+                    update(primaryStage,game);
+                }
+            });
+        }else{
+            skip.setText("Deselect Pawn");
+            skip.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle (ActionEvent event) {
+                    System.out.println("Okay. Bye-bye now.");
+                    game.deselectPawn();
+                    update(primaryStage,game);
+                }
+            });
+        }
 
         //For loop that constructs the gameboard by going through rows/columns
         //As it goes through it checks for specific column and row values to put buttons in
@@ -70,6 +99,35 @@ public class Main extends Application {
                         bt.setStyle("-fx-background-color: #2eb7ff; -fx-border-color: rgba(18,65,227,0.46)");// Bottom left start & home
                     else if ( (col < 7 && col > 0 && row == 8) || (col == 1 && row == 6) )
                         bt.setStyle("-fx-background-color: #f88bff; -fx-border-color: rgba(232,0,238,0.69)");// Leftmost start & home
+
+                    //Starts
+                    if(col == 9 && row == 1){
+                        bt.setText(Integer.toString(game.getBoard().startAmount(0)));
+                    }else if(col == 24 && row == 1){
+                        bt.setText(Integer.toString(game.getBoard().startAmount(1)));
+                    }else if(col == 29 && row == 9){
+                        bt.setText(Integer.toString(game.getBoard().startAmount(2)));
+                    }else if(col == 21 && row == 14){
+                        bt.setText(Integer.toString(game.getBoard().startAmount(3)));
+                    }else if(col == 6 && row == 14){
+                        bt.setText(Integer.toString(game.getBoard().startAmount(4)));
+                    }else if(col == 1 && row == 6){
+                        bt.setText(Integer.toString(game.getBoard().startAmount(5)));
+                    }
+                    //Homes
+                    else if(col == 7 && row == 6){
+                        bt.setText(Integer.toString(game.getBoard().homeAmount(0)));
+                    }else if(col == 22 && row == 6){
+                        bt.setText(Integer.toString(game.getBoard().homeAmount(1)));
+                    }else if(col == 24 && row == 7){
+                        bt.setText(Integer.toString(game.getBoard().homeAmount(2)));
+                    }else if(col == 23 && row == 9){
+                        bt.setText(Integer.toString(game.getBoard().homeAmount(3)));
+                    }else if(col == 8 && row == 9){
+                        bt.setText(Integer.toString(game.getBoard().homeAmount(4)));
+                    }else if(col == 6 && row == 8){
+                        bt.setText(Integer.toString(game.getBoard().homeAmount(5)));
+                    }
 
                     bt.setMaxSize(60, 60);
                     bt.setMinHeight(50);
@@ -173,7 +231,7 @@ public class Main extends Application {
         Group root = new Group();
 
         //Put the card and board into Root, then add Root into scene later
-        root.getChildren().addAll(backview, cardView, gameBoard);
+        root.getChildren().addAll(backview, cardView, gameBoard, skip);
         //Put the gameboard into the borderpane
         gameBoard.setCenter(squareGrid);
 
