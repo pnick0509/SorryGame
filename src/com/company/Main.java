@@ -44,12 +44,12 @@ public class Main extends Application {
         skip.setLayoutY(650);
         skip.setMinSize(150,50);
         skip.setMaxSize(150,50);
+        skip.setStyle("-fx-font-size:20");
         if(game.getSelected() == -1){
             skip.setText("Skip Turn");
             skip.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle (ActionEvent event) {
-                    System.out.println("Thank you, next.");
                     game.nextTurn();
                     update(primaryStage,game);
                 }
@@ -59,7 +59,6 @@ public class Main extends Application {
             skip.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle (ActionEvent event) {
-                    System.out.println("Okay. Bye-bye now.");
                     game.deselectPawn();
                     update(primaryStage,game);
                 }
@@ -88,17 +87,17 @@ public class Main extends Application {
                     bt.setShape(gameSquare);
 
                     if(   (col == 7 && row >= 1 && row < 7) || (col == 9 && row == 1) )
-                        bt.setStyle("-fx-background-color: #ff6258; -fx-border-color: rgba(202,8,6,0.57)");// Top left Start & Home
+                        bt.setStyle("-fx-font-size:20; -fx-background-color: #ff6258; -fx-border-color: rgba(202,8,6,0.57)");// Top left Start & Home
                     else if ( (col == 22 && row < 7 && row >= 1) || (col == 24 && row == 1) )
-                        bt.setStyle("-fx-background-color: #ffa048; -fx-border-color: rgba(202,100,11,0.57)");// Top right Start & Home
+                        bt.setStyle("-fx-font-size:20; -fx-background-color: #ffa048; -fx-border-color: rgba(202,100,11,0.57)");// Top right Start & Home
                     else if ( (col > 23 && col < 30 && row == 7) || (col == 29 && row == 9) )
-                        bt.setStyle("-fx-background-color: #fffc5c; -fx-border-color: rgba(198,202,32,0.57)");// Rightmost start & home
+                        bt.setStyle("-fx-font-size:20; -fx-background-color: #fffc5c; -fx-border-color: rgba(198,202,32,0.57)");// Rightmost start & home
                     else if ( (col == 23 && row > 8 && row < 15) || ( col == 21 && row == 14) )
-                        bt.setStyle("-fx-background-color: #66ff90; -fx-border-color: rgba(8,202,0,0.57)");//Bottom right start & home
+                        bt.setStyle("-fx-font-size:20; -fx-background-color: #66ff90; -fx-border-color: rgba(8,202,0,0.57)");//Bottom right start & home
                     else if ( (col == 8 && row > 8 && row < 15) || (col == 6 && row == 14))
-                        bt.setStyle("-fx-background-color: #2eb7ff; -fx-border-color: rgba(18,65,227,0.46)");// Bottom left start & home
+                        bt.setStyle("-fx-font-size:20; -fx-background-color: #2eb7ff; -fx-border-color: rgba(18,65,227,0.46)");// Bottom left start & home
                     else if ( (col < 7 && col > 0 && row == 8) || (col == 1 && row == 6) )
-                        bt.setStyle("-fx-background-color: #f88bff; -fx-border-color: rgba(232,0,238,0.69)");// Leftmost start & home
+                        bt.setStyle("-fx-font-size:20; -fx-background-color: #f88bff; -fx-border-color: rgba(232,0,238,0.69)");// Leftmost start & home
 
                     //Starts
                     if(col == 9 && row == 1){
@@ -241,7 +240,7 @@ public class Main extends Application {
 
 
         //Construct the scene and launch
-        primaryStage.setTitle("Sorry! Cycle 1.3");
+        primaryStage.setTitle("Sorry! Cycle 2.1");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
