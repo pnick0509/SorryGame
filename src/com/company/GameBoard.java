@@ -10,6 +10,7 @@ class GameBoard{
     private int maxPlayers = 6;
     private int[] start;
     private int[] home;
+    private int pawnNum;
 
     public Pawn[] getSpaces()
     {
@@ -21,11 +22,12 @@ class GameBoard{
         safeLength = 5;
         //spaces = new Pawn[(sideLength*sides)-sides+safeLength*sides];
         spaces = new Pawn[marginCount+safeLength*maxPlayers];
+        pawnNum = 4;
 
         start = new int[maxPlayers];
         home = new int[maxPlayers];
         for(int i = 0; i < maxPlayers; i++){
-            start[i] = 4;
+            start[i] = pawnNum;
             home[i] = 0;
         }
     }

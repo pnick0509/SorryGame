@@ -84,33 +84,42 @@ class Sorry{
         return currCard;
     }
 
+    //This script skips the turn and goes to the next player
+    public void skipTurn(){
+        options.clear();
+        nextTurn();
+    }
+
     //This script ensures that the turn is always set to an active player
     public void nextTurn()
     {
+        remainder = 0;
         selected = -1;
         turn = (turn+1)%players;
         System.out.println("Turn: "+turn);
         currCard = pullCard();
         //For the Sorry! card you don't have to select a pawn
-        if(currCard == 13){
-            options.clear();
-            if(gb.startAmount(turn) > 0){
-                for(int i = 0; i < gb.getMarginCount(); i++){
-                    if(gb.getSpaces()[i] != null){
-                        if(gb.getSpaces()[i].getPawnColor() != getTurnColor()){
-                            options.add(i);
+        if(gb.startAmount(turn) > 0){
+            if(currCard == 13){
+                options.clear();
+                if(gb.startAmount(turn) > 0){
+                    for(int i = 0; i < gb.getMarginCount(); i++){
+                        if(gb.getSpaces()[i] != null){
+                            if(gb.getSpaces()[i].getPawnColor() != getTurnColor()){
+                                options.add(i);
+                            }
                         }
                     }
                 }
-            }
-        }else if(currCard == 1 || currCard == 2){
-            if(gb.getSpaces()[gb.mySpawn(getTurn())] == null){
-                options.clear();
-                safeAdd(gb.myStart(getTurn()));
-            }else{
-                if(gb.getSpaces()[gb.mySpawn(getTurn())].getPawnColor() != getTurnColor()){
+            }else if(currCard == 1 || currCard == 2){
+                if(gb.getSpaces()[gb.mySpawn(getTurn())] == null){
                     options.clear();
                     safeAdd(gb.myStart(getTurn()));
+                }else{
+                    if(gb.getSpaces()[gb.mySpawn(getTurn())].getPawnColor() != getTurnColor()){
+                        options.clear();
+                        safeAdd(gb.myStart(getTurn()));
+                    }
                 }
             }
         }

@@ -22,10 +22,7 @@ public class Main extends Application {
 
     public void start(Stage primaryStage){
         game = new Sorry();
-
-        for(int i = 0; i < 3; i++) {
-            update(primaryStage,game);
-        }
+        update(primaryStage,game);
     }
 
     public void update(Stage primaryStage, Sorry game) {
@@ -40,17 +37,17 @@ public class Main extends Application {
         Pawn[] screen = game.getBoard().getSpaces();
 
         Button skip = new Button();
-        skip.setLayoutX(700);
+        skip.setLayoutX(650);
         skip.setLayoutY(650);
-        skip.setMinSize(150,50);
-        skip.setMaxSize(150,50);
+        skip.setMinSize(250,50);
+        skip.setMaxSize(250,50);
         skip.setStyle("-fx-font-size:20");
         if(game.getSelected() == -1){
             skip.setText("Skip Turn");
             skip.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle (ActionEvent event) {
-                    game.nextTurn();
+                    game.skipTurn();
                     update(primaryStage,game);
                 }
             });
@@ -128,7 +125,7 @@ public class Main extends Application {
                         bt.setText(Integer.toString(game.getBoard().homeAmount(5)));
                     }
 
-                    bt.setMaxSize(60, 60);
+                    bt.setMaxSize(50, 50);
                     bt.setMinHeight(50);
                     bt.setMinWidth(50);
                     if(game.getOptions().contains(getInput(row,col))){
