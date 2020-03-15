@@ -55,7 +55,7 @@ class Sorry{
 
     public void createCards()
     {
-        for(int y=1; y<=13; y++) {
+        /*for(int y=1; y<=13; y++) {
             if(y==6||y==9){
                 y++;
             }
@@ -63,7 +63,8 @@ class Sorry{
                 cards.add(y);
             }
         }
-        cards.add(1);
+        cards.add(1);*/
+        cards.add(7);
     }
 
     //Remove a random card from the deck
@@ -284,10 +285,9 @@ class Sorry{
         System.out.println(options);
     }
 
-    //Checks if there is any pawns of a certain color that can move a set number of spaces
-    //No include can be set to a non negative number to disinclude checking a pawn at a certain index. Otherwise set to -1.
-    public boolean canMoveOther(pColor c, int spaces, int noinclude, int noOffset){
-        int movedTo = gb.countForward(noinclude,noOffset,c);
+    //Checks if there is any pawns of a certain color that can move a set number of spaces. It must not be the index of orig.
+    public boolean canMoveOther(pColor c, int spaces, int orig, int origOffset){
+        /*int movedTo = gb.countForward(noinclude,noOffset,c);
         for(int i = 0; i < gb.getSpaces().length; i++){
             if(i != movedTo){
                 if(gb.getSpaces()[i] != null){
@@ -298,7 +298,40 @@ class Sorry{
                 }
             }
         }
-        return false;
+        return false;*/
+        boolean can = false;
+        //Create a deep copy
+        Pawn deepCopy[];
+        deepCopy = new Pawn[gb.getSpaces().length];
+        for(int i = 0; i < deepCopy.length; i++){
+            deepCopy[i] = gb.getSpaces()[i];
+        }
+        //Advance orig
+        Pawn origPawn = gb.getSpaces()[orig];
+        if(canMove(orig,origOffset)){
+            //Move Pawn
+            if(gb.countForward(orig,origOffset,c) < deepCopy.length){
+                gb.movePawn(orig,gb.countForward(orig,origOffset,c));
+            }else{
+                gb.destroyPawn(orig);
+            }
+            //Check availability
+            for(int i = 0; i < gb.getSpaces().length; i++){
+                if(gb.getSpaces()[i] != null){
+                    if(gb.getSpaces()[i].getPawnColor() == c && origPawn != gb.getSpaces()[i]){
+                        //Found a pawn that meets conditions of color and not orig
+                        if(canMove(i,spaces)){
+                            can = true;
+                        }
+                    }
+                }
+            }
+        }
+        //Reset original with deep copy
+        for(int i = 0; i < deepCopy.length; i++){
+            gb.setSpace(i,deepCopy[i]);
+        }
+        return can;
     }
 
     //Checks if a pawn can move a certain number of spaces
