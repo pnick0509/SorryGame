@@ -16,8 +16,9 @@ class Sorry{
     private ArrayList<Integer> options;
 
     private boolean cardCheats;
+    private boolean colorBlind;
 
-    //Starts a new game with four players
+    //Starts a new game with six players
     public Sorry(){
         gb = new GameBoard();
         players = 6;
@@ -31,6 +32,7 @@ class Sorry{
         nextTurn();
 
         cardCheats = true;
+        colorBlind = true;
     }
 
     //Starts a new game with a variable amount of players
@@ -48,6 +50,7 @@ class Sorry{
         nextTurn();
 
         cardCheats = true;
+        colorBlind = true;
     }
 
     public void createCards()
@@ -336,5 +339,15 @@ class Sorry{
     public void deselectPawn(){
         options.clear();
         selected = -1;
+    }
+
+    //Get color blind setting
+    public boolean getColorblind(){
+        return colorBlind;
+    }
+
+    //Toggle color blind setting
+    public void toggleColorblind(){
+        colorBlind = !colorBlind;
     }
 }

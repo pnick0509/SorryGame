@@ -159,39 +159,66 @@ public class Main extends Application {
                         if (getInput(row,col) < screen.length) {
                             if(screen[getInput(row, col)] != null){
                                 Image image;
-                                if(getInput(row,col) == game.getSelected()){
+                                /*if(getInput(row,col) == game.getSelected()){
                                     if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
-                                        image = new Image("RedSelect.png");
+                                        image = new Image("Default/RedSelect.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
-                                        image = new Image("OrangeSelect.png");
+                                        image = new Image("Default/OrangeSelect.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
-                                        image = new Image("YellowSelect.png");
+                                        image = new Image("Default/YellowSelect.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
-                                        image = new Image("GreenSelect.png");
+                                        image = new Image("Default/GreenSelect.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
-                                        image = new Image("BlueSelect.png");
+                                        image = new Image("Default/BlueSelect.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
-                                        image = new Image("PurpleSelect.png");
+                                        image = new Image("Default/PurpleSelect.png");
                                     }else{
-                                        image = new Image("RedPawn.png");
+                                        image = new Image("Default/RedPawn.png");
                                     }
                                 }else{
                                     if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
-                                        image = new Image("RedPawn.png");
+                                        image = new Image("Default/RedPawn.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
-                                        image = new Image("OrangePawn.png");
+                                        image = new Image("Default/OrangePawn.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
-                                        image = new Image("YellowPawn.png");
+                                        image = new Image("Default/YellowPawn.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
-                                        image = new Image("GreenPawn.png");
+                                        image = new Image("Default/GreenPawn.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
-                                        image = new Image("BluePawn.png");
+                                        image = new Image("Default/BluePawn.png");
                                     }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
-                                        image = new Image("PurplePawn.png");
+                                        image = new Image("Default/PurplePawn.png");
                                     }else{
-                                        image = new Image("RedPawn.png");
+                                        image = new Image("Default/RedPawn.png");
                                     }
+                                }*/
+                                String img;
+                                if(game.getColorblind()){
+                                    img = "ColorBlind/";
+                                }else{
+                                    img = "Default/";
                                 }
+                                if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
+                                    img += "Red";
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
+                                    img += "Orange";
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
+                                    img += "Yellow";
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
+                                    img += "Green";
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
+                                    img += "Blue";
+                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
+                                    img += "Purple";
+                                }
+                                if(getInput(row,col) == game.getSelected()){
+                                    img += "Select.png";
+                                }else{
+                                    img += "Pawn.png";
+                                }
+
+                                image = new Image(img);
+
                                 //}else{
                                 //    image = new Image(getClass().getResourceAsStream("Unknown.png"));
                                 //}
@@ -261,14 +288,22 @@ public class Main extends Application {
     }
 
     public String setNextBack(int turn){
-        switch(turn){
-            case 0: return "RedCard.png";
-            case 1: return "OrangeCard.png";
-            case 2: return "YellowCard.png";
-            case 3: return "GreenCard.png";
-            case 4: default: return "BlueCard.png";
-            case 5: return "PurpleCard.png";
+        String img;
+        if(game.getColorblind()){
+            img = "ColorBlind/";
+        }else{
+            img = "Default/";
         }
+        switch(turn){
+            case 0: img += "RedCard.png"; break;
+            case 1: img += "OrangeCard.png"; break;
+            case 2: img += "YellowCard.png"; break;
+            case 3: img += "GreenCard.png"; break;
+            case 4: default: img += "BlueCard.png"; break;
+            case 5: img += "PurpleCard.png"; break;
+        }
+        System.out.println(img);
+        return img;
     }
 
     public int getInput(int row, int col){
