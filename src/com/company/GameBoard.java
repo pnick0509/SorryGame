@@ -30,9 +30,6 @@ class GameBoard{
             start[i] = pawnNum;
             home[i] = 0;
         }
-
-        newPawn(pColor.RED,7);
-        newPawn(pColor.RED,6);
     }
 
     //Keeps track of how many pawns in start and home

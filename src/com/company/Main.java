@@ -159,39 +159,6 @@ public class Main extends Application {
                         if (getInput(row,col) < screen.length) {
                             if(screen[getInput(row, col)] != null){
                                 Image image;
-                                /*if(getInput(row,col) == game.getSelected()){
-                                    if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
-                                        image = new Image("Default/RedSelect.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
-                                        image = new Image("Default/OrangeSelect.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
-                                        image = new Image("Default/YellowSelect.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
-                                        image = new Image("Default/GreenSelect.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
-                                        image = new Image("Default/BlueSelect.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
-                                        image = new Image("Default/PurpleSelect.png");
-                                    }else{
-                                        image = new Image("Default/RedPawn.png");
-                                    }
-                                }else{
-                                    if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
-                                        image = new Image("Default/RedPawn.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
-                                        image = new Image("Default/OrangePawn.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
-                                        image = new Image("Default/YellowPawn.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
-                                        image = new Image("Default/GreenPawn.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
-                                        image = new Image("Default/BluePawn.png");
-                                    }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
-                                        image = new Image("Default/PurplePawn.png");
-                                    }else{
-                                        image = new Image("Default/RedPawn.png");
-                                    }
-                                }*/
                                 String img;
                                 if(game.getColorblind()){
                                     img = "ColorBlind/";
@@ -219,9 +186,6 @@ public class Main extends Application {
 
                                 image = new Image(img);
 
-                                //}else{
-                                //    image = new Image(getClass().getResourceAsStream("Unknown.png"));
-                                //}
                                 ImageView imageView = new ImageView(image);
                                 imageView.setFitWidth(30);
                                 imageView.setFitHeight(30);
@@ -302,7 +266,6 @@ public class Main extends Application {
             case 4: default: img += "BlueCard.png"; break;
             case 5: img += "PurpleCard.png"; break;
         }
-        System.out.println(img);
         return img;
     }
 

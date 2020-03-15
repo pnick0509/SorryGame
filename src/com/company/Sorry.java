@@ -55,7 +55,7 @@ class Sorry{
 
     public void createCards()
     {
-        /*for(int y=1; y<=13; y++) {
+        for(int y=1; y<=13; y++) {
             if(y==6||y==9){
                 y++;
             }
@@ -63,8 +63,7 @@ class Sorry{
                 cards.add(y);
             }
         }
-        cards.add(1);*/
-        cards.add(7);
+        cards.add(1);
     }
 
     //Remove a random card from the deck
@@ -72,12 +71,14 @@ class Sorry{
     {
         int temp = Math.abs(rand.nextInt())%cards.size();
         int card = cards.get(temp);
-        cards.remove(temp);
+        if(cardCheats){
+            cards.remove(temp);
 
-        //Reshuffle cards
-        if(cards.size() <= 0 || !cardCheats){
-            System.out.println("Reshuffling");
-            createCards();
+            //Reshuffle cards
+            if(cards.size() <= 0){
+                System.out.println("Reshuffling");
+                createCards();
+            }
         }
 
         return card;
@@ -102,7 +103,13 @@ class Sorry{
         turn = (turn+1)%players;
         System.out.println("Turn: "+turn);
         currCard = pullCard();
-        //For the Sorry! card you don't have to select a pawn
+
+        //Set options
+        startOptions();
+    }
+
+    //Sets the options that don't require a pawn to be selected
+    public void startOptions(){
         if(gb.startAmount(turn) > 0){
             if(currCard == 13){
                 options.clear();
@@ -159,27 +166,7 @@ class Sorry{
                             gb.setSpace(selected,one);
                         }
                         //Next move
-                        if(currCard == 7){
-                            System.out.println("Remain "+remainder);
-                            if(remainder == 0){ //First move with 7
-                                remainder = 7-gb.distanceBetweenSpaces(selected,index,gb.getSpaces()[index].getPawnColor());
-                                if(remainder != 0){
-                                    selected = -1;
-                                }else{
-                                    nextTurn();
-                                }
-                            }else{ //Second move with 7
-                                remainder = 0;
-                                nextTurn();
-                            }
-                        }else if(currCard == 2){
-                            //Go again
-                            System.out.println("Go Again");
-                            turn--;
-                            nextTurn();
-                        }else{
-                            nextTurn();
-                        }
+                        specialNext(index);
                     }
                 }
             }else{ //Sorry! Card
@@ -211,36 +198,39 @@ class Sorry{
                         nextTurn();
                     }
                 }else if(index >= 126 && index <= 131){ //Home
-                    pColor tempColor = gb.getSpaces()[selected].getPawnColor();
                     gb.destroyPawn(selected);
                     gb.homeAdd(getTurn());
                     options.clear();
 
-                    //Terrible idea here:
-                    if(currCard == 7){
-                        System.out.println("Remain "+remainder);
-                        if(remainder == 0){ //First move with 7
-                            remainder = 7-gb.distanceBetweenSpaces(selected,index,tempColor);
-                            if(remainder != 0){
-                                selected = -1;
-                            }else{
-                                nextTurn();
-                            }
-                        }else{ //Second move with 7
-                            remainder = 0;
-                            nextTurn();
-                        }
-                    }else if(currCard == 2){
-                        //Go again
-                        System.out.println("Go Again");
-                        turn--;
-                        nextTurn();
-                    }else{
-                        nextTurn();
-                    }
-                    //Terrible idea ends here
+                    specialNext(index);
                 }
             }
+        }
+    }
+
+    //Does special next turns if the card is a 2 or a 7, otherwise does normal next turn.
+    public void specialNext(int index){
+        if(currCard == 7){
+            pColor tempColor = gb.getSpaces()[index].getPawnColor();
+            System.out.println("Remain "+remainder);
+            if(remainder == 0){ //First move with 7
+                remainder = 7-gb.distanceBetweenSpaces(selected,index,tempColor);
+                if(remainder != 0){
+                    selected = -1;
+                }else{
+                    nextTurn();
+                }
+            }else{ //Second move with 7
+                remainder = 0;
+                nextTurn();
+            }
+        }else if(currCard == 2){
+            //Go again
+            System.out.println("Go Again");
+            turn--;
+            nextTurn();
+        }else{
+            nextTurn();
         }
     }
 
@@ -251,7 +241,6 @@ class Sorry{
             safeAdd(gb.countForward(index, 1, c));
         }else if(card == 2){
             safeAdd(gb.countForward(index, 2, c));
-            //safeAdd(gb.myStart(getTurn()));
         }else if(card == 3){
             safeAdd(gb.countForward(index, 3, c));
         }else if(card == 4){
@@ -287,18 +276,6 @@ class Sorry{
 
     //Checks if there is any pawns of a certain color that can move a set number of spaces. It must not be the index of orig.
     public boolean canMoveOther(pColor c, int spaces, int orig, int origOffset){
-        /*int movedTo = gb.countForward(noinclude,noOffset,c);
-        for(int i = 0; i < gb.getSpaces().length; i++){
-            if(i != movedTo){
-                if(gb.getSpaces()[i] != null){
-                    if(gb.getSpaces()[i].getPawnColor() == c){
-                        //Found a pawn that meets conditions of color and not noinclude
-                        return canMove(i,spaces);
-                    }
-                }
-            }
-        }
-        return false;*/
         boolean can = false;
         //Create a deep copy
         Pawn deepCopy[];
@@ -404,6 +381,7 @@ class Sorry{
 
     public void deselectPawn(){
         options.clear();
+        startOptions();
         selected = -1;
     }
 

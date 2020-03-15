@@ -14,7 +14,7 @@ class Pawn{
     }
 }
 
-//The color enum for 4 different Sorry! players.
+//The color enum for 6 different Sorry! players.
 //The players will always move in this turn order.
 enum pColor{
     RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
