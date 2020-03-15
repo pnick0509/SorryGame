@@ -32,7 +32,7 @@ class Sorry{
         nextTurn();
 
         cardCheats = true;
-        colorBlind = true;
+        colorBlind = false;
     }
 
     //Starts a new game with a variable amount of players
@@ -259,13 +259,11 @@ class Sorry{
             safeAdd(gb.countForward(index, 5, c));
         }else if(card == 7){
             if(remainder == 0){
-                safeAdd(gb.countForward(index, 1, c));
-                safeAdd(gb.countForward(index, 2, c));
-                safeAdd(gb.countForward(index, 3, c));
-                safeAdd(gb.countForward(index, 4, c));
-                safeAdd(gb.countForward(index, 5, c));
-                safeAdd(gb.countForward(index, 6, c));
-                safeAdd(gb.countForward(index, 7, c));
+                for(int i = 1; i <= 7; i++){
+                    if(canMoveOther(c,7-i,index,i) || i == 7){
+                        safeAdd(gb.countForward(index, i, c));
+                    }
+                }
             }else{
                 System.out.println(remainder);
                 safeAdd(gb.countForward(index, remainder, c));
@@ -284,6 +282,41 @@ class Sorry{
         options.removeIf(a -> a.equals(-1));
         options.removeIf(a -> a.equals(-2));
         System.out.println(options);
+    }
+
+    //Checks if there is any pawns of a certain color that can move a set number of spaces
+    //No include can be set to a non negative number to disinclude checking a pawn at a certain index. Otherwise set to -1.
+    public boolean canMoveOther(pColor c, int spaces, int noinclude, int noOffset){
+        int movedTo = gb.countForward(noinclude,noOffset,c);
+        for(int i = 0; i < gb.getSpaces().length; i++){
+            if(i != movedTo){
+                if(gb.getSpaces()[i] != null){
+                    if(gb.getSpaces()[i].getPawnColor() == c){
+                        //Found a pawn that meets conditions of color and not noinclude
+                        return canMove(i,spaces);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //Checks if a pawn can move a certain number of spaces
+    public boolean canMove(int index, int spaces){
+        pColor c = gb.getSpaces()[index].getPawnColor();
+        int newSpace = gb.countForward(index,spaces,c);
+        if(newSpace != -1){
+            if(newSpace > gb.getSpaces().length){
+                return true;
+            }else if(gb.getSpaces()[newSpace] == null){
+                return true;
+            }else{
+                if(gb.getSpaces()[newSpace].getPawnColor() != c){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //Ensures that the pawn movement would be valid. For example, it cannot move onto a pawn of the same color or a negative space.
