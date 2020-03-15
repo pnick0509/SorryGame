@@ -288,7 +288,9 @@ class Sorry{
         if(canMove(orig,origOffset)){
             //Move Pawn
             if(gb.countForward(orig,origOffset,c) < deepCopy.length){
-                gb.movePawn(orig,gb.countForward(orig,origOffset,c));
+                //gb.movePawn(orig,gb.countForward(orig,origOffset,c));
+                gb.setSpace(gb.countForward(orig,origOffset,c),gb.getSpaces()[orig]);
+                gb.setSpace(orig,null);
             }else{
                 gb.destroyPawn(orig);
             }
