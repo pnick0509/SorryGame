@@ -3,7 +3,33 @@
   <component name="ChangeListManager">
     <list default="true" id="7094ba8c-4d69-41b4-b224-6416011d3902" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/BluePawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/BluePawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/BlueSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/BlueSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/GreenPawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/GreenPawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/GreenSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/GreenSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/OrangePawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/OrangePawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/OrangeSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/OrangeSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/PurplePawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/PurplePawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/PurpleSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/PurpleSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/RedPawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/RedPawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/RedSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/RedSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/YellowPawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/YellowPawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ColorBlind/YellowSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ColorBlind/YellowSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/BluePawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/BluePawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/BlueSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/BlueSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/GreenPawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/GreenPawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/GreenSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/GreenSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/OrangePawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/OrangePawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/OrangeSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/OrangeSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/PurplePawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/PurplePawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/PurpleSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/PurpleSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/RedPawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/RedPawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/RedSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/RedSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/YellowPawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/YellowPawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Default/YellowSelect.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Default/YellowSelect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Sorry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Sorry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,6 +116,7 @@
       <workItem from="1584032345345" duration="5229000" />
       <workItem from="1584059701713" duration="2022000" />
       <workItem from="1584287871542" duration="9936000" />
+      <workItem from="1584979424824" duration="15464000" />
     </task>
     <servers />
   </component>
@@ -105,25 +132,25 @@
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
     <state x="706" y="286" key="FileChooserDialogImpl/0.0.1853.1080@0.0.1853.1080" timestamp="1583436696683" />
-    <state width="1810" height="90" key="GridCell.Tab.0.bottom" timestamp="1584298941259">
+    <state width="1305" height="90" key="GridCell.Tab.0.bottom" timestamp="1585017018138">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="90" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1584298941259" />
+    <state width="1305" height="90" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1585017018138" />
     <state width="1812" height="292" key="GridCell.Tab.0.bottom/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="90" key="GridCell.Tab.0.center" timestamp="1584298941257">
+    <state width="1305" height="90" key="GridCell.Tab.0.center" timestamp="1585017018137">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="90" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1584298941257" />
+    <state width="1305" height="90" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1585017018137" />
     <state width="1812" height="292" key="GridCell.Tab.0.center/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="90" key="GridCell.Tab.0.left" timestamp="1584298941257">
+    <state width="1305" height="90" key="GridCell.Tab.0.left" timestamp="1585017018137">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="90" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1584298941257" />
+    <state width="1305" height="90" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1585017018137" />
     <state width="1812" height="292" key="GridCell.Tab.0.left/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1810" height="90" key="GridCell.Tab.0.right" timestamp="1584298941257">
+    <state width="1305" height="90" key="GridCell.Tab.0.right" timestamp="1585017018137">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="1810" height="90" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1584298941257" />
+    <state width="1305" height="90" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1585017018137" />
     <state width="1812" height="292" key="GridCell.Tab.0.right/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
     <state x="859" y="189" key="SettingsEditor" timestamp="1582769279491">
       <screen x="0" y="0" width="1853" height="1080" />
@@ -133,15 +160,19 @@
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
     <state x="635" y="369" key="com.intellij.ide.util.TipDialog/0.0.1853.1080@0.0.1853.1080" timestamp="1583269901950" />
-    <state x="583" y="250" key="run.anything.popup" timestamp="1583869512228">
+    <state x="582" y="159" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1585009720380">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state x="583" y="250" key="run.anything.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1583869512228" />
+    <state x="582" y="159" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1853.1080@0.0.1853.1080" timestamp="1585009720380" />
+    <state x="583" y="250" key="run.anything.popup" timestamp="1585016995945">
+      <screen x="0" y="0" width="1853" height="1080" />
+    </state>
+    <state x="583" y="250" key="run.anything.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1585016995945" />
     <state x="584" y="250" key="run.anything.popup/0.0.1855.1080@0.0.1855.1080" timestamp="1581464929255" />
-    <state x="589" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1584059771983">
+    <state x="589" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1584984758343">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state x="589" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1584059771983" />
+    <state x="589" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1584984758343" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SorryNew$Main.ic" NAME="Main Coverage Results" MODIFIED="1582769930534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -32,7 +32,7 @@ class Sorry{
         nextTurn();
 
         cardCheats = true;
-        colorBlind = false;
+        colorBlind = true;
     }
 
     //Starts a new game with a variable amount of players

@@ -1,41 +1,108 @@
 package com.company;
 
+import javafx.animation.KeyFrame;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
+import java.util.Random;
 
 import static javafx.scene.paint.Color.GREEN;
 
-
 public class Main extends Application {
     Sorry game;
+    Group root = new Group();
+    int rowNum = 16, colNum = 31, squareSize = 50;
+    Scene scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
     public void start(Stage primaryStage){
         game = new Sorry();
         update(primaryStage,game);
+
+        scene.setOnMouseClicked(e -> {
+            if (e.getButton() == MouseButton.PRIMARY) {
+                System.out.print("("+e.getX()+", "+e.getY()+") ");
+                System.out.println(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
+                game.takeTurn(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
+                update(primaryStage,game);
+            }
+        });
     }
 
     public void update(Stage primaryStage, Sorry game) {
-
         System.out.println("Update");
+        root.getChildren().clear();
+        for(int row = 0; row<rowNum; row++) {
+            for (int col = 0; col < colNum; col++) {
+                if (getInput(row,col) != -1){
+                    //Draw Square
+                    placeImage(row,col,spaceImage(getInput(row,col)));
+                    if(game.getOptions().contains(getInput(row,col))){
+                        placeImage(row,col,"Board/Selection.png");
+                    }
 
-        //Grid and board parameters
-        int rowNum = 16, colNum = 31, gridH = 16, gridW = 16;
-        //Grid pane to hold the grid of squares, a borderbane to hold the grid or game board in
-        GridPane squareGrid = new GridPane();
-        BorderPane gameBoard = new BorderPane();
-        Pawn[] screen = game.getBoard().getSpaces();
+                    //Draw Pawn
+                    if(getInput(row,col) <= 119){
+                        if(game.getBoard().getSpaces()[getInput(row,col)] != null){
+                            placeImage(row,col,pawnImage(getInput(row,col)));
+                        }
+                    }
 
+                    //Draw numbers
+                    //Starts
+                    if(col == 9 && row == 1){
+                        placeImage(row, col, "Board/"+game.getBoard().startAmount(0)+".png");
+                    }else if(col == 24 && row == 1){
+                        placeImage(row, col, "Board/"+game.getBoard().startAmount(1)+".png");
+                    }else if(col == 29 && row == 9){
+                        placeImage(row, col, "Board/"+game.getBoard().startAmount(2)+".png");
+                    }else if(col == 21 && row == 14){
+                        placeImage(row, col, "Board/"+game.getBoard().startAmount(3)+".png");
+                    }else if(col == 6 && row == 14){
+                        placeImage(row, col, "Board/"+game.getBoard().startAmount(4)+".png");
+                    }else if(col == 1 && row == 6){
+                        placeImage(row, col, "Board/"+game.getBoard().startAmount(5)+".png");
+                    }
+                    //Homes
+                    else if(col == 7 && row == 6){
+                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(0)+".png");
+                    }else if(col == 22 && row == 6){
+                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(1)+".png");
+                    }else if(col == 24 && row == 7){
+                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(2)+".png");
+                    }else if(col == 23 && row == 9){
+                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(3)+".png");
+                    }else if(col == 8 && row == 9){
+                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(4)+".png");
+                    }else if(col == 6 && row == 8){
+                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(5)+".png");
+                    }
+                }
+            }
+        }
+
+        //Skip Button
         Button skip = new Button();
         skip.setLayoutX(650);
         skip.setLayoutY(650);
@@ -48,6 +115,7 @@ public class Main extends Application {
                 @Override
                 public void handle (ActionEvent event) {
                     game.skipTurn();
+                    System.out.println("Handle!");
                     update(primaryStage,game);
                 }
             });
@@ -61,143 +129,7 @@ public class Main extends Application {
                 }
             });
         }
-
-        //For loop that constructs the gameboard by going through rows/columns
-        //As it goes through it checks for specific column and row values to put buttons in
-        for(int row = 0; row<rowNum; row++) {
-            for (int col = 0; col < colNum; col++) {
-                if (    (row == 0) || (col == 0) || (row == 15) || (col == 30) || //The board itself
-                        (col == 7 && row <= 6) || (col == 9 && row < 2) || // Top left Start & Home
-                        (col == 22 && row <= 6) || (col == 24 && row < 2) || // Top right Start & Home
-                        (col > 23 && row == 7) || (col == 29 && row == 9) || // Rightmost start & home
-                        (col == 23 && row > 8) || ( col == 21 && row == 14) || //Bottom right start & home
-                        (col == 8 && row > 8) || (col == 6 && row == 14) || // Bottom left start & home
-                        (col < 7 && row == 8) || (col == 1 && row == 6) // Leftmost start & home
-                        ) {
-
-                    //Make a button, assign it the rectangle object/shape
-                    Button bt = new Button();
-                    Rectangle gameSquare = new Rectangle();
-
-
-                    bt.setStyle("-fx-focus-color: transparent;");
-                    bt.setShape(gameSquare);
-
-                    if(   (col == 7 && row >= 1 && row < 7) || (col == 9 && row == 1) )
-                        bt.setStyle("-fx-font-size:20; -fx-background-color: #ff6258; -fx-border-color: rgba(202,8,6,0.57)");// Top left Start & Home
-                    else if ( (col == 22 && row < 7 && row >= 1) || (col == 24 && row == 1) )
-                        bt.setStyle("-fx-font-size:20; -fx-background-color: #ffa048; -fx-border-color: rgba(202,100,11,0.57)");// Top right Start & Home
-                    else if ( (col > 23 && col < 30 && row == 7) || (col == 29 && row == 9) )
-                        bt.setStyle("-fx-font-size:20; -fx-background-color: #fffc5c; -fx-border-color: rgba(198,202,32,0.57)");// Rightmost start & home
-                    else if ( (col == 23 && row > 8 && row < 15) || ( col == 21 && row == 14) )
-                        bt.setStyle("-fx-font-size:20; -fx-background-color: #66ff90; -fx-border-color: rgba(8,202,0,0.57)");//Bottom right start & home
-                    else if ( (col == 8 && row > 8 && row < 15) || (col == 6 && row == 14))
-                        bt.setStyle("-fx-font-size:20; -fx-background-color: #2eb7ff; -fx-border-color: rgba(18,65,227,0.46)");// Bottom left start & home
-                    else if ( (col < 7 && col > 0 && row == 8) || (col == 1 && row == 6) )
-                        bt.setStyle("-fx-font-size:20; -fx-background-color: #f88bff; -fx-border-color: rgba(232,0,238,0.69)");// Leftmost start & home
-
-                    //Starts
-                    if(col == 9 && row == 1){
-                        bt.setText(Integer.toString(game.getBoard().startAmount(0)));
-                    }else if(col == 24 && row == 1){
-                        bt.setText(Integer.toString(game.getBoard().startAmount(1)));
-                    }else if(col == 29 && row == 9){
-                        bt.setText(Integer.toString(game.getBoard().startAmount(2)));
-                    }else if(col == 21 && row == 14){
-                        bt.setText(Integer.toString(game.getBoard().startAmount(3)));
-                    }else if(col == 6 && row == 14){
-                        bt.setText(Integer.toString(game.getBoard().startAmount(4)));
-                    }else if(col == 1 && row == 6){
-                        bt.setText(Integer.toString(game.getBoard().startAmount(5)));
-                    }
-                    //Homes
-                    else if(col == 7 && row == 6){
-                        bt.setText(Integer.toString(game.getBoard().homeAmount(0)));
-                    }else if(col == 22 && row == 6){
-                        bt.setText(Integer.toString(game.getBoard().homeAmount(1)));
-                    }else if(col == 24 && row == 7){
-                        bt.setText(Integer.toString(game.getBoard().homeAmount(2)));
-                    }else if(col == 23 && row == 9){
-                        bt.setText(Integer.toString(game.getBoard().homeAmount(3)));
-                    }else if(col == 8 && row == 9){
-                        bt.setText(Integer.toString(game.getBoard().homeAmount(4)));
-                    }else if(col == 6 && row == 8){
-                        bt.setText(Integer.toString(game.getBoard().homeAmount(5)));
-                    }
-
-                    bt.setMaxSize(50, 50);
-                    bt.setMinHeight(50);
-                    bt.setMinWidth(50);
-                    if(game.getOptions().contains(getInput(row,col))){
-                        bt.setStyle("-fx-border-color: #ff0000");
-                    }
-
-                    //Set the button action, make sure the row/col are final before we go in- as temp variables
-                    int finalCol = col;
-                    int finalRow = row;
-                    bt.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle (ActionEvent event) {
-                            int click = getInput(finalRow,finalCol);
-                            System.out.println("Input: "+click+" Row:"+finalRow+" Col:"+finalCol);
-                            game.takeTurn(click);
-                            update(primaryStage,game);
-                        }
-                    });
-
-                    //Rectangle alterations
-                    gameSquare.setHeight(60);
-                    gameSquare.setWidth(60);
-                    gameSquare.setStroke(Color.BLACK);
-                    gameSquare.setStrokeWidth(3);
-                    gameSquare.setFill(Color.WHITE);
-
-                    squareGrid.setRowIndex(bt, row);
-                    squareGrid.setColumnIndex(bt, col);
-
-                    if(getInput(row,col) != -1) {
-                        if (getInput(row,col) < screen.length) {
-                            if(screen[getInput(row, col)] != null){
-                                Image image;
-                                String img;
-                                if(game.getColorblind()){
-                                    img = "ColorBlind/";
-                                }else{
-                                    img = "Default/";
-                                }
-                                if(screen[getInput(row, col)].getPawnColor() == pColor.RED){
-                                    img += "Red";
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.ORANGE){
-                                    img += "Orange";
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.YELLOW){
-                                    img += "Yellow";
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.GREEN){
-                                    img += "Green";
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.BLUE){
-                                    img += "Blue";
-                                }else if(screen[getInput(row, col)].getPawnColor() == pColor.PURPLE){
-                                    img += "Purple";
-                                }
-                                if(getInput(row,col) == game.getSelected()){
-                                    img += "Select.png";
-                                }else{
-                                    img += "Pawn.png";
-                                }
-
-                                image = new Image(img);
-
-                                ImageView imageView = new ImageView(image);
-                                imageView.setFitWidth(30);
-                                imageView.setFitHeight(30);
-                                bt.setGraphic(imageView);
-                            }
-                        }
-
-                    }
-                    squareGrid.getChildren().addAll(bt);
-                }
-            }
-        }
+        root.getChildren().add(skip);
 
         //Draw and position the card in screen
         Image cardBack = new Image(setNextBack(game.getTurn()));
@@ -206,6 +138,7 @@ public class Main extends Application {
         backview.setFitHeight(350);
         backview.setX(650);
         backview.setY(225);
+        root.getChildren().add(backview);
 
         Image cardImage = new Image(setNextCard(game.getCard()));
         ImageView cardView = new ImageView(cardImage);
@@ -213,60 +146,87 @@ public class Main extends Application {
         cardView.setFitHeight(350);
         cardView.setX(650);
         cardView.setY(225);
+        root.getChildren().add(cardView);
 
-
-        Group root = new Group();
-
-        //Put the card and board into Root, then add Root into scene later
-        root.getChildren().addAll(backview, cardView, gameBoard, skip);
-        //Put the gameboard into the borderpane
-        gameBoard.setCenter(squareGrid);
-
-
-        //Put the borderpane into the scene
-        Scene scene = new Scene(root);
-
-
-        //Construct the scene and launch
-        primaryStage.setTitle("Sorry! Cycle 2.1");
+        //scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
+        primaryStage.setTitle("Sorry! Cycle 2.2");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
-    //Gets the next card to draw
-    public String setNextCard(int nextCard){
-        switch(nextCard){
-            case 1: return "One.png";
-            case 2: return "Two.png";
-            case 3: return "Three.png";
-            case 4: return "Four.png";
-            case 5: return "Five.png";
-            case 7: return "Seven.png";
-            case 8: return "Eight.png";
-            case 10: return "Ten.png";
-            case 11: return "Eleven.png";
-            case 12: return "Twelve.png";
-            case 13: return "Sorry.png";
-            default: return "none.jpg";
-        }
-    }
-
-    public String setNextBack(int turn){
-        String img;
-        if(game.getColorblind()){
-            img = "ColorBlind/";
+    public String spaceImage(int index){
+        String s = "Board/";
+        if((index >= 90 && index <= 94) || index == 120 || index == 126){
+            s+= "Square_Red";
+        }else if((index >= 95 && index <= 99) || index == 121 || index == 127){
+            s+= "Square_Orange";
+        }else if((index >= 100 && index <= 104) || index == 122 || index == 128){
+            s+= "Square_Yellow";
+        }else if((index >= 105 && index <= 109) || index == 123 || index == 129){
+            s+= "Square_Green";
+        }else if((index >= 110 && index <= 114) || index == 124 || index == 130){
+            s+= "Square_Blue";
+        }else if((index >= 115 && index <= 119) || index == 125 || index == 131){
+            s+= "Square_Purple";
+        }else if(index <= 89 && ((index%15 >= 6 && index%15 <= 9) || (index%15 >= 0 && index%15 <= 3) || index%15 >= 14)){
+            s+= "Slide_";
+            if(index-5 < 0){
+                s+= "Purple_";
+            }else{
+                switch((index-6)/15){
+                    case 0: s+= "Red_"; break;
+                    case 1: s+= "Orange_"; break;
+                    case 2: s+= "Yellow_"; break;
+                    case 3: s+= "Green_"; break;
+                    case 4: s+= "Blue_"; break;
+                    case 5: s+= "Purple_"; break;
+                }
+            }
+            if(index == 0 || index == 30 || index == 45 || index == 75){
+                s+= "Corner";
+            }else{
+                int ind = (index-6)%15;
+                if(ind == 0 || ind == 8){
+                    s+= "Start";
+                }else{
+                    if(ind == 3 || ind == 12 || index == 3){
+                        s+= "End_";
+                    }
+                    if((index > 0 && index < 30) || (index > 45 && index < 75)){
+                        s+= "Horizontal";
+                    }else{
+                        s+= "Vertical";
+                    }
+                }
+            }
         }else{
-            img = "Default/";
+            s += "Square";
         }
-        switch(turn){
-            case 0: img += "RedCard.png"; break;
-            case 1: img += "OrangeCard.png"; break;
-            case 2: img += "YellowCard.png"; break;
-            case 3: img += "GreenCard.png"; break;
-            case 4: default: img += "BlueCard.png"; break;
-            case 5: img += "PurpleCard.png"; break;
+        return s+".png";
+    }
+
+    public String pawnImage(int index){
+        String s;
+        if(game.getColorblind()){
+            s = "ColorBlind/";
+        }else{
+            s = "Default/";
         }
-        return img;
+        switch(game.getBoard().getValue(game.getBoard().getSpaces()[index].getPawnColor())){
+            case 0: s+="Red"; break;
+            case 1: s+="Orange"; break;
+            case 2: s+="Yellow"; break;
+            case 3: s+="Green"; break;
+            case 4: s+="Blue"; break;
+            case 5: s+="Purple"; break;
+        }
+        if(game.getSelected() == index){
+            s += "Select.png";
+        }else{
+            s += "Pawn.png";
+        }
+        return s;
     }
 
     public int getInput(int row, int col){
@@ -317,5 +277,56 @@ public class Main extends Application {
         }else{
             return -1;
         }
+    }
+
+    public void placeImage(int row, int col, String img){
+        try{
+            Image image = new Image(img);
+            ImageView imageView = new ImageView(image);
+            imageView.setX(col*squareSize);
+            imageView.setY(row*squareSize);
+            imageView.setFitHeight(squareSize);
+            imageView.setFitWidth(squareSize);
+            root.getChildren().add(imageView);
+        }
+        catch (Exception e){
+            System.out.println("Error: \""+img+"\" Not Found.");
+        }
+    }
+
+    //Gets the next card to draw
+    public String setNextCard(int nextCard){
+        switch(nextCard){
+            case 1: return "One.png";
+            case 2: return "Two.png";
+            case 3: return "Three.png";
+            case 4: return "Four.png";
+            case 5: return "Five.png";
+            case 7: return "Seven.png";
+            case 8: return "Eight.png";
+            case 10: return "Ten.png";
+            case 11: return "Eleven.png";
+            case 12: return "Twelve.png";
+            case 13: return "Sorry.png";
+            default: return "none.jpg";
+        }
+    }
+
+    public String setNextBack(int turn){
+        String img;
+        if(game.getColorblind()){
+            img = "ColorBlind/";
+        }else{
+            img = "Default/";
+        }
+        switch(turn){
+            case 0: img += "RedCard.png"; break;
+            case 1: img += "OrangeCard.png"; break;
+            case 2: img += "YellowCard.png"; break;
+            case 3: img += "GreenCard.png"; break;
+            case 4: default: img += "BlueCard.png"; break;
+            case 5: img += "PurpleCard.png"; break;
+        }
+        return img;
     }
 }
