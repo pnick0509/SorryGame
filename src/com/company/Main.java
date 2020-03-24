@@ -1,9 +1,7 @@
 package com.company;
 
-import javafx.animation.KeyFrame;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,19 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
-import java.awt.event.MouseAdapter;
-import java.util.ArrayList;
-import java.util.Random;
-
-import static javafx.scene.paint.Color.GREEN;
 
 public class Main extends Application {
     Sorry game;
