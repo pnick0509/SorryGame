@@ -81,7 +81,7 @@ class GameBoard{
     //Do not confuse with advancePawn. This moves a pawn to a set index.
     //Takes a pre-existing pawn from and index and moves it to a new index on the array.
     //This will make the space it used to occupy null and will knock out any pawn at the new position
-    public void movePawn(int pre, int post){
+    public int movePawn(int pre, int post){
         if(spaces[post] != null){
             startAdd(getValue(spaces[post].getPawnColor()));
         }
@@ -89,6 +89,23 @@ class GameBoard{
         spaces[post] = spaces[pre];
         spaces[pre] = null;
         System.out.println(pre+" --> "+post);
+
+        //Do slides
+        if(post%15 == 6 && post < 90){
+            for(int i = 0; i < 3; i++){
+                pre = post;
+                post = nextSpace(post,spaces[post].getPawnColor());
+                movePawn(pre,post);
+            }
+        }else if(post%15 == 14 && post < 90){
+            for(int i = 0; i < 4; i++){
+                pre = post;
+                post = nextSpace(post,spaces[post].getPawnColor());
+                movePawn(pre,post);
+            }
+        }
+
+        return post;
     }
 
     public void destroyPawn(int index){

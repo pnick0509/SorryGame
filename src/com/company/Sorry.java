@@ -21,7 +21,7 @@ class Sorry{
     //Starts a new game with six players
     public Sorry(){
         gb = new GameBoard();
-        players = 6;
+        players = 1;
         turn = -1; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
         createCards();
@@ -55,15 +55,18 @@ class Sorry{
 
     public void createCards()
     {
-        for(int y=1; y<=13; y++) {
+        /*for(int y=1; y<=13; y++) {
             if(y==6||y==9){
                 y++;
             }
             for (int x=0; x<5; x++) {
                 cards.add(y);
             }
-        }
+        }*/
         cards.add(1);
+        cards.add(3);
+        cards.add(2);
+        cards.add(7);
     }
 
     //Remove a random card from the deck
@@ -157,7 +160,7 @@ class Sorry{
                         //Take turn
                         options.clear();
                         if(currCard != 11){
-                            gb.movePawn(selected,index);
+                            index = gb.movePawn(selected,index);
                         }else{
                             //Swap
                             Pawn one = gb.getSpaces()[index];

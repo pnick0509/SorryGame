@@ -155,6 +155,7 @@ public class Main extends Application {
 
     }
 
+    //Returns the image to represent the space the space
     public String spaceImage(int index){
         String s = "Board/";
         if((index >= 90 && index <= 94) || index == 120 || index == 126){
@@ -206,6 +207,7 @@ public class Main extends Application {
         return s+".png";
     }
 
+    //Returns the image to represent a pawn
     public String pawnImage(int index){
         String s;
         if(game.getColorblind()){
@@ -229,6 +231,7 @@ public class Main extends Application {
         return s;
     }
 
+    //Gets the input on the spaces array based on row and column
     public int getInput(int row, int col){
         if(row == 0) { //Top row
             return col;
@@ -279,6 +282,7 @@ public class Main extends Application {
         }
     }
 
+    //Places an image in a grid dictated by the variable "squareSize" which should be the size of the images placed with this method
     public void placeImage(int row, int col, String img){
         try{
             Image image = new Image(img);
@@ -294,7 +298,7 @@ public class Main extends Application {
         }
     }
 
-    //Gets the next card to draw
+    //Get the face of the card
     public String setNextCard(int nextCard){
         switch(nextCard){
             case 1: return "One.png";
@@ -312,6 +316,7 @@ public class Main extends Application {
         }
     }
 
+    //Get the back of the card
     public String setNextBack(int turn){
         String img;
         if(game.getColorblind()){
