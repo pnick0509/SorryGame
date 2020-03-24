@@ -290,6 +290,82 @@ class Sorry{
         }else{
             newOrig = -1;
         }
+        //Add exceptions
+        ArrayList<Integer> except = new ArrayList<Integer>();
+        except.add(orig);
+        //Add exeptions for slides
+        if(newOrig == 6){
+            for(int i = 6; i < 9; i++){
+                except.add(i);
+            }
+            newOrig = 9;
+        }else if(newOrig == 14){
+            for(int i = 14; i < 18; i++){
+                except.add(i);
+            }
+            newOrig = 18;
+        }else if(newOrig == 21){
+            for(int i = 21; i < 24; i++){
+                except.add(i);
+            }
+            newOrig = 24;
+        }else if(newOrig == 29){
+            for(int i = 29; i < 33; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 33;
+        }else if(newOrig == 36){
+            for(int i = 36; i < 39; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 39;
+        }else if(newOrig == 44){
+            for(int i = 44; i < 18; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 48;
+        }else if(newOrig == 51){
+            for(int i = 51; i < 54; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 54;
+        }else if(newOrig == 59){
+            for(int i = 59; i < 63; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 63;
+        }else if(newOrig == 66){
+            for(int i = 66; i < 69; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 69;
+        }else if(newOrig == 74){
+            for(int i = 74; i < 78; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 78;
+        }else if(newOrig == 81){
+            for(int i = 81; i < 84; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 84;
+        }else if(newOrig == 89){
+            except.add(89);
+            for(int i = 0; i < 3; i++){
+                except.add(i);
+            }
+            System.out.println("Added exception "+newOrig);
+            newOrig = 3;
+        }
+        //Check pawns
         for(int i = 0; i < gb.getSpaces().length; i++){
             if(gb.getSpaces()[i] != null && i != orig){
                 //Check to see if pawn is of same color
@@ -302,7 +378,7 @@ class Sorry{
                             if(newI != newOrig){
                                 can = true;
                             }
-                        }else if((gb.getSpaces()[newI].getPawnColor() != c || newI == orig) && newI != newOrig){
+                        }else if((gb.getSpaces()[newI].getPawnColor() != c || except.contains(newI)) && newI != newOrig){
                             can = true;
                         }
                     }
