@@ -12,6 +12,8 @@ class GameBoard{
     private int[] home;
     private int pawnNum;
 
+    private int land = 0; //The space a pawn lands on through move pawn
+
     public Pawn[] getSpaces()
     {
         return spaces;
@@ -82,6 +84,27 @@ class GameBoard{
     //Takes a pre-existing pawn from and index and moves it to a new index on the array.
     //This will make the space it used to occupy null and will knock out any pawn at the new position
     public int movePawn(int pre, int post){
+        post = movePawnLoop(pre,post);
+        land = post;
+        //Do slides
+        if(post%15 == 6 && post < 90){
+            for(int i = 0; i < 3; i++){
+                pre = post;
+                post = nextSpace(post,spaces[post].getPawnColor());
+                movePawnLoop(pre,post);
+            }
+        }else if(post%15 == 14 && post < 90){
+            for(int i = 0; i < 4; i++){
+                pre = post;
+                post = nextSpace(post,spaces[post].getPawnColor());
+                movePawnLoop(pre,post);
+            }
+        }
+
+        return post;
+    }
+
+    private int movePawnLoop(int pre, int post){
         if(spaces[post] != null){
             startAdd(getValue(spaces[post].getPawnColor()));
         }
@@ -89,21 +112,6 @@ class GameBoard{
         spaces[post] = spaces[pre];
         spaces[pre] = null;
         System.out.println(pre+" --> "+post);
-
-        //Do slides
-        if(post%15 == 6 && post < 90){
-            for(int i = 0; i < 3; i++){
-                pre = post;
-                post = nextSpace(post,spaces[post].getPawnColor());
-                movePawn(pre,post);
-            }
-        }else if(post%15 == 14 && post < 90){
-            for(int i = 0; i < 4; i++){
-                pre = post;
-                post = nextSpace(post,spaces[post].getPawnColor());
-                movePawn(pre,post);
-            }
-        }
 
         return post;
     }
@@ -215,5 +223,9 @@ class GameBoard{
 
     public void setSpace(int i, Pawn p){
         spaces[i] = p;
+    }
+
+    public int getLand(){
+        return land;
     }
 }

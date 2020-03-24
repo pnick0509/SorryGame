@@ -102,6 +102,7 @@ class Sorry{
     public void nextTurn()
     {
         remainder = 0;
+        System.out.println("Reset Remainder A");
         selected = -1;
         turn = (turn+1)%players;
         System.out.println("Turn: "+turn);
@@ -217,7 +218,8 @@ class Sorry{
             pColor tempColor = gb.getSpaces()[index].getPawnColor();
             System.out.println("Remain "+remainder);
             if(remainder == 0){ //First move with 7
-                remainder = 7-gb.distanceBetweenSpaces(selected,index,tempColor);
+                remainder = 7-gb.distanceBetweenSpaces(selected,gb.getLand(),tempColor);
+                System.out.println("Now: "+remainder);
                 if(remainder != 0){
                     selected = -1;
                 }else{
@@ -225,6 +227,7 @@ class Sorry{
                 }
             }else{ //Second move with 7
                 remainder = 0;
+                System.out.println("Reset Remainder");
                 nextTurn();
             }
         }else if(currCard == 2){
@@ -258,7 +261,7 @@ class Sorry{
                     }
                 }
             }else{
-                System.out.println(remainder);
+                System.out.println("Remain: "+remainder);
                 safeAdd(gb.countForward(index, remainder, c));
             }
         }else if(card == 8){
@@ -280,38 +283,31 @@ class Sorry{
     //Checks if there is any pawns of a certain color that can move a set number of spaces. It must not be the index of orig.
     public boolean canMoveOther(pColor c, int spaces, int orig, int origOffset){
         boolean can = false;
-        //Create a deep copy
-        Pawn deepCopy[];
-        deepCopy = new Pawn[gb.getSpaces().length];
-        for(int i = 0; i < deepCopy.length; i++){
-            deepCopy[i] = gb.getSpaces()[i];
-        }
-        //Advance orig
-        Pawn origPawn = gb.getSpaces()[orig];
+        //Calculate next position of pawn
+        int newOrig, newI;
         if(canMove(orig,origOffset)){
-            //Move Pawn
-            if(gb.countForward(orig,origOffset,c) < deepCopy.length){
-                //gb.movePawn(orig,gb.countForward(orig,origOffset,c));
-                gb.setSpace(gb.countForward(orig,origOffset,c),gb.getSpaces()[orig]);
-                gb.setSpace(orig,null);
-            }else{
-                gb.destroyPawn(orig);
-            }
-            //Check availability
-            for(int i = 0; i < gb.getSpaces().length; i++){
-                if(gb.getSpaces()[i] != null){
-                    if(gb.getSpaces()[i].getPawnColor() == c && origPawn != gb.getSpaces()[i]){
-                        //Found a pawn that meets conditions of color and not orig
-                        if(canMove(i,spaces)){
+            newOrig = gb.countForward(orig,origOffset,c);
+        }else{
+            newOrig = -1;
+        }
+        for(int i = 0; i < gb.getSpaces().length; i++){
+            if(gb.getSpaces()[i] != null && i != orig){
+                //Check to see if pawn is of same color
+                if(gb.getSpaces()[i].getPawnColor() == c){
+                    //Project movement
+                    newI = gb.countForward(i,spaces,c);
+                    if(newI != -1){
+                        //Check
+                        if(gb.getSpaces()[newI] == null){
+                            if(newI != newOrig){
+                                can = true;
+                            }
+                        }else if((gb.getSpaces()[newI].getPawnColor() != c || newI == orig) && newI != newOrig){
                             can = true;
                         }
                     }
                 }
             }
-        }
-        //Reset original with deep copy
-        for(int i = 0; i < deepCopy.length; i++){
-            gb.setSpace(i,deepCopy[i]);
         }
         return can;
     }
