@@ -3,26 +3,24 @@ package com.company;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.scene.shape.*;
+import javafx.scene.paint.*;
 
 public class Main extends Application {
     Sorry game;
     Group root = new Group();
     int rowNum = 16, colNum = 31, squareSize = 50;
     Scene scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
+    int[] points = new int[6];
 
     public static void main(String[] args) {
         launch(args);
@@ -31,26 +29,44 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage){
         game = new Sorry();
-        //update(primaryStage,game);
 
-        /*scene.setOnMouseClicked(e -> {
+        //Set points
+        for(int i = 0; i < 6; i++){
+            points[i] = 0;
+        }
+
+        update(primaryStage);
+
+        scene.setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 System.out.print("("+e.getX()+", "+e.getY()+") ");
                 System.out.println(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
                 game.takeTurn(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
                 if(game.getWinner() == -1){
-                    update(primaryStage,game);
+                    update(primaryStage);
                 }else{
+                    //Add points
+                    for(int i = 0; i < 6; i++){
+                        if(i != game.getWinner()){
+                            points[i] += game.getBoard().homeAmount(i)*5;
+                        }else{
+                            points[i] += game.getBoard().homeAmount(i)*10;
+                        }
+                    }
+                    //Show screen
                     WinScreen(primaryStage,game);
                 }
             }
-        });*/
-        WinScreen(primaryStage,game);
+        });
+        //WinScreen(primaryStage,game);
     }
 
-    public void update(Stage primaryStage, Sorry game) {
+    public void update(Stage primaryStage) {
         System.out.println("Update");
         root.getChildren().clear();
+
+        DrawBackground(Color.rgb(250,250,250));
+
         for(int row = 0; row<rowNum; row++) {
             for (int col = 0; col < colNum; col++) {
                 if (getInput(row,col) != -1){
@@ -114,7 +130,7 @@ public class Main extends Application {
                 public void handle (ActionEvent event) {
                     game.skipTurn();
                     System.out.println("Handle!");
-                    update(primaryStage,game);
+                    update(primaryStage);
                 }
             });
         }else{
@@ -123,7 +139,7 @@ public class Main extends Application {
                 @Override
                 public void handle (ActionEvent event) {
                     game.deselectPawn();
-                    update(primaryStage,game);
+                    update(primaryStage);
                 }
             });
         }
@@ -338,7 +354,47 @@ public class Main extends Application {
         System.out.println("Winscreen");
         root.getChildren().clear();
 
-        DrawText("A Winrar is you!",scene.getWidth()/2,scene.getHeight()/2,80,true);
+        DrawBackground(Color.rgb(250,250,250));
+
+        String s = "";
+        switch(game.getWinner()){
+            case 0: s = "Red"; break;
+            case 1: s = "Orange"; break;
+            case 2: s = "Yellow"; break;
+            case 3: s = "Green"; break;
+            case 4: s = "Blue"; break;
+            case 5: s = "Purple"; break;
+        }
+        s += " is the winner!";
+
+        DrawText(s,scene.getWidth()/2,64,80,true);
+
+        //Draw points
+        DrawText("Red: "+points[0],10,scene.getHeight()-50,40,false);
+        DrawText("Orange: "+points[1],10,scene.getHeight()-10,40,false);
+        DrawText("Yellow: "+points[2],10+(scene.getWidth()/3),scene.getHeight()-50,40,false);
+        DrawText("Green: "+points[3],10+(scene.getWidth()/3),scene.getHeight()-10,40,false);
+        DrawText("Blue: "+points[2],10+(2*scene.getWidth()/3),scene.getHeight()-50,40,false);
+        DrawText("Purple: "+points[3],10+(2*scene.getWidth()/3),scene.getHeight()-10,40,false);
+
+        //Again Button
+        Button again = new Button();
+        again.setLayoutX(650);
+        again.setLayoutY(650);
+        again.setMinSize(250,50);
+        again.setMaxSize(250,50);
+        again.setStyle("-fx-font-size:20");
+        again.setText("Play Again!");
+        again.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                reset();
+                update(primaryStage);
+                System.out.println("Handle!");
+            }
+        });
+
+        root.getChildren().add(again);
 
         primaryStage.setTitle("Sorry! Cycle 2.3");
         primaryStage.setScene(scene);
@@ -358,5 +414,19 @@ public class Main extends Application {
         }
 
         root.getChildren().add(text);
+    }
+
+    public void DrawBackground(Color c){
+        Rectangle r = new Rectangle();
+        r.setX(0);
+        r.setY(0);
+        r.setWidth(scene.getWidth());
+        r.setHeight(scene.getHeight());
+        r.setFill(c);
+        root.getChildren().add(r);
+    }
+
+    public void reset(){
+        game = new Sorry();
     }
 }

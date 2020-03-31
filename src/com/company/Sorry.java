@@ -56,7 +56,7 @@ class Sorry{
 
     public void createCards()
     {
-        for(int y=1; y<=13; y++) {
+        /*for(int y=1; y<=13; y++) {
             if(y==6||y==9){
                 y++;
             }
@@ -64,7 +64,10 @@ class Sorry{
                 cards.add(y);
             }
         }
+        cards.add(1);*/
         cards.add(1);
+        cards.add(2);
+        cards.add(7);
     }
 
     //Remove a random card from the deck
