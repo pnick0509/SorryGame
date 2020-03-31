@@ -11,6 +11,7 @@ class Sorry{
     private Random rand;
     private int currCard;
     int remainder = 0;
+    private int winner = -1;
 
     private int selected = -1;
     private ArrayList<Integer> options;
@@ -21,7 +22,7 @@ class Sorry{
     //Starts a new game with six players
     public Sorry(){
         gb = new GameBoard();
-        players = 2;
+        players = 1;
         turn = -1; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
         createCards();
@@ -181,6 +182,7 @@ class Sorry{
             }
         }else{ //Home and start
             if(options.contains(index)){
+                gb.setLand(index);
                 if(index >= 120 && index <= 125 && index == gb.myStart(getTurn())){ //Start
                     if(gb.getSpaces()[gb.mySpawn(getTurn())] != null){
                         gb.startAdd(gb.getValue(gb.getSpaces()[gb.mySpawn(getTurn())].getPawnColor()));
@@ -203,6 +205,12 @@ class Sorry{
                     gb.homeAdd(getTurn());
                     options.clear();
 
+                    System.out.println("In");
+
+                    //Check to see if win state
+                    if(gb.homeAmount(getTurn()) == 4){
+                        winner = getTurn();
+                    }
                     specialNext(index);
                 }
             }
@@ -212,10 +220,10 @@ class Sorry{
     //Does special next turns if the card is a 2 or a 7, otherwise does normal next turn.
     public void specialNext(int index){
         if(currCard == 7){
-            pColor tempColor = gb.getSpaces()[index].getPawnColor();
+            //pColor tempColor = gb.getSpaces()[index].getPawnColor();
             System.out.println("Remain "+remainder);
             if(remainder == 0){ //First move with 7
-                remainder = 7-gb.distanceBetweenSpaces(selected,gb.getLand(),tempColor);
+                remainder = 7-gb.distanceBetweenSpaces(selected,gb.getLand(),getTurnColor());
                 System.out.println("Now: "+remainder);
                 if(remainder != 0){
                     selected = -1;
@@ -370,13 +378,19 @@ class Sorry{
                     //Project movement
                     newI = gb.countForward(i,spaces,c);
                     if(newI != -1){
-                        //Check
-                        if(gb.getSpaces()[newI] == null){
-                            if(newI != newOrig){
+                        if(newI < 120){
+                            //Check
+                            if(gb.getSpaces()[newI] == null){
+                                if(newI != newOrig){
+                                    can = true;
+                                }
+                            }else if((gb.getSpaces()[newI].getPawnColor() != c || except.contains(newI)) && newI != newOrig){
                                 can = true;
                             }
-                        }else if((gb.getSpaces()[newI].getPawnColor() != c || except.contains(newI)) && newI != newOrig){
-                            can = true;
+                        }else{
+                            if(newI >= 126 && newI <= 131){
+                                can = true;
+                            }
                         }
                     }
                 }
@@ -467,5 +481,9 @@ class Sorry{
     //Toggle color blind setting
     public void toggleColorblind(){
         colorBlind = !colorBlind;
+    }
+
+    public int getWinner(){
+        return winner;
     }
 }

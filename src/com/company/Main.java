@@ -3,12 +3,19 @@ package com.company;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -24,16 +31,21 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage){
         game = new Sorry();
-        update(primaryStage,game);
+        //update(primaryStage,game);
 
-        scene.setOnMouseClicked(e -> {
+        /*scene.setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 System.out.print("("+e.getX()+", "+e.getY()+") ");
                 System.out.println(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
                 game.takeTurn(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
-                update(primaryStage,game);
+                if(game.getWinner() == -1){
+                    update(primaryStage,game);
+                }else{
+                    WinScreen(primaryStage,game);
+                }
             }
-        });
+        });*/
+        WinScreen(primaryStage,game);
     }
 
     public void update(Stage primaryStage, Sorry game) {
@@ -135,7 +147,7 @@ public class Main extends Application {
         root.getChildren().add(cardView);
 
         //scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
-        primaryStage.setTitle("Sorry! Cycle 2.2");
+        primaryStage.setTitle("Sorry! Cycle 2.3");
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -319,5 +331,32 @@ public class Main extends Application {
             case 5: img += "PurpleCard.png"; break;
         }
         return img;
+    }
+
+    //Draw win screen
+    public void WinScreen(Stage primaryStage, Sorry game) {
+        System.out.println("Winscreen");
+        root.getChildren().clear();
+
+        DrawText("A Winrar is you!",scene.getWidth()/2,scene.getHeight()/2,80,true);
+
+        primaryStage.setTitle("Sorry! Cycle 2.3");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void DrawText(String string, double x, double y, int size, boolean center){
+        Text text = new Text();
+        text.setText(string);
+        text.setFont(Font.font("Verdana",size));
+
+        text.setY(y);
+        if(center){
+            text.setX(x-(text.getLayoutBounds().getWidth()/2));
+        }else{
+            text.setX(x);
+        }
+
+        root.getChildren().add(text);
     }
 }

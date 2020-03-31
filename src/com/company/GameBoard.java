@@ -12,7 +12,7 @@ class GameBoard{
     private int[] home;
     private int pawnNum;
 
-    private int land = 0; //The space a pawn lands on through move pawn
+    private int land = -1; //The space a pawn lands on through move pawn
 
     public Pawn[] getSpaces()
     {
@@ -31,6 +31,11 @@ class GameBoard{
             start[i] = pawnNum;
             home[i] = 0;
         }
+
+        newPawn(pColor.RED,91);
+        newPawn(pColor.RED,92);
+        newPawn(pColor.RED,93);
+        newPawn(pColor.RED,94);
     }
 
     //Keeps track of how many pawns in start and home
@@ -84,10 +89,11 @@ class GameBoard{
     //This will make the space it used to occupy null and will knock out any pawn at the new position
     public int movePawn(int pre, int post){
         post = movePawnLoop(pre,post);
-        land = post;
+
         //Do slides
         checkSlides(post);
 
+        setLand(post);
         return post;
     }
 
@@ -130,10 +136,16 @@ class GameBoard{
     {
         int i =0;
         int curr = startSpace;
-        while(curr != endSpace)
+        while(curr != endSpace && curr != -1)
         {
             curr=nextSpace(curr, c);
+            System.out.print(curr+" ");
             i++;
+        }
+        System.out.println();
+        if(curr == -1){
+            System.out.println("Error: Cannot find distance "+startSpace+" to "+endSpace);
+            //System.exit(0);
         }
         return i;
     }
@@ -233,5 +245,10 @@ class GameBoard{
 
     public int getLand(){
         return land;
+    }
+
+    public void setLand(int index){
+        land = index;
+        System.out.println("Land is now "+land);
     }
 }
