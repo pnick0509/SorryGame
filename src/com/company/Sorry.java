@@ -21,7 +21,7 @@ class Sorry{
     //Starts a new game with six players
     public Sorry(){
         gb = new GameBoard();
-        players = 6;
+        players = 2;
         turn = -1; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
         createCards();

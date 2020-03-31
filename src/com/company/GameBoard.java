@@ -22,7 +22,6 @@ class GameBoard{
     public GameBoard(){
         marginCount = 90;
         safeLength = 5;
-        //spaces = new Pawn[(sideLength*sides)-sides+safeLength*sides];
         spaces = new Pawn[marginCount+safeLength*maxPlayers];
         pawnNum = 4;
 
@@ -87,21 +86,27 @@ class GameBoard{
         post = movePawnLoop(pre,post);
         land = post;
         //Do slides
-        if(post%15 == 6 && post < 90){
+        checkSlides(post);
+
+        return post;
+    }
+
+    public int checkSlides(int index){
+        if(index%15 == 6 && index < 90 && (int)(index/15) != getValue(spaces[index].getPawnColor())){
             for(int i = 0; i < 3; i++){
-                pre = post;
-                post = nextSpace(post,spaces[post].getPawnColor());
-                movePawnLoop(pre,post);
+                int pre = index;
+                index = nextSpace(index,spaces[index].getPawnColor());
+                movePawnLoop(pre,index);
             }
-        }else if(post%15 == 14 && post < 90){
+        }else if(index%15 == 14 && index < 90 && (int)(index/15) != getValue(spaces[index].getPawnColor())){
             for(int i = 0; i < 4; i++){
-                pre = post;
-                post = nextSpace(post,spaces[post].getPawnColor());
-                movePawnLoop(pre,post);
+                int pre = index;
+                index = nextSpace(index,spaces[index].getPawnColor());
+                movePawnLoop(pre,index);
             }
         }
 
-        return post;
+        return index;
     }
 
     private int movePawnLoop(int pre, int post){
@@ -223,6 +228,7 @@ class GameBoard{
 
     public void setSpace(int i, Pawn p){
         spaces[i] = p;
+        checkSlides(i);
     }
 
     public int getLand(){

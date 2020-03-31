@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="7094ba8c-4d69-41b4-b224-6416011d3902" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/GameBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/GameBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/GameBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Sorry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Sorry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +37,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -91,7 +96,9 @@
       <workItem from="1584059701713" duration="2022000" />
       <workItem from="1584287871542" duration="9936000" />
       <workItem from="1584979424824" duration="18401000" />
-      <workItem from="1585059363822" duration="8094000" />
+      <workItem from="1585059363822" duration="9202000" />
+      <workItem from="1585235781548" duration="1469000" />
+      <workItem from="1585662808622" duration="821000" />
     </task>
     <servers />
   </component>
@@ -107,25 +114,25 @@
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
     <state x="706" y="286" key="FileChooserDialogImpl/0.0.1853.1080@0.0.1853.1080" timestamp="1583436696683" />
-    <state width="879" height="90" key="GridCell.Tab.0.bottom" timestamp="1585081214145">
+    <state width="1810" height="90" key="GridCell.Tab.0.bottom" timestamp="1585663514396">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="879" height="90" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1585081214145" />
+    <state width="1810" height="90" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1585663514396" />
     <state width="1812" height="292" key="GridCell.Tab.0.bottom/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="879" height="90" key="GridCell.Tab.0.center" timestamp="1585081214145">
+    <state width="1810" height="90" key="GridCell.Tab.0.center" timestamp="1585663514395">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="879" height="90" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1585081214145" />
+    <state width="1810" height="90" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1585663514395" />
     <state width="1812" height="292" key="GridCell.Tab.0.center/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="879" height="90" key="GridCell.Tab.0.left" timestamp="1585081214145">
+    <state width="1810" height="90" key="GridCell.Tab.0.left" timestamp="1585663514395">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="879" height="90" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1585081214145" />
+    <state width="1810" height="90" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1585663514395" />
     <state width="1812" height="292" key="GridCell.Tab.0.left/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="879" height="90" key="GridCell.Tab.0.right" timestamp="1585081214145">
+    <state width="1810" height="90" key="GridCell.Tab.0.right" timestamp="1585663514395">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state width="879" height="90" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1585081214145" />
+    <state width="1810" height="90" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1585663514395" />
     <state width="1812" height="292" key="GridCell.Tab.0.right/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
     <state x="859" y="189" key="SettingsEditor" timestamp="1582769279491">
       <screen x="0" y="0" width="1853" height="1080" />
