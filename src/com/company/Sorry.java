@@ -22,7 +22,7 @@ class Sorry{
     //Starts a new game with six players
     public Sorry(){
         gb = new GameBoard();
-        players = 1;
+        players = 6;
         turn = -1; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
         createCards();
@@ -56,7 +56,7 @@ class Sorry{
 
     public void createCards()
     {
-        /*for(int y=1; y<=13; y++) {
+        for(int y=1; y<=13; y++) {
             if(y==6||y==9){
                 y++;
             }
@@ -64,10 +64,7 @@ class Sorry{
                 cards.add(y);
             }
         }
-        cards.add(1);*/
         cards.add(1);
-        cards.add(2);
-        cards.add(7);
     }
 
     //Remove a random card from the deck
@@ -488,5 +485,66 @@ class Sorry{
 
     public int getWinner(){
         return winner;
+    }
+
+    public void preset1(){
+        selected = -1;
+        for(int i = 0; i < gb.getSpaces().length; i++){
+            gb.destroyPawn(i);
+        }
+        for(int i = 0; i < players; i++){
+            gb.setStart(i,0);
+            gb.setHome(i,3);
+            gb.newPawn(pColor.values()[i],94+(i*5));
+        }
+    }
+
+    public void preset2(){
+        selected = -1;
+        for(int i = 0; i < gb.getSpaces().length; i++){
+            gb.destroyPawn(i);
+        }
+        for(int i = 0; i < players; i++){
+            gb.setStart(i,4);
+            gb.setHome(i,0);
+        }
+        gb.setStart(0,3);
+        gb.setStart(2,3);
+        gb.setStart(4,3);
+        gb.newPawn(pColor.RED,13);
+        gb.newPawn(pColor.YELLOW,36);
+        gb.newPawn(pColor.BLUE,66);
+    }
+
+    public void preset3(){
+        selected = -1;
+        currCard = 1;
+        startOptions();
+    }
+
+    public void preset4(){
+        selected = -1;
+        currCard = 11;
+        startOptions();
+    }
+
+    public void preset5(){
+        selected = -1;
+        int r;
+        for(int i = 0; i < gb.getSpaces().length; i++){
+            gb.destroyPawn(i);
+        }
+        for(int i = 0; i < players; i++){
+            gb.setStart(i,0);
+            gb.setHome(i,0);
+            for(int j = 0; j < 4; j++){
+                do{
+                    r = Math.abs(rand.nextInt()%90);
+                }while(gb.getSpaces()[r] != null);
+                gb.newPawn(pColor.values()[i],r);
+                gb.checkSlides(r);
+            }
+        }
+
     }
 }

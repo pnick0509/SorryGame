@@ -31,11 +31,6 @@ class GameBoard{
             start[i] = pawnNum;
             home[i] = 0;
         }
-
-        newPawn(pColor.RED,91);
-        newPawn(pColor.RED,92);
-        newPawn(pColor.RED,93);
-        newPawn(pColor.RED,94);
     }
 
     //Keeps track of how many pawns in start and home
@@ -48,6 +43,8 @@ class GameBoard{
     public void startSubtract(int player){
         start[player]--;
     }
+
+    public void setStart(int i, int num){ start[i] = num; }
 
     //Adds a pawn to the home count
     public void homeAdd(int player){
@@ -63,6 +60,8 @@ class GameBoard{
     public int homeAmount(int player){
         return home[player];
     }
+
+    public void setHome(int i, int num){ home[i] = num; }
 
     //Returns the button id of the start position
     public int myStart(int player){

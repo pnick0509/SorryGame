@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -59,6 +61,46 @@ public class Main extends Application {
             }
         });
         //WinScreen(primaryStage,game);
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()== KeyCode.F1) {
+                System.out.println("You pressed f1");
+                game.preset1();
+                update(primaryStage);
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()== KeyCode.F2) {
+                System.out.println("You pressed f2");
+                game.preset2();
+                update(primaryStage);
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()== KeyCode.F3) {
+                System.out.println("You pressed f3");
+                game.preset3();
+                update(primaryStage);
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()== KeyCode.F4) {
+                System.out.println("You pressed f4");
+                game.preset4();
+                update(primaryStage);
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()== KeyCode.F5) {
+                System.out.println("You pressed f5");
+                game.preset5();
+                update(primaryStage);
+            }
+        });
     }
 
     public void update(Stage primaryStage) {
@@ -174,16 +216,34 @@ public class Main extends Application {
         String s = "Board/";
         if((index >= 90 && index <= 94) || index == 120 || index == 126){
             s+= "Square_Red";
+            if(game.getColorblind()){
+                s += "_CB";
+            }
         }else if((index >= 95 && index <= 99) || index == 121 || index == 127){
             s+= "Square_Orange";
+            if(game.getColorblind()){
+                s += "_CB";
+            }
         }else if((index >= 100 && index <= 104) || index == 122 || index == 128){
             s+= "Square_Yellow";
+            if(game.getColorblind()){
+                s += "_CB";
+            }
         }else if((index >= 105 && index <= 109) || index == 123 || index == 129){
             s+= "Square_Green";
+            if(game.getColorblind()){
+                s += "_CB";
+            }
         }else if((index >= 110 && index <= 114) || index == 124 || index == 130){
             s+= "Square_Blue";
+            if(game.getColorblind()){
+                s += "_CB";
+            }
         }else if((index >= 115 && index <= 119) || index == 125 || index == 131){
             s+= "Square_Purple";
+            if(game.getColorblind()){
+                s += "_CB";
+            }
         }else if(index <= 89 && ((index%15 >= 6 && index%15 <= 9) || (index%15 >= 0 && index%15 <= 3) || index%15 >= 14)){
             s+= "Slide_";
             if(index-5 < 0){
@@ -374,8 +434,8 @@ public class Main extends Application {
         DrawText("Orange: "+points[1],10,scene.getHeight()-10,40,false);
         DrawText("Yellow: "+points[2],10+(scene.getWidth()/3),scene.getHeight()-50,40,false);
         DrawText("Green: "+points[3],10+(scene.getWidth()/3),scene.getHeight()-10,40,false);
-        DrawText("Blue: "+points[2],10+(2*scene.getWidth()/3),scene.getHeight()-50,40,false);
-        DrawText("Purple: "+points[3],10+(2*scene.getWidth()/3),scene.getHeight()-10,40,false);
+        DrawText("Blue: "+points[4],10+(2*scene.getWidth()/3),scene.getHeight()-50,40,false);
+        DrawText("Purple: "+points[5],10+(2*scene.getWidth()/3),scene.getHeight()-10,40,false);
 
         //Again Button
         Button again = new Button();

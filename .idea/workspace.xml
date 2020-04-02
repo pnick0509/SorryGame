@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7094ba8c-4d69-41b4-b224-6416011d3902" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/GameBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/GameBoard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board/Selection.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Selection.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/GameBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Sorry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Sorry.java" afterDir="false" />
     </list>
@@ -97,7 +102,8 @@
       <workItem from="1584979424824" duration="18401000" />
       <workItem from="1585059363822" duration="9202000" />
       <workItem from="1585235781548" duration="1469000" />
-      <workItem from="1585662808622" duration="13449000" />
+      <workItem from="1585662808622" duration="17597000" />
+      <workItem from="1585835387697" duration="3495000" />
     </task>
     <servers />
   </component>
@@ -105,6 +111,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="521" y="202" key="#Images" timestamp="1585836585740">
+      <screen x="0" y="0" width="1858" height="1080" />
+    </state>
+    <state x="521" y="202" key="#Images/0.0.1858.1080@0.0.1858.1080" timestamp="1585836585740" />
     <state x="686" y="383" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1583436762768">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
@@ -113,26 +123,30 @@
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
     <state x="706" y="286" key="FileChooserDialogImpl/0.0.1853.1080@0.0.1853.1080" timestamp="1583436696683" />
-    <state width="881" height="90" key="GridCell.Tab.0.bottom" timestamp="1585676798621">
-      <screen x="0" y="0" width="1853" height="1080" />
+    <state width="1815" height="90" key="GridCell.Tab.0.bottom" timestamp="1585838802161">
+      <screen x="0" y="0" width="1858" height="1080" />
     </state>
-    <state width="881" height="90" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1585676798621" />
+    <state width="1291" height="90" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1585688662525" />
     <state width="1812" height="292" key="GridCell.Tab.0.bottom/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="881" height="90" key="GridCell.Tab.0.center" timestamp="1585676798621">
-      <screen x="0" y="0" width="1853" height="1080" />
+    <state width="1815" height="90" key="GridCell.Tab.0.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1585838802161" />
+    <state width="1815" height="90" key="GridCell.Tab.0.center" timestamp="1585838802161">
+      <screen x="0" y="0" width="1858" height="1080" />
     </state>
-    <state width="881" height="90" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1585676798621" />
+    <state width="1291" height="90" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1585688662524" />
     <state width="1812" height="292" key="GridCell.Tab.0.center/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="881" height="90" key="GridCell.Tab.0.left" timestamp="1585676798620">
-      <screen x="0" y="0" width="1853" height="1080" />
+    <state width="1815" height="90" key="GridCell.Tab.0.center/0.0.1858.1080@0.0.1858.1080" timestamp="1585838802161" />
+    <state width="1815" height="90" key="GridCell.Tab.0.left" timestamp="1585838802161">
+      <screen x="0" y="0" width="1858" height="1080" />
     </state>
-    <state width="881" height="90" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1585676798620" />
+    <state width="1291" height="90" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1585688662524" />
     <state width="1812" height="292" key="GridCell.Tab.0.left/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="881" height="90" key="GridCell.Tab.0.right" timestamp="1585676798621">
-      <screen x="0" y="0" width="1853" height="1080" />
+    <state width="1815" height="90" key="GridCell.Tab.0.left/0.0.1858.1080@0.0.1858.1080" timestamp="1585838802161" />
+    <state width="1815" height="90" key="GridCell.Tab.0.right" timestamp="1585838802161">
+      <screen x="0" y="0" width="1858" height="1080" />
     </state>
-    <state width="881" height="90" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1585676798621" />
+    <state width="1291" height="90" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1585688662525" />
     <state width="1812" height="292" key="GridCell.Tab.0.right/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
+    <state width="1815" height="90" key="GridCell.Tab.0.right/0.0.1858.1080@0.0.1858.1080" timestamp="1585838802161" />
     <state x="859" y="189" key="SettingsEditor" timestamp="1582769279491">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
@@ -150,10 +164,10 @@
     </state>
     <state x="583" y="250" key="run.anything.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1585016995945" />
     <state x="584" y="250" key="run.anything.popup/0.0.1855.1080@0.0.1855.1080" timestamp="1581464929255" />
-    <state x="779" y="758" width="672" height="678" key="search.everywhere.popup" timestamp="1585674233614">
+    <state x="779" y="758" width="672" height="678" key="search.everywhere.popup" timestamp="1585687885419">
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
-    <state x="779" y="758" width="672" height="678" key="search.everywhere.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1585674233614" />
+    <state x="779" y="758" width="672" height="678" key="search.everywhere.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1585687885419" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SorryNew$Main.ic" NAME="Main Coverage Results" MODIFIED="1582769930534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
