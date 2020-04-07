@@ -23,6 +23,8 @@ public class Main extends Application {
     int rowNum = 16, colNum = 31, squareSize = 50;
     Scene scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
     int[] points = new int[6];
+    int screen;
+    String header = "Sorry! Cycle 3.1";
 
     public static void main(String[] args) {
         launch(args);
@@ -37,10 +39,11 @@ public class Main extends Application {
             points[i] = 0;
         }
 
-        update(primaryStage);
+        StartScreen(primaryStage,game);
+        //update(primaryStage);
 
         scene.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY) {
+            if (e.getButton() == MouseButton.PRIMARY && screen == 1) {
                 System.out.print("("+e.getX()+", "+e.getY()+") ");
                 System.out.println(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
                 game.takeTurn(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
@@ -104,6 +107,7 @@ public class Main extends Application {
     }
 
     public void update(Stage primaryStage) {
+        screen = 1;
         System.out.println("Update");
         root.getChildren().clear();
 
@@ -164,7 +168,7 @@ public class Main extends Application {
         skip.setLayoutY(650);
         skip.setMinSize(250,50);
         skip.setMaxSize(250,50);
-        skip.setStyle("-fx-font-size:20");
+        skip.setFont(getFont(20));
         if(game.getSelected() == -1){
             skip.setText("Skip Turn");
             skip.setOnAction(new EventHandler<ActionEvent>() {
@@ -205,7 +209,7 @@ public class Main extends Application {
         root.getChildren().add(cardView);
 
         //scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
-        primaryStage.setTitle("Sorry! Cycle 2.3");
+        primaryStage.setTitle(header);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -375,18 +379,20 @@ public class Main extends Application {
     //Get the face of the card
     public String setNextCard(int nextCard){
         switch(nextCard){
-            case 1: return "One.png";
-            case 2: return "Two.png";
-            case 3: return "Three.png";
-            case 4: return "Four.png";
-            case 5: return "Five.png";
-            case 7: return "Seven.png";
-            case 8: return "Eight.png";
-            case 10: return "Ten.png";
-            case 11: return "Eleven.png";
-            case 12: return "Twelve.png";
-            case 13: return "Sorry.png";
-            default: return "none.jpg";
+            default: case 0: return "Faces/Zero.png";
+            case 1: return "Faces/One.png";
+            case 2: return "Faces/Two.png";
+            case 3: return "Faces/Three.png";
+            case 4: return "Faces/Four.png";
+            case 5: return "Faces/Five.png";
+            case 6: return "Faces/Six.png";
+            case 7: return "Faces/Seven.png";
+            case 8: return "Faces/Eight.png";
+            case 9: return "Faces/Nine.png";
+            case 10: return "Faces/Ten.png";
+            case 11: return "Faces/Eleven.png";
+            case 12: return "Faces/Twelve.png";
+            case 13: return "Faces/Sorry.png";
         }
     }
 
@@ -411,6 +417,7 @@ public class Main extends Application {
 
     //Draw win screen
     public void WinScreen(Stage primaryStage, Sorry game) {
+        screen = 2;
         System.out.println("Winscreen");
         root.getChildren().clear();
 
@@ -443,7 +450,7 @@ public class Main extends Application {
         again.setLayoutY(650);
         again.setMinSize(250,50);
         again.setMaxSize(250,50);
-        again.setStyle("-fx-font-size:20");
+        again.setFont(getFont(20));
         again.setText("Play Again!");
         again.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -456,15 +463,58 @@ public class Main extends Application {
 
         root.getChildren().add(again);
 
-        primaryStage.setTitle("Sorry! Cycle 2.3");
+        primaryStage.setTitle(header);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    //Draw start screen
+    public void StartScreen(Stage primaryStage, Sorry game) {
+        screen = 0;
+        System.out.println("Start screen");
+        root.getChildren().clear();
+
+        DrawBackground(Color.rgb(250,250,250));
+
+        Image image = new Image("GUI/Title.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setX(300);
+        imageView.setY(-50);
+        root.getChildren().add(imageView);
+
+        //DrawText("Test",50,200,200,false);
+
+        //Start Button
+        Button again = new Button();
+        again.setLayoutX(650);
+        again.setLayoutY(650);
+        again.setMinSize(250,50);
+        again.setMaxSize(250,50);
+        again.setFont(getFont(20));
+        again.setText("Start!");
+        again.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                update(primaryStage);
+                System.out.println("Handle!");
+            }
+        });
+        root.getChildren().add(again);
+
+        primaryStage.setTitle(header);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public Font getFont(int size){
+        return Font.loadFont(getClass().getResourceAsStream("/Fonts/Comfortaa-Regular.ttf"),size);
     }
 
     public void DrawText(String string, double x, double y, int size, boolean center){
         Text text = new Text();
         text.setText(string);
-        text.setFont(Font.font("Verdana",size));
+        Font fnt = getFont(size);
+        text.setFont(fnt);
 
         text.setY(y);
         if(center){
