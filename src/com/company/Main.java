@@ -46,9 +46,6 @@ public class Main extends Application {
             if (e.getButton() == MouseButton.PRIMARY && screen == 1) {
                 System.out.print("("+e.getX()+", "+e.getY()+") ");
                 System.out.println(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
-
-                //Check if AI Player. And then goes through the AI Loop.
-                game.AITurn();
                 game.takeTurn(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
                 if(game.getWinner() == -1){
                     update(primaryStage);

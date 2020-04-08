@@ -232,23 +232,6 @@ class GameBoard{
             return -1;
         }
     }
-    /*
-    Not score but number returned home.
-    */
-    public int getScore(pColor c)
-    {
-        return home[c];
-
-    }
-    public int getStartCount(pColor c)
-    {
-        return start[c];
-    }
-    public int getPawnNum()
-    {
-        return pawnNum;
-
-    }
 
     public int getMarginCount() {
         return marginCount;
@@ -266,10 +249,5 @@ class GameBoard{
     public void setLand(int index){
         land = index;
         System.out.println("Land is now "+land);
-    }
-    public int getSize()
-    {
-        return marginCount+maxPlayers*safeLength;
-
     }
 }
