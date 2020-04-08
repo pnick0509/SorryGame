@@ -15,6 +15,7 @@ class Sorry{
 
     private int selected = -1;
     private ArrayList<Integer> options;
+    private ArrayList<Integer> AI;
 
     private boolean cardCheats;
     private boolean colorBlind;
@@ -29,13 +30,37 @@ class Sorry{
         rand = new Random();
         currCard = pullCard();
 
+        AI = new ArrayList<Ai>();//List of AI players
+        AI.add(new Ai(this,0,3));//Gives the AI the Sorry Board, Easy Mode, Its Turn Number.
+        
+
         options = new ArrayList<Integer>();
         nextTurn();
 
         cardCheats = true;
         colorBlind = true;
     }
-
+    public void AITurn()
+    {
+        if(!AI.isEmpty())
+        {
+        boolean inList=true;
+        while(inList)//ArrayList with AI player numbers. Ensures that if there are two AI turns in a row it will still work.
+        {
+            inList=false;
+            for(int i =0; i<AI.size(); i++) 
+                {
+                if(AI.get(i).getPlayer()==turn)
+                    {
+                    Ai(currCard);
+                    nextTurn();
+                    inList=true;
+                    }
+                
+                }
+            }
+        }
+    }
     //Starts a new game with a variable amount of players
     //Value should be in the range of 1 and 4
     public Sorry(int num){
