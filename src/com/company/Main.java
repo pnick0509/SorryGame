@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 
+import java.util.Random;
+
 public class Main extends Application {
     Sorry game;
     Group root = new Group();
@@ -25,6 +27,7 @@ public class Main extends Application {
     int[] points = new int[6];
     int screen;
     String header = "Sorry! Cycle 3.1";
+    int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer
 
     Stage pStage;
 
@@ -38,7 +41,13 @@ public class Main extends Application {
 
         pStage = primaryStage;
 
-        System.out.println("Done setting up game");
+        //Set up settings
+        playerSetting[0] = 1;
+        playerSetting[1] = 2;
+        playerSetting[2] = 0;
+        playerSetting[3] = 0;
+        playerSetting[4] = 0;
+        playerSetting[5] = 0;
 
         //Set points
         for(int i = 0; i < 6; i++){
@@ -130,46 +139,46 @@ public class Main extends Application {
             for (int col = 0; col < colNum; col++) {
                 if (getInput(row,col) != -1){
                     //Draw Square
-                    placeImage(row,col,spaceImage(getInput(row,col)));
+                    placeTile(row,col,spaceImage(getInput(row,col)));
                     if(game.getOptions().contains(getInput(row,col))){
-                        placeImage(row,col,"Board/Selection.png");
+                        placeTile(row,col,"Board/Selection.png");
                     }
 
                     //Draw Pawn
                     if(getInput(row,col) <= 119){
                         if(game.getBoard().getSpaces()[getInput(row,col)] != null){
-                            placeImage(row,col,pawnImage(getInput(row,col)));
+                            placeTile(row,col,pawnImage(getInput(row,col)));
                         }
                     }
 
                     //Draw numbers
                     //Starts
                     if(col == 9 && row == 1){
-                        placeImage(row, col, "Board/"+game.getBoard().startAmount(0)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().startAmount(0)+".png");
                     }else if(col == 24 && row == 1){
-                        placeImage(row, col, "Board/"+game.getBoard().startAmount(1)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().startAmount(1)+".png");
                     }else if(col == 29 && row == 9){
-                        placeImage(row, col, "Board/"+game.getBoard().startAmount(2)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().startAmount(2)+".png");
                     }else if(col == 21 && row == 14){
-                        placeImage(row, col, "Board/"+game.getBoard().startAmount(3)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().startAmount(3)+".png");
                     }else if(col == 6 && row == 14){
-                        placeImage(row, col, "Board/"+game.getBoard().startAmount(4)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().startAmount(4)+".png");
                     }else if(col == 1 && row == 6){
-                        placeImage(row, col, "Board/"+game.getBoard().startAmount(5)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().startAmount(5)+".png");
                     }
                     //Homes
                     else if(col == 7 && row == 6){
-                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(0)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().homeAmount(0)+".png");
                     }else if(col == 22 && row == 6){
-                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(1)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().homeAmount(1)+".png");
                     }else if(col == 24 && row == 7){
-                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(2)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().homeAmount(2)+".png");
                     }else if(col == 23 && row == 9){
-                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(3)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().homeAmount(3)+".png");
                     }else if(col == 8 && row == 9){
-                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(4)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().homeAmount(4)+".png");
                     }else if(col == 6 && row == 8){
-                        placeImage(row, col, "Board/"+game.getBoard().homeAmount(5)+".png");
+                        placeTile(row, col, "Board/"+game.getBoard().homeAmount(5)+".png");
                     }
                 }
             }
@@ -374,7 +383,7 @@ public class Main extends Application {
     }
 
     //Places an image in a grid dictated by the variable "squareSize" which should be the size of the images placed with this method
-    public void placeImage(int row, int col, String img){
+    public void placeTile(int row, int col, String img){
         try{
             Image image = new Image(img);
             ImageView imageView = new ImageView(image);
@@ -382,6 +391,19 @@ public class Main extends Application {
             imageView.setY(row*squareSize);
             imageView.setFitHeight(squareSize);
             imageView.setFitWidth(squareSize);
+            root.getChildren().add(imageView);
+        }
+        catch (Exception e){
+            System.out.println("Error: \""+img+"\" Not Found.");
+        }
+    }
+
+    public void placeImage(int x, int y, String img){
+        try{
+            Image image = new Image(img);
+            ImageView imageView = new ImageView(image);
+            imageView.setX(x);
+            imageView.setY(y);
             root.getChildren().add(imageView);
         }
         catch (Exception e){
@@ -481,6 +503,15 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /*public void drawPlayerSetting(int x, int y, String name,int index){
+        placeImage(x,y,name);
+        switch(playerSetting[0]){
+            case -1: placeImage(x,y,"GUI/Off.png"); break;
+            case 0: placeImage(x,y,"GUI/Player.png"); break;
+            case 1: placeImage(x,y,"GUI/Computer.png"); break;
+        }
+    }*/
+
     //Draw start screen
     public void StartScreen(Stage primaryStage, Sorry game) {
         screen = 0;
@@ -495,7 +526,44 @@ public class Main extends Application {
         imageView.setY(-50);
         root.getChildren().add(imageView);
 
-        //DrawText("Test",50,200,200,false);
+        Button btn;
+        for(int i = 0; i < 6; i++){
+            btn = new Button();
+            btn.setLayoutX(20);
+            btn.setLayoutY(200+(75*i));
+            btn.setMinSize(200,50);
+            btn.setMaxSize(200,50);
+            btn.setFont(getFont(20));
+            String txt = "";
+            switch(i){
+                case 0: txt += "Red"; break;
+                case 1: txt += "Orange"; break;
+                case 2: txt += "Yellow"; break;
+                case 3: txt += "Green"; break;
+                case 4: txt += "Blue"; break;
+                case 5: txt += "Purple"; break;
+            }
+            txt += " - ";
+            switch(playerSetting[i]){
+                case 0: txt += "Off"; break;
+                case 1: txt += "On"; break;
+                case 2: txt += "Com"; break;
+            }
+            btn.setText(txt);
+            int k = i;
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle (ActionEvent event) {
+                    playerSetting[k]++;
+                    if(playerSetting[k] > 2){
+                        playerSetting[k] = 0;
+                    }
+                    StartScreen(primaryStage,game);
+                    System.out.println("Handle!");
+                }
+            });
+            root.getChildren().add(btn);
+        }
 
         //Start Button
         Button again = new Button();
@@ -508,8 +576,37 @@ public class Main extends Application {
         again.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                update(primaryStage);
-                System.out.println("Handle!");
+                if(playerSetting[0] == 1 || playerSetting[1] == 1 || playerSetting[2] == 1 || playerSetting[3] == 1 || playerSetting[4] == 1 || playerSetting[5] == 1){
+                    //Set up options
+                    for(int b = 0; b < 6; b++){
+                        if(playerSetting[b] == 1){
+                            game.addTurnOrder(b);
+                        }else if(playerSetting[b] == 2){
+                            game.addTurnOrder(b);
+                            game.newAI(b,false);
+                        }
+                    }
+                    //Random r = new Random();
+                    //int a = Math.abs(r.nextInt()%6);
+                    //while(a != 0){
+                    //    a = Math.abs(r.nextInt()%6);
+                    //}
+                    //game.setTurn(a);
+                    int c = 0;
+                    while(playerSetting[c] == 0){
+                        c++;
+                    }
+                    game.setTurn(c);
+                    game.startOptions();
+                    Ai a = game.getAiTurn();
+                    if(a != null){
+                        a.taketurn(game.getCard());
+                    }
+                    System.out.println("Turn"+a);
+                    //Display board
+                    update(primaryStage);
+                    System.out.println("Handle!");
+                }
             }
         });
         root.getChildren().add(again);

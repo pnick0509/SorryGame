@@ -16,6 +16,7 @@ class Sorry{
     private int selected = -1;
     private ArrayList<Integer> options;
     private ArrayList<Ai> AI;
+    private ArrayList<Integer> TurnOrder;
 
     private boolean cardCheats;
     private boolean colorBlind;
@@ -33,10 +34,10 @@ class Sorry{
         currCard = pullCard();
 
         AI = new ArrayList<Ai>();//List of AI players
-        for(int k = 1; k < 6; k++){
-            System.out.println("K = "+k);
-            AI.add(new Ai(this,false,k));//Gives the AI the Sorry Board, Easy Mode, Its Turn Number.
-        }
+        TurnOrder = new ArrayList<Integer>();
+        //for(int k = 1; k < 6; k++){
+        //    AI.add(new Ai(this,false,k));//Gives the AI the Sorry Board, Easy Mode, Its Turn Number.
+        //}
         
         System.out.println("Ais all set up");
 
@@ -49,16 +50,24 @@ class Sorry{
         this.main = main;
     }
 
+    public void newAI(int turn, boolean difficulty){
+        AI.add(new Ai(this,difficulty,turn));
+    }
+
+    public void addTurnOrder(int turn){
+        TurnOrder.add(turn);
+    }
+
     public void createCards()
     {
-        for(int y=1; y<=13; y++) {
+        /*for(int y=1; y<=13; y++) {
             if(y==6||y==9){
                 y++;
             }
             for (int x=0; x<5; x++) {
                 cards.add(y);
             }
-        }
+        }*/
         cards.add(1);
     }
 
@@ -97,7 +106,15 @@ class Sorry{
         remainder = 0;
         System.out.println("Reset Remainder A");
         selected = -1;
-        turn = (turn+1)%players;
+        //turn = (turn+1)%players;
+        if(TurnOrder.contains(turn)){
+            turn = TurnOrder.get((TurnOrder.indexOf(turn)+1)%TurnOrder.size());
+        }else if(TurnOrder.size() > 0){
+            turn = TurnOrder.get(0);
+        }else{
+            turn = 0;
+        }
+
         System.out.println("Turn: "+turn);
         currCard = pullCard();
 
@@ -565,5 +582,13 @@ class Sorry{
 
     public Main getMain(){
         return main;
+    }
+
+    public void setTurn(int turn){
+        this.turn = turn;
+    }
+
+    public ArrayList<Ai> getTurnOrder(){
+        return AI;
     }
 }
