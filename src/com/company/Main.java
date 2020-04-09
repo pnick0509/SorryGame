@@ -1,5 +1,6 @@
 package com.company;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Main extends Application {
@@ -30,6 +32,8 @@ public class Main extends Application {
     int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer
 
     Stage pStage;
+
+    ArrayList<AniPawn> PawnIcons = new ArrayList<>();
 
     public static void main(String[] args) {
         launch(args);
@@ -122,6 +126,30 @@ public class Main extends Application {
                 update(primaryStage);
             }
         });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()== KeyCode.Q) {
+                System.out.println("You pressed Q");
+                ImageView temp;
+                for(int i = 0; i < PawnIcons.size(); i++){
+                    temp = PawnIcons.get(i).getImageView();
+                    temp.setY(temp.getY()+1);
+                }
+            }
+        });
+
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                AniPawn temp;
+                for(int i = 0; i < PawnIcons.size(); i++){
+                    temp = PawnIcons.get(i);
+                    //temp.setY(temp.getY()+1);
+                    temp.getImageView().toFront();
+                    temp.moveTo(temp.getImageView().getX(),temp.getImageView().getY(),1);
+                }
+            }
+        }.start();
     }
 
     public void update(){
@@ -129,6 +157,7 @@ public class Main extends Application {
     }
 
     public void update(Stage primaryStage) {
+        PawnIcons.clear();
         screen = 1;
         System.out.println("Update");
         root.getChildren().clear();
@@ -147,7 +176,7 @@ public class Main extends Application {
                     //Draw Pawn
                     if(getInput(row,col) <= 119){
                         if(game.getBoard().getSpaces()[getInput(row,col)] != null){
-                            placeTile(row,col,pawnImage(getInput(row,col)));
+                            PawnIcons.add(new AniPawn(placeTile(row,col,pawnImage(getInput(row,col)))));
                         }
                     }
 
@@ -383,7 +412,7 @@ public class Main extends Application {
     }
 
     //Places an image in a grid dictated by the variable "squareSize" which should be the size of the images placed with this method
-    public void placeTile(int row, int col, String img){
+    public ImageView placeTile(int row, int col, String img){
         try{
             Image image = new Image(img);
             ImageView imageView = new ImageView(image);
@@ -392,10 +421,12 @@ public class Main extends Application {
             imageView.setFitHeight(squareSize);
             imageView.setFitWidth(squareSize);
             root.getChildren().add(imageView);
+            return imageView;
         }
         catch (Exception e){
             System.out.println("Error: \""+img+"\" Not Found.");
         }
+        return null;
     }
 
     public void placeImage(int x, int y, String img){

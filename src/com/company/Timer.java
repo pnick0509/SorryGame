@@ -19,10 +19,18 @@ public class Timer {
 
     public void set(double secs){
         restart();
-        waitFor = (long)secs*1000000000;
+        waitFor = toNano(secs);
+    }
+
+    public double percent(){
+        return System.nanoTime()-waitFor/(markTime+waitFor);
     }
 
     public boolean checkTime(){
         return (System.nanoTime() > markTime+waitFor);
+    }
+
+    private long toNano(double seconds){
+        return (long)seconds*1000000000;
     }
 }
