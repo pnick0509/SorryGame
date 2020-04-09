@@ -45,7 +45,7 @@ class Sorry{
         nextTurn();
 
         cardCheats = true;
-        colorBlind = true;
+        colorBlind = false;
 
         this.main = main;
     }
@@ -60,14 +60,15 @@ class Sorry{
 
     public void createCards()
     {
-        /*for(int y=1; y<=13; y++) {
+        cards.clear();
+        for(int y=1; y<=13; y++) {
             if(y==6||y==9){
                 y++;
             }
             for (int x=0; x<5; x++) {
                 cards.add(y);
             }
-        }*/
+        }
         cards.add(1);
     }
 
@@ -515,8 +516,35 @@ class Sorry{
         colorBlind = !colorBlind;
     }
 
+    public boolean getCardCheats(){
+        return cardCheats;
+    }
+
+    public void toggleCardCheats(){
+        cardCheats = !cardCheats;
+    }
+
     public int getWinner(){
         return winner;
+    }
+
+    public void reset(){
+        selected = -1;
+        winner = -1;
+        createCards();
+        for(int i = 0; i < gb.getSpaces().length; i++){
+            gb.destroyPawn(i);
+        }
+        for(int i = 0; i < players; i++){
+            gb.setStart(i,4);
+            gb.setHome(i,0);
+        }
+        Random r = new Random();
+        turn = TurnOrder.get(Math.abs(r.nextInt()%TurnOrder.size()));
+        Ai a = getAiTurn();
+        if(a != null){
+            a.taketurn(getCard());
+        }
     }
 
     public void preset1(){

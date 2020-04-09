@@ -490,7 +490,7 @@ public class Main extends Application {
         again.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                reset();
+                game.reset();
                 update(primaryStage);
                 System.out.println("Handle!");
             }
@@ -543,7 +543,7 @@ public class Main extends Application {
                 case 4: txt += "Blue"; break;
                 case 5: txt += "Purple"; break;
             }
-            txt += " - ";
+            txt += ": ";
             switch(playerSetting[i]){
                 case 0: txt += "Off"; break;
                 case 1: txt += "On"; break;
@@ -564,6 +564,55 @@ public class Main extends Application {
             });
             root.getChildren().add(btn);
         }
+
+        //Draw options
+        //Colorblind
+        btn = new Button();
+        btn.setLayoutX(320);
+        btn.setLayoutY(200);
+        btn.setMinSize(200,50);
+        btn.setMaxSize(200,50);
+        btn.setFont(getFont(20));
+        String txt = "Color Blind: ";
+        if(game.getColorblind()){
+            txt += "On";
+        }else{
+            txt += "Off";
+        }
+        btn.setText(txt);
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                game.toggleColorblind();
+                StartScreen(primaryStage,game);
+                System.out.println("Handle!");
+            }
+        });
+        root.getChildren().add(btn);
+
+        //Infinite Deck
+        btn = new Button();
+        btn.setLayoutX(320);
+        btn.setLayoutY(200+75);
+        btn.setMinSize(200,50);
+        btn.setMaxSize(200,50);
+        btn.setFont(getFont(20));
+        txt = "Infinite Deck: ";
+        if(!game.getCardCheats()){
+            txt += "On";
+        }else{
+            txt += "Off";
+        }
+        btn.setText(txt);
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                game.toggleCardCheats();
+                StartScreen(primaryStage,game);
+                System.out.println("Handle!");
+            }
+        });
+        root.getChildren().add(btn);
 
         //Start Button
         Button again = new Button();
@@ -586,16 +635,11 @@ public class Main extends Application {
                             game.newAI(b,false);
                         }
                     }
-                    //Random r = new Random();
-                    //int a = Math.abs(r.nextInt()%6);
-                    //while(a != 0){
-                    //    a = Math.abs(r.nextInt()%6);
-                    //}
-                    //game.setTurn(a);
-                    int c = 0;
-                    while(playerSetting[c] == 0){
-                        c++;
-                    }
+                    int c;
+                    Random r = new Random();
+                    do{
+                        c = Math.abs(r.nextInt()%6);
+                    }while(playerSetting[c] == 0);
                     game.setTurn(c);
                     game.startOptions();
                     Ai a = game.getAiTurn();
@@ -644,9 +688,5 @@ public class Main extends Application {
         r.setHeight(scene.getHeight());
         r.setFill(c);
         root.getChildren().add(r);
-    }
-
-    public void reset(){
-        game = new Sorry(this);
     }
 }
