@@ -26,13 +26,19 @@ public class Main extends Application {
     int screen;
     String header = "Sorry! Cycle 3.1";
 
+    Stage pStage;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage){
-        game = new Sorry();
+        game = new Sorry(this);
+
+        pStage = primaryStage;
+
+        System.out.println("Done setting up game");
 
         //Set points
         for(int i = 0; i < 6; i++){
@@ -48,7 +54,7 @@ public class Main extends Application {
                 System.out.println(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
 
                 //Check if AI Player. And then goes through the AI Loop.
-                game.AITurn();
+                //game.AITurn();
                 game.takeTurn(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
                 if(game.getWinner() == -1){
                     update(primaryStage);
@@ -107,6 +113,10 @@ public class Main extends Application {
                 update(primaryStage);
             }
         });
+    }
+
+    public void update(){
+        update(pStage);
     }
 
     public void update(Stage primaryStage) {
@@ -540,6 +550,6 @@ public class Main extends Application {
     }
 
     public void reset(){
-        game = new Sorry();
+        game = new Sorry(this);
     }
 }

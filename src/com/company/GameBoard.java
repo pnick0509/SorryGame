@@ -235,7 +235,7 @@ class GameBoard{
     /*
     Not score but number returned home.
     */
-    public int getScore(pColor c)
+    /*public int getScore(pColor c)
     {
         return home[c];
 
@@ -243,7 +243,7 @@ class GameBoard{
     public int getStartCount(pColor c)
     {
         return start[c];
-    }
+    }*/
     public int getPawnNum()
     {
         return pawnNum;
