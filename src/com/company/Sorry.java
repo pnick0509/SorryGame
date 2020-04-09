@@ -33,7 +33,7 @@ class Sorry{
         currCard = pullCard();
 
         AI = new ArrayList<Ai>();//List of AI players
-        for(int k = 5; k < 6; k++){
+        for(int k = 1; k < 6; k++){
             System.out.println("K = "+k);
             AI.add(new Ai(this,false,k));//Gives the AI the Sorry Board, Easy Mode, Its Turn Number.
         }
@@ -48,27 +48,6 @@ class Sorry{
 
         this.main = main;
     }
-    /*public void AITurn()
-    {
-        if(!AI.isEmpty())
-        {
-        boolean inList=true;
-        while(inList)//ArrayList with AI player numbers. Ensures that if there are two AI turns in a row it will still work.
-        {
-            inList=false;
-            for(int i =0; i<AI.size(); i++) 
-                {
-                if(AI.get(i).getPlayer()==turn)
-                    {
-                    Ai(currCard);
-                    nextTurn();
-                    inList=true;
-                    }
-                
-                }
-            }
-        }
-    }*/
 
     public void createCards()
     {
