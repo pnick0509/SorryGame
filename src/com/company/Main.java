@@ -31,9 +31,12 @@ public class Main extends Application {
     String header = "Sorry! Cycle 3.1";
     int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer
 
+    Ai StandbyAi = null;
+
     Stage pStage;
 
     ArrayList<AniPawn> PawnIcons = new ArrayList<>();
+    int pawnSpeed = 4;
 
     public static void main(String[] args) {
         launch(args);
@@ -62,27 +65,14 @@ public class Main extends Application {
         //update(primaryStage);
 
         scene.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY && screen == 1) {
+            if (e.getButton() == MouseButton.PRIMARY && screen == 1 && playerSetting[game.getTurn()] == 1) {
                 System.out.print("("+e.getX()+", "+e.getY()+") ");
                 System.out.println(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
 
                 //Check if AI Player. And then goes through the AI Loop.
                 //game.AITurn();
                 game.takeTurn(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
-                if(game.getWinner() == -1){
-                    update(primaryStage);
-                }else{
-                    //Add points
-                    for(int i = 0; i < 6; i++){
-                        if(i != game.getWinner()){
-                            points[i] += game.getBoard().homeAmount(i)*5;
-                        }else{
-                            points[i] += game.getBoard().homeAmount(i)*10;
-                        }
-                    }
-                    //Show screen
-                    WinScreen(primaryStage,game);
-                }
+                checkWin(primaryStage);
             }
         });
         //WinScreen(primaryStage,game);
@@ -141,15 +131,51 @@ public class Main extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
+                while(game.getAniStart().size() > 0){
+                    System.out.println("New AniPawn ");
+                    ImageView temp = placeTile(getSquareY(game.getAniStart().get(0)),getSquareX(game.getAniStart().get(0)),pawnImage(game.getAniColor().get(0),false));
+                    PawnIcons.add(new AniPawn(temp,game.getAniStart().get(0)));
+                    System.out.println("Stop at: "+getSquareX(game.getAniStop().get(0))+", "+getSquareY(game.getAniStop().get(0)));
+                    PawnIcons.get(PawnIcons.size()-1).setGoal(getSquareX(game.getAniStop().get(0))*squareSize,getSquareY(game.getAniStop().get(0))*squareSize);
+                    //root.getChildren().add(PawnIcons.get(PawnIcons.size()-1));
+                    game.removeAnimate(0);
+                }
+
                 AniPawn temp;
                 for(int i = 0; i < PawnIcons.size(); i++){
                     temp = PawnIcons.get(i);
+                    //System.out.println("A"+temp.getImageView().getX()+" "+temp.getImageView().getY());
                     //temp.setY(temp.getY()+1);
                     temp.getImageView().toFront();
-                    temp.moveTo(temp.getImageView().getX(),temp.getImageView().getY(),1);
+                    //temp.moveTo(temp.getImageView().getX(),temp.getImageView().getY(),1);
+                    temp.moveToGoal(pawnSpeed);
+                    if(temp.atGoal()){
+                        PawnIcons.remove(i);
+                        i--;
+                    }
                 }
+                /*if(StandbyAi != null && PawnIcons.isEmpty() && StandbyAi.getPlayer() == game.getTurn()){
+                    StandbyAi.taketurn(game.getCard());
+                }*/
             }
         }.start();
+    }
+
+    public void checkWin(Stage primaryStage){
+        if(game.getWinner() == -1){
+            update(primaryStage);
+        }else{
+            //Add points
+            for(int i = 0; i < 6; i++){
+                if(i != game.getWinner()){
+                    points[i] += game.getBoard().homeAmount(i)*5;
+                }else{
+                    points[i] += game.getBoard().homeAmount(i)*10;
+                }
+            }
+            //Show screen
+            WinScreen(primaryStage,game);
+        }
     }
 
     public void update(){
@@ -176,7 +202,12 @@ public class Main extends Application {
                     //Draw Pawn
                     if(getInput(row,col) <= 119){
                         if(game.getBoard().getSpaces()[getInput(row,col)] != null){
-                            PawnIcons.add(new AniPawn(placeTile(row,col,pawnImage(getInput(row,col)))));
+                            //PawnIcons.add(new AniPawn(placeTile(row,col,pawnImage(getInput(row,col))),getInput(row,col)));
+                            if(game.getAniStop().contains(getInput(row,col))){
+                                //PawnIcons.add(new AniPawn(placeTile(row,col,pawnImage(getInput(row,col))),getInput(row,col)));
+                            }else{
+                                placeTile(row,col,pawnImage(getInput(row,col)));
+                            }
                         }
                     }
 
@@ -360,6 +391,34 @@ public class Main extends Application {
         return s;
     }
 
+    public String pawnImage(pColor c, boolean select){
+        String s;
+        if(game.getColorblind()){
+            s = "ColorBlind/";
+        }else{
+            s = "Default/";
+        }
+        if(c == pColor.RED){
+            s += "Red";
+        }else if(c == pColor.ORANGE){
+            s += "Orange";
+        }else if(c == pColor.YELLOW){
+            s += "Yellow";
+        }else if(c == pColor.GREEN){
+            s += "Green";
+        }else if(c == pColor.BLUE){
+            s += "Blue";
+        }else if(c == pColor.PURPLE){
+            s += "Purple";
+        }
+        if(select){
+            s += "Select.png";
+        }else{
+            s += "Pawn.png";
+        }
+        return s;
+    }
+
     //Gets the input on the spaces array based on row and column
     public int getInput(int row, int col){
         if(row == 0) { //Top row
@@ -408,6 +467,66 @@ public class Main extends Application {
             return 131;
         }else{
             return -1;
+        }
+    }
+
+    public int getSquareX(int index){
+        if(index <= 30){
+            return index;
+        }else if(index <= 45){
+            return 30;
+        }else if(index <= 75){
+            return (75-index);
+        }else if(index <= 89){
+            return 0;
+        }else if(index == 125){
+            return 1;
+        }else if(index == 131 || index == 124){
+            return 6;
+        }else if(index == 126){
+            return 7;
+        }else if(index == 130){
+            return 8;
+        }else if(index == 120){
+            return 9;
+        }else if(index == 123){
+            return 21;
+        }else if(index == 127){
+            return 22;
+        }else if(index == 129){
+            return 23;
+        }else if(index == 121 || index == 126){
+            return 24;
+        }else if(index == 122){
+            return 29;
+        }else{
+            return 0;
+        }
+    }
+
+    public int getSquareY(int index){
+        if(index <= 30){
+            return 0;
+        }else if(index <= 45){
+            return (index-30);
+        }else if(index <= 75){
+            return 15;
+        }else if(index <= 89){
+            return (90-index);
+        }else if(index == 9 || index == 121){
+            return 1;
+        }else if(index == 125 || index == 126 || index == 127){
+            return 6;
+        }else if(index == 128){
+            return 7;
+        }else if(index == 131){
+            return 8;
+        }else if(index == 130 || index == 129 || index == 122){
+            return 9;
+        }else if(index == 124 || index == 123){
+            return 14;
+        }else{
+            return 0;
         }
     }
 
@@ -719,5 +838,17 @@ public class Main extends Application {
         r.setHeight(scene.getHeight());
         r.setFill(c);
         root.getChildren().add(r);
+    }
+
+    public AniPawn findAniPawn(int index){
+        AniPawn ap = null;
+        int i = 0;
+        while(ap == null && i < PawnIcons.size()){
+            if(PawnIcons.get(i).getIndex() == i){
+                ap = PawnIcons.get(i);
+            }
+            i++;
+        }
+        return ap;
     }
 }

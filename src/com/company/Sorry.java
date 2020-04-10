@@ -23,6 +23,11 @@ class Sorry{
 
     private Main main;
 
+    private ArrayList<AniPawn> AniQueue = new ArrayList<>();
+    private ArrayList<Integer> AniStart = new ArrayList<>();
+    private ArrayList<Integer> AniStop = new ArrayList<>();
+    private ArrayList<pColor> AniColor = new ArrayList<>();
+
     //Starts a new game with six players
     public Sorry(Main main){
         gb = new GameBoard();
@@ -38,7 +43,8 @@ class Sorry{
         //for(int k = 1; k < 6; k++){
         //    AI.add(new Ai(this,false,k));//Gives the AI the Sorry Board, Easy Mode, Its Turn Number.
         //}
-        
+        this.main = main;
+
         System.out.println("Ais all set up");
 
         options = new ArrayList<Integer>();
@@ -47,7 +53,6 @@ class Sorry{
         cardCheats = true;
         colorBlind = false;
 
-        this.main = main;
     }
 
     public void newAI(int turn, boolean difficulty){
@@ -128,6 +133,7 @@ class Sorry{
             a.taketurn(currCard);
         }
         System.out.println("Report Back");
+        //main.StandbyAi = getAiTurn();
     }
 
     //Check if it's an ai's turn
@@ -192,6 +198,8 @@ class Sorry{
                         //Take turn
                         options.clear();
                         if(currCard != 11){
+                            animateIndex(selected,index,gb.getSpaces()[selected].getPawnColor());
+                            //animateIndex(index,index,gb.getSpaces()[index].getPawnColor());
                             index = gb.movePawn(selected,index);
                         }else{
                             //Swap
@@ -201,7 +209,13 @@ class Sorry{
                             gb.setSpace(selected,one);
                         }
                         //Next move
+                        //AniQueue.add();
                         specialNext(index);
+                        /*AniPawn ap = main.findAniPawn(selected);
+                        System.out.println(ap);
+                        if(ap != null){
+                            ap.setGoal(main.getSquareX(index),main.getSquareY(index));
+                        }*/
                     }
                 }
             }else{ //Sorry! Card
@@ -618,5 +632,29 @@ class Sorry{
 
     public ArrayList<Ai> getTurnOrder(){
         return AI;
+    }
+
+    public void animateIndex(int start, int stop, pColor c){
+        AniStart.add(start);
+        AniStop.add(stop);
+        AniColor.add(c);
+    }
+
+    public ArrayList<Integer> getAniStart(){
+        return AniStart;
+    }
+
+    public ArrayList<Integer> getAniStop(){
+        return AniStop;
+    }
+
+    public ArrayList<pColor> getAniColor(){
+        return AniColor;
+    }
+
+    public void removeAnimate(int index){
+        AniStart.remove(index);
+        AniStop.remove(index);
+        AniColor.remove(index);
     }
 }
