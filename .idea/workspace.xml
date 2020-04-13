@@ -8,27 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7094ba8c-4d69-41b4-b224-6416011d3902" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Eight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Eleven.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Five.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/META-INF/SorryGameNew.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Two.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/Unknown.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Selection.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Selection.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Eight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Eleven.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Five.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Four.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/One.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Seven.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sorry.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ten.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Three.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Twelve.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Two.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SorryGameNew/com/company/Sorry.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/none.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Sorry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Sorry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +22,9 @@
     <option name="printScope" value="4" />
     <option name="OPEN_IN_BROWSER" value="true" />
     <option name="OUTPUT_DIRECTORY" value="C:\Users\nicho\OneDrive\Desktop\Apologies" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="SorryNew" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -123,7 +109,9 @@
       <workItem from="1585235781548" duration="1469000" />
       <workItem from="1585662808622" duration="17597000" />
       <workItem from="1585835387697" duration="5549000" />
-      <workItem from="1586267599779" duration="5599000" />
+      <workItem from="1586267599779" duration="6198000" />
+      <workItem from="1586372625175" duration="12314000" />
+      <workItem from="1586441749032" duration="6037000" />
     </task>
     <servers />
   </component>
@@ -147,30 +135,30 @@
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
     <state x="706" y="286" key="FileChooserDialogImpl/0.0.1853.1080@0.0.1853.1080" timestamp="1583436696683" />
-    <state width="1815" height="90" key="GridCell.Tab.0.bottom" timestamp="1586278087124">
+    <state width="1815" height="89" key="GridCell.Tab.0.bottom" timestamp="1586449048569">
       <screen x="0" y="0" width="1858" height="1080" />
     </state>
     <state width="1291" height="90" key="GridCell.Tab.0.bottom/0.0.1853.1080@0.0.1853.1080" timestamp="1585688662525" />
     <state width="1812" height="292" key="GridCell.Tab.0.bottom/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1815" height="90" key="GridCell.Tab.0.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1586278087124" />
-    <state width="1815" height="90" key="GridCell.Tab.0.center" timestamp="1586278087124">
+    <state width="1815" height="89" key="GridCell.Tab.0.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1586449048569" />
+    <state width="1815" height="89" key="GridCell.Tab.0.center" timestamp="1586449048569">
       <screen x="0" y="0" width="1858" height="1080" />
     </state>
     <state width="1291" height="90" key="GridCell.Tab.0.center/0.0.1853.1080@0.0.1853.1080" timestamp="1585688662524" />
     <state width="1812" height="292" key="GridCell.Tab.0.center/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1815" height="90" key="GridCell.Tab.0.center/0.0.1858.1080@0.0.1858.1080" timestamp="1586278087124" />
-    <state width="1815" height="90" key="GridCell.Tab.0.left" timestamp="1586278087124">
+    <state width="1815" height="89" key="GridCell.Tab.0.center/0.0.1858.1080@0.0.1858.1080" timestamp="1586449048569" />
+    <state width="1815" height="89" key="GridCell.Tab.0.left" timestamp="1586449048569">
       <screen x="0" y="0" width="1858" height="1080" />
     </state>
     <state width="1291" height="90" key="GridCell.Tab.0.left/0.0.1853.1080@0.0.1853.1080" timestamp="1585688662524" />
     <state width="1812" height="292" key="GridCell.Tab.0.left/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1815" height="90" key="GridCell.Tab.0.left/0.0.1858.1080@0.0.1858.1080" timestamp="1586278087124" />
-    <state width="1815" height="90" key="GridCell.Tab.0.right" timestamp="1586278087124">
+    <state width="1815" height="89" key="GridCell.Tab.0.left/0.0.1858.1080@0.0.1858.1080" timestamp="1586449048569" />
+    <state width="1815" height="89" key="GridCell.Tab.0.right" timestamp="1586449048569">
       <screen x="0" y="0" width="1858" height="1080" />
     </state>
     <state width="1291" height="90" key="GridCell.Tab.0.right/0.0.1853.1080@0.0.1853.1080" timestamp="1585688662525" />
     <state width="1812" height="292" key="GridCell.Tab.0.right/0.0.1855.1080@0.0.1855.1080" timestamp="1581483276527" />
-    <state width="1815" height="90" key="GridCell.Tab.0.right/0.0.1858.1080@0.0.1858.1080" timestamp="1586278087124" />
+    <state width="1815" height="89" key="GridCell.Tab.0.right/0.0.1858.1080@0.0.1858.1080" timestamp="1586449048569" />
     <state x="605" y="108" key="SettingsEditor" timestamp="1585839361049">
       <screen x="0" y="0" width="1858" height="1080" />
     </state>
@@ -184,15 +172,17 @@
       <screen x="0" y="0" width="1853" height="1080" />
     </state>
     <state x="582" y="159" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1853.1080@0.0.1853.1080" timestamp="1585009720380" />
-    <state x="583" y="250" key="run.anything.popup" timestamp="1585016995945">
-      <screen x="0" y="0" width="1853" height="1080" />
+    <state x="585" y="250" key="run.anything.popup" timestamp="1586401511123">
+      <screen x="0" y="0" width="1858" height="1080" />
     </state>
     <state x="583" y="250" key="run.anything.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1585016995945" />
     <state x="584" y="250" key="run.anything.popup/0.0.1855.1080@0.0.1855.1080" timestamp="1581464929255" />
-    <state x="779" y="758" width="672" height="678" key="search.everywhere.popup" timestamp="1585687885419">
-      <screen x="0" y="0" width="1853" height="1080" />
+    <state x="585" y="250" key="run.anything.popup/0.0.1858.1080@0.0.1858.1080" timestamp="1586401511123" />
+    <state x="753" y="497" width="674" height="678" key="search.everywhere.popup" timestamp="1586444723094">
+      <screen x="0" y="0" width="1858" height="1080" />
     </state>
     <state x="779" y="758" width="672" height="678" key="search.everywhere.popup/0.0.1853.1080@0.0.1853.1080" timestamp="1585687885419" />
+    <state x="753" y="497" width="674" height="678" key="search.everywhere.popup/0.0.1858.1080@0.0.1858.1080" timestamp="1586444723094" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SorryNew$Main.ic" NAME="Main Coverage Results" MODIFIED="1582769930534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
