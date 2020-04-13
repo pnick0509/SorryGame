@@ -81,6 +81,7 @@ class GameBoard{
     //Creates a new pawn and places it somewhere on the board
     public void newPawn(pColor c, int index){
         spaces[index] = new Pawn(c);
+        updatePawn(index);
     }
 
     //Do not confuse with advancePawn. This moves a pawn to a set index.
@@ -90,9 +91,10 @@ class GameBoard{
         post = movePawnLoop(pre,post);
 
         //Do slides
-        checkSlides(post);
+        post = checkSlides(post);
 
         setLand(post);
+        updatePawn(post);
         return post;
     }
 
@@ -271,5 +273,18 @@ class GameBoard{
     {
         return marginCount+maxPlayers*safeLength;
 
+    }
+
+    public Pawn getPawnAtIndex(int index){
+        return spaces[index];
+    }
+
+    public void updatePawn(int index){
+        //Pawn p = spaces[index];
+        try{
+            spaces[index].updateThisPawn(index);
+        }catch (Exception e){
+            System.out.println("Could not update pawn at "+index);
+        }
     }
 }

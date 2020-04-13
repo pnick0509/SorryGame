@@ -1,16 +1,152 @@
 package com.company;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 //A basic pawn who holds a color
 class Pawn{
     private pColor pawnColor;
+    private int squareSize = 50;
+    private ImageView iv;
 
     //Basic Pawn constructor that assigns it with a user defined color
     public Pawn(pColor c){
         pawnColor = c;
+
+        Image image = new Image(pawnImage(pawnColor,false,false));
+        iv = new ImageView(image);
+        iv.setX(0*squareSize);
+        iv.setY(0*squareSize);
+        iv.setFitHeight(squareSize);
+        iv.setFitWidth(squareSize);
     }
+
     public pColor getPawnColor()
     {
         return pawnColor;
+    }
+
+    public String pawnImage(pColor c, boolean colorBlind, boolean selected){
+        String s;
+        if(colorBlind){
+            s = "ColorBlind/";
+        }else{
+            s = "Default/";
+        }
+        if(c == pColor.RED){
+            s += "Red";
+        }else if(c == pColor.ORANGE){
+            s += "Orange";
+        }else if(c == pColor.YELLOW){
+            s += "Yellow";
+        }else if(c == pColor.GREEN){
+            s += "Green";
+        }else if(c == pColor.BLUE){
+            s += "Blue";
+        }else if(c == pColor.PURPLE){
+            s += "Purple";
+        }
+        if(selected){
+            s += "Select.png";
+        }else{
+            s += "Pawn.png";
+        }
+        return s;
+    }
+
+    public ImageView getIv(){
+        return iv;
+    }
+
+    public void updateThisPawn(int index){
+        iv.setImage(new Image(pawnImage(pawnColor,false,false)));
+        iv.setX(getSquareX(index)*squareSize);
+        iv.setY(getSquareY(index)*squareSize);
+        System.out.println("Pawn at ("+iv.getX()+", "+iv.getY()+")");
+    }
+
+    private int getSquareX(int index){
+        if(index <= 30){
+            return index;
+        }else if(index <= 45){
+            return 30;
+        }else if(index <= 75){
+            return (75-index);
+        }else if(index <= 89){
+            return 0;
+        }else if(index == 125){
+            return 1;
+        }else if(index == 131 || index == 124){
+            return 6;
+        }else if(index == 126){
+            return 7;
+        }else if(index == 130){
+            return 8;
+        }else if(index == 120){
+            return 9;
+        }else if(index == 123){
+            return 21;
+        }else if(index == 127){
+            return 22;
+        }else if(index == 129){
+            return 23;
+        }else if(index == 121 || index == 126){
+            return 24;
+        }else if(index == 122){
+            return 29;
+        }else if(index >= 115 && index <= 119){
+            return index-114;
+        }else if(index >= 90 && index <= 94){
+            return 7;
+        }else if(index >= 110 && index <= 114){
+            return 8;
+        }else if(index >= 95 && index <= 99){
+            return 22;
+        }else if(index >= 105 && index <= 109){
+            return 23;
+        }else if(index >= 100 && index <= 104){
+            return 129-index;
+        }else{
+            return 1;
+        }
+    }
+
+    private int getSquareY(int index){
+        if(index <= 30){
+            return 0;
+        }else if(index <= 45){
+            return (index-30);
+        }else if(index <= 75){
+            return 15;
+        }else if(index <= 89){
+            return (90-index);
+        }else if(index == 9 || index == 121){
+            return 1;
+        }else if(index == 125 || index == 126 || index == 127){
+            return 6;
+        }else if(index == 128){
+            return 7;
+        }else if(index == 131){
+            return 8;
+        }else if(index == 130 || index == 129 || index == 122){
+            return 9;
+        }else if(index == 124 || index == 123){
+            return 14;
+        }else if(index >= 115 && index <= 119){
+            return 8;
+        }else if(index >= 90 && index <= 94){
+            return index-89;
+        }else if(index >= 110 && index <= 114){
+            return 124-index;
+        }else if(index >= 95 && index <= 99){
+            return index-94;
+        }else if(index >= 105 && index <= 109){
+            return 23;
+        }else if(index >= 100 && index <= 104){
+            return 119-index;
+        }else{
+            return 1;
+        }
     }
 }
 

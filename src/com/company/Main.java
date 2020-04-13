@@ -26,7 +26,7 @@ public class Main extends Application {
     Scene scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
     int[] points = new int[6];
     int screen;
-    String header = "Sorry! Cycle 3.1";
+    String header = "Sorry! Cycle 3.2";
     int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer
 
     Stage pStage;
@@ -145,9 +145,16 @@ public class Main extends Application {
                     }
 
                     //Draw Pawn
-                    if(getInput(row,col) <= 119){
+                    /*if(getInput(row,col) <= 119){
                         if(game.getBoard().getSpaces()[getInput(row,col)] != null){
                             placeTile(row,col,pawnImage(getInput(row,col)));
+                        }
+                    }*/
+                    if(getInput(row,col) <= 119){
+                        if(game.getBoard().getSpaces()[getInput(row,col)] != null){
+                            //placeTile(row,col,pawnImage(getInput(row,col)));
+                            //drawPawn(getInput(row,col));
+                            root.getChildren().add(game.getBoard().getSpaces()[getInput(row,col)].getIv());
                         }
                     }
 
@@ -236,6 +243,12 @@ public class Main extends Application {
         primaryStage.show();
 
     }
+
+    /*public void drawPawn(int index){
+        if(game.getBoard().getSpaces()[index] != null){
+            root.getChildren().add(game.getBoard().getSpaces()[index].getIv());
+        }
+    }*/
 
     //Returns the image to represent the space the space
     public String spaceImage(int index){

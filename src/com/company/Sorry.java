@@ -199,6 +199,8 @@ class Sorry{
                             Pawn two = gb.getSpaces()[selected];
                             gb.setSpace(index,two);
                             gb.setSpace(selected,one);
+                            gb.updatePawn(index);
+                            gb.updatePawn(selected);
                         }
                         //Next move
                         specialNext(index);
