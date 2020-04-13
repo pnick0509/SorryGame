@@ -154,9 +154,10 @@ public class Main extends Application {
                         i--;
                     }
                 }
-                /*if(StandbyAi != null && PawnIcons.isEmpty() && StandbyAi.getPlayer() == game.getTurn()){
+                if(StandbyAi != null && PawnIcons.isEmpty() && StandbyAi.getPlayer() == game.getTurn()){
+                    System.out.println("Taking Ai's turn");
                     StandbyAi.taketurn(game.getCard());
-                }*/
+                }
             }
         }.start();
     }

@@ -128,12 +128,12 @@ class Sorry{
         startOptions();
 
         //Do Ai stuffs
-        Ai a = getAiTurn();
+        /*Ai a = getAiTurn();
         if(a != null){
             a.taketurn(currCard);
-        }
+        }*/
         System.out.println("Report Back");
-        //main.StandbyAi = getAiTurn();
+        main.StandbyAi = getAiTurn();
     }
 
     //Check if it's an ai's turn
