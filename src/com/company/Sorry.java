@@ -35,9 +35,6 @@ class Sorry{
 
         AI = new ArrayList<Ai>();//List of AI players
         TurnOrder = new ArrayList<Integer>();
-        //for(int k = 1; k < 6; k++){
-        //    AI.add(new Ai(this,false,k));//Gives the AI the Sorry Board, Easy Mode, Its Turn Number.
-        //}
         
         System.out.println("Ais all set up");
 
@@ -107,7 +104,6 @@ class Sorry{
         remainder = 0;
         System.out.println("Reset Remainder A");
         selected = -1;
-        //turn = (turn+1)%players;
         if(TurnOrder.contains(turn)){
             turn = TurnOrder.get((TurnOrder.indexOf(turn)+1)%TurnOrder.size());
         }else if(TurnOrder.size() > 0){
@@ -123,23 +119,11 @@ class Sorry{
         startOptions();
 
         //Do Ai stuffs
-        /*Ai a = getAiTurn();
-        if(a != null){
-            //Timer tmr = new Timer(1);
-            //while(!tmr.checkTime());
-            //main.update();
-            //tmr.set(1);
-            //while(!tmr.checkTime());
-
-
-            //a.taketurn(currCard);
-            main.aiQueued = a;
-        }*/
         try{
             main.queueAi(getAiTurn());
             main.update();
         }catch(Exception e){
-
+            System.out.println("CATCH");
         }
         System.out.println("Report Back");
     }

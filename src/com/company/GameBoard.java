@@ -236,18 +236,7 @@ class GameBoard{
             return -1;
         }
     }
-    /*
-    Not score but number returned home.
-    */
-    /*public int getScore(pColor c)
-    {
-        return home[c];
 
-    }
-    public int getStartCount(pColor c)
-    {
-        return start[c];
-    }*/
     public int getPawnNum()
     {
         return pawnNum;
@@ -282,7 +271,6 @@ class GameBoard{
     }
 
     public void updatePawn(int index){
-        //Pawn p = spaces[index];
         try{
             spaces[index].updateThisPawn(index);
         }catch (Exception e){

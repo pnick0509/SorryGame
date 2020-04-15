@@ -5,10 +5,6 @@ public class Timer {
     long markTime; //The time when the timer was started
     long waitFor; //How much time to wait for in nano seconds
 
-    //Timer(){
-    //    restart();
-   // }
-
     Timer(double secs){
         restart();
         set(secs);

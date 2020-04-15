@@ -65,12 +65,10 @@ public class Main extends Application {
         //update(primaryStage);
 
         scene.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY && screen == 1) {
+            if (e.getButton() == MouseButton.PRIMARY && screen == 1 && aiQueued == null) {
                 System.out.print("("+e.getX()+", "+e.getY()+") ");
                 System.out.println(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
 
-                //Check if AI Player. And then goes through the AI Loop.
-                //game.AITurn();
                 game.takeTurn(getInput((int)e.getY()/squareSize,(int)e.getX()/squareSize));
                 if(game.getWinner() == -1){
                     update(primaryStage);
@@ -88,7 +86,6 @@ public class Main extends Application {
                 }
             }
         });
-        //WinScreen(primaryStage,game);
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(key.getCode()== KeyCode.F1) {
@@ -133,7 +130,7 @@ public class Main extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if(pawnTimer.checkTime()){
+                if(pawnTimer.checkTime() && screen == 1){
                     System.out.println("PAWNLIST B"+pawnList);
                     if(pawnList.size() > 0){
                         for(int i = 0; i < pawnList.size(); i++){
@@ -147,8 +144,8 @@ public class Main extends Application {
                         if(aiQueued != null){
                             Timer wait = new Timer(0.5);
                             while(!wait.checkTime());
+                            System.out.println("Taking turn with AI: "+aiQueued.getPlayer());
                             aiQueued.taketurn(game.getCard());
-                            aiQueued = null;
                         }
                     }
                     pawnTimer.set(0.1);
@@ -182,12 +179,6 @@ public class Main extends Application {
                         placeTile(row,col,"Board/Selection.png");
                     }
 
-                    //Draw Pawn
-                    /*if(getInput(row,col) <= 119){
-                        if(game.getBoard().getSpaces()[getInput(row,col)] != null){
-                            placeTile(row,col,pawnImage(getInput(row,col)));
-                        }
-                    }*/
                     if(getInput(row,col) <= 119){
                         if(game.getBoard().getSpaces()[getInput(row,col)] != null){
                             //placeTile(row,col,pawnImage(getInput(row,col)));
@@ -245,8 +236,9 @@ public class Main extends Application {
                 public void handle (ActionEvent event) {
                     if(aiQueued == null){
                         game.skipTurn();
-                        System.out.println("Handle!");
+                        System.out.println("Handle Skip!");
                         update(primaryStage);
+                        pawnTimer.set(0.1);
                     }
                 }
             });
@@ -287,12 +279,6 @@ public class Main extends Application {
         primaryStage.show();
 
     }
-
-    /*public void drawPawn(int index){
-        if(game.getBoard().getSpaces()[index] != null){
-            root.getChildren().add(game.getBoard().getSpaces()[index].getIv());
-        }
-    }*/
 
     //Returns the image to represent the space the space
     public String spaceImage(int index){
@@ -560,15 +546,6 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    /*public void drawPlayerSetting(int x, int y, String name,int index){
-        placeImage(x,y,name);
-        switch(playerSetting[0]){
-            case -1: placeImage(x,y,"GUI/Off.png"); break;
-            case 0: placeImage(x,y,"GUI/Player.png"); break;
-            case 1: placeImage(x,y,"GUI/Computer.png"); break;
-        }
-    }*/
-
     //Draw start screen
     public void StartScreen(Stage primaryStage, Sorry game) {
         screen = 0;
@@ -698,10 +675,12 @@ public class Main extends Application {
                         c = Math.abs(r.nextInt()%6);
                     }while(playerSetting[c] == 0);
                     game.setTurn(c);
+                    System.out.println("Start Turn "+c);
                     game.startOptions();
                     Ai a = game.getAiTurn();
                     if(a != null){
-                        a.taketurn(game.getCard());
+                        aiQueued = a;
+                        //a.taketurn(game.getCard());
                     }
                     System.out.println("Turn"+a);
                     //Display board

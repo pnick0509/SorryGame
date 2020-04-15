@@ -8,10 +8,6 @@ class Pawn{
     private pColor pawnColor;
     private int squareSize = 50;
     private ImageView iv;
-    //private int lastX = -1;
-    //private int lastY = -1;
-    //private int goalX = lastX;
-    //private int goalY = lastY;
     private int displayIndex = -1;
     private int displayGoal = -1;
     private int animateType = 0; //0: Forward, 1: Backwards, 2: None
