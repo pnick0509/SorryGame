@@ -27,7 +27,7 @@ public class Main extends Application {
     int[] points = new int[6];
     int screen;
     String header = "Sorry! Cycle 3.1";
-    int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer
+    int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer, 3 for "hard" computer
 
     Stage pStage;
 
@@ -43,7 +43,7 @@ public class Main extends Application {
 
         //Set up settings
         playerSetting[0] = 1;
-        playerSetting[1] = 2;
+        playerSetting[1] = 3;
         playerSetting[2] = 0;
         playerSetting[3] = 0;
         playerSetting[4] = 0;
@@ -547,7 +547,8 @@ public class Main extends Application {
             switch(playerSetting[i]){
                 case 0: txt += "Off"; break;
                 case 1: txt += "On"; break;
-                case 2: txt += "Com"; break;
+                case 2: txt += "Easy"; break;
+                case 3: txt += "Hard"; break;
             }
             btn.setText(txt);
             int k = i;
@@ -633,6 +634,11 @@ public class Main extends Application {
                         }else if(playerSetting[b] == 2){
                             game.addTurnOrder(b);
                             game.newAI(b,false);
+                        }
+                        else if(playerSetting[b]==3)
+                        {
+                            game.addTurnOrder(b);
+                            game.newAI(b,true);
                         }
                     }
                     int c;

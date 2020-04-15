@@ -113,7 +113,20 @@ class GameBoard{
 
         return index;
     }
+    public boolean checkSlides(int index,pColor playerColor)
+    {
+        boolean slide = false;
+        if(index%15 == 6 && index < 90 && (int)(index/15) != getValue(playerColor))
+        {
+            slide=true;
+        }
+        else if(index%15 == 14 && index < 90 && (int)(index/15) != getValue(playerColor))
+        {
+            slide =true;
+        }
 
+        return slide;
+    }
     private int movePawnLoop(int pre, int post){
         if(spaces[post] != null){
             startAdd(getValue(spaces[post].getPawnColor()));
