@@ -123,14 +123,23 @@ class Sorry{
         startOptions();
 
         //Do Ai stuffs
-        Ai a = getAiTurn();
+        /*Ai a = getAiTurn();
         if(a != null){
             //Timer tmr = new Timer(1);
             //while(!tmr.checkTime());
             //main.update();
             //tmr.set(1);
             //while(!tmr.checkTime());
-            a.taketurn(currCard);
+
+
+            //a.taketurn(currCard);
+            main.aiQueued = a;
+        }*/
+        try{
+            main.queueAi(getAiTurn());
+            main.update();
+        }catch(Exception e){
+
         }
         System.out.println("Report Back");
     }
@@ -211,8 +220,12 @@ class Sorry{
                             //Swap
                             Pawn one = gb.getSpaces()[index];
                             Pawn two = gb.getSpaces()[selected];
-                            one.setAnimateType(2);
-                            two.setAnimateType(2);
+                            if(one == null){
+                                two.setAnimateType(0);
+                            }else{
+                                one.setAnimateType(2);
+                                two.setAnimateType(2);
+                            }
                             gb.setSpace(index,two);
                             gb.setSpace(selected,one);
                             gb.updatePawn(index);

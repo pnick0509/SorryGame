@@ -34,6 +34,8 @@ public class Main extends Application {
     ArrayList<Pawn> pawnList = new ArrayList<>();
     Timer pawnTimer = new Timer(0);
 
+    Ai aiQueued = null;
+
     Stage pStage;
 
     public static void main(String[] args) {
@@ -133,16 +135,30 @@ public class Main extends Application {
             public void handle(long now) {
                 if(pawnTimer.checkTime()){
                     System.out.println("PAWNLIST B"+pawnList);
-                    for(int i = 0; i < pawnList.size(); i++){
-                        if(pawnList.get(i).animate()){
-                            pawnList.remove(i);
-                            i--;
+                    if(pawnList.size() > 0){
+                        for(int i = 0; i < pawnList.size(); i++){
+                            if(pawnList.get(i).animate()){
+                                pawnList.remove(i);
+                                i--;
+                            }
+                        }
+                    }else{
+                        System.out.println(aiQueued);
+                        if(aiQueued != null){
+                            Timer wait = new Timer(0.5);
+                            while(!wait.checkTime());
+                            aiQueued.taketurn(game.getCard());
+                            aiQueued = null;
                         }
                     }
                     pawnTimer.set(0.1);
                 }
             }
         }.start();
+    }
+
+    public void queueAi(Ai a){
+        aiQueued = a;
     }
 
     public void update(){
@@ -227,9 +243,11 @@ public class Main extends Application {
             skip.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle (ActionEvent event) {
-                    game.skipTurn();
-                    System.out.println("Handle!");
-                    update(primaryStage);
+                    if(aiQueued == null){
+                        game.skipTurn();
+                        System.out.println("Handle!");
+                        update(primaryStage);
+                    }
                 }
             });
         }else{
@@ -237,8 +255,10 @@ public class Main extends Application {
             skip.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle (ActionEvent event) {
-                    game.deselectPawn();
-                    update(primaryStage);
+                    if(aiQueued == null){
+                        game.deselectPawn();
+                        update(primaryStage);
+                    }
                 }
             });
         }
