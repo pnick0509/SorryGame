@@ -80,7 +80,7 @@ class GameBoard{
 
     //Creates a new pawn and places it somewhere on the board
     public void newPawn(pColor c, int index){
-        spaces[index] = new Pawn(c);
+        spaces[index] = new Pawn(c,this);
         updatePawn(index);
     }
 
@@ -91,10 +91,10 @@ class GameBoard{
         post = movePawnLoop(pre,post);
 
         //Do slides
-        post = checkSlides(post);
+        int temp = checkSlides(post);
 
         setLand(post);
-        updatePawn(post);
+        updatePawn(temp);
         return post;
     }
 
@@ -203,6 +203,7 @@ class GameBoard{
     }
 
     public int countForward(int index, int count, pColor c){
+        spaces[index].setAnimateType(0);
         for(int i = 0; i < count; i++){
             index = nextSpace(index,c);
         }
@@ -210,6 +211,7 @@ class GameBoard{
     }
 
     public int countBackward(int index, int count, pColor c){
+        spaces[index].setAnimateType(1);
         for(int i = 0; i < count; i++){
             index = lastSpace(index,c);
         }

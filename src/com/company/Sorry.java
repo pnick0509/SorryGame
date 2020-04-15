@@ -125,6 +125,11 @@ class Sorry{
         //Do Ai stuffs
         Ai a = getAiTurn();
         if(a != null){
+            //Timer tmr = new Timer(1);
+            //while(!tmr.checkTime());
+            //main.update();
+            //tmr.set(1);
+            //while(!tmr.checkTime());
             a.taketurn(currCard);
         }
         System.out.println("Report Back");
@@ -192,11 +197,22 @@ class Sorry{
                         //Take turn
                         options.clear();
                         if(currCard != 11){
+                            if(currCard == 10){
+                                Pawn temp = gb.getSpaces()[selected];
+                                System.out.println("THIS: "+temp+" "+index+" "+gb.lastSpace(selected,temp.getPawnColor()));
+                                if(index == gb.lastSpace(selected,temp.getPawnColor())){
+                                    temp.setAnimateType(1);
+                                }else{
+                                    temp.setAnimateType(0);
+                                }
+                            }
                             index = gb.movePawn(selected,index);
                         }else{
                             //Swap
                             Pawn one = gb.getSpaces()[index];
                             Pawn two = gb.getSpaces()[selected];
+                            one.setAnimateType(2);
+                            two.setAnimateType(2);
                             gb.setSpace(index,two);
                             gb.setSpace(selected,one);
                             gb.updatePawn(index);

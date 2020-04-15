@@ -1,5 +1,6 @@
 package com.company;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Main extends Application {
@@ -28,6 +30,9 @@ public class Main extends Application {
     int screen;
     String header = "Sorry! Cycle 3.2";
     int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer
+
+    ArrayList<Pawn> pawnList = new ArrayList<>();
+    Timer pawnTimer = new Timer(0);
 
     Stage pStage;
 
@@ -122,6 +127,22 @@ public class Main extends Application {
                 update(primaryStage);
             }
         });
+
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if(pawnTimer.checkTime()){
+                    System.out.println("PAWNLIST B"+pawnList);
+                    for(int i = 0; i < pawnList.size(); i++){
+                        if(pawnList.get(i).animate()){
+                            pawnList.remove(i);
+                            i--;
+                        }
+                    }
+                    pawnTimer.set(0.1);
+                }
+            }
+        }.start();
     }
 
     public void update(){
@@ -135,6 +156,7 @@ public class Main extends Application {
 
         DrawBackground(Color.rgb(250,250,250));
 
+        pawnList.clear();
         for(int row = 0; row<rowNum; row++) {
             for (int col = 0; col < colNum; col++) {
                 if (getInput(row,col) != -1){
@@ -155,6 +177,8 @@ public class Main extends Application {
                             //placeTile(row,col,pawnImage(getInput(row,col)));
                             //drawPawn(getInput(row,col));
                             root.getChildren().add(game.getBoard().getSpaces()[getInput(row,col)].getIv());
+                            pawnList.add(game.getBoard().getSpaces()[getInput(row,col)]);
+                            System.out.println("PAWNLIST A"+pawnList);
                         }
                     }
 

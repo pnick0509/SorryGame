@@ -8,15 +8,24 @@ class Pawn{
     private pColor pawnColor;
     private int squareSize = 50;
     private ImageView iv;
+    //private int lastX = -1;
+    //private int lastY = -1;
+    //private int goalX = lastX;
+    //private int goalY = lastY;
+    private int displayIndex = -1;
+    private int displayGoal = -1;
+    private int animateType = 0; //0: Forward, 1: Backwards, 2: None
+    private GameBoard gb;
 
     //Basic Pawn constructor that assigns it with a user defined color
-    public Pawn(pColor c){
+    public Pawn(pColor c, GameBoard gb){
         pawnColor = c;
+        this.gb = gb;
 
         Image image = new Image(pawnImage(pawnColor,false,false));
         iv = new ImageView(image);
-        iv.setX(0*squareSize);
-        iv.setY(0*squareSize);
+        iv.setX(-1);
+        iv.setY(-1);
         iv.setFitHeight(squareSize);
         iv.setFitWidth(squareSize);
     }
@@ -24,6 +33,14 @@ class Pawn{
     public pColor getPawnColor()
     {
         return pawnColor;
+    }
+
+    public void setAnimateType(int type){
+        animateType = type;
+    }
+
+    public int getAnimateType(){
+        return animateType;
     }
 
     public String pawnImage(pColor c, boolean colorBlind, boolean selected){
@@ -60,9 +77,34 @@ class Pawn{
 
     public void updateThisPawn(int index){
         iv.setImage(new Image(pawnImage(pawnColor,false,false)));
-        iv.setX(getSquareX(index)*squareSize);
-        iv.setY(getSquareY(index)*squareSize);
-        System.out.println("Pawn at ("+iv.getX()+", "+iv.getY()+")");
+        displayGoal = index;
+        if(iv.getX() != -1){
+            displayIndex = getInput((int)iv.getY()/squareSize,(int)iv.getX()/squareSize);
+            iv.setX(getSquareX(displayIndex)*squareSize);
+            iv.setY(getSquareY(displayIndex)*squareSize);
+            System.out.println("Pawn at ("+iv.getX()+", "+iv.getY()+") going from "+displayIndex+" --> "+displayGoal);
+        }else{
+            displayIndex = index;
+            iv.setX(getSquareX(displayIndex)*squareSize);
+            iv.setY(getSquareY(displayIndex)*squareSize);
+        }
+    }
+
+    public boolean animate(){
+        if(displayGoal != displayIndex){
+            if(animateType == 0){
+                displayIndex = gb.nextSpace(displayIndex,pawnColor);
+            }else if(animateType == 1){
+                displayIndex = gb.lastSpace(displayIndex,pawnColor);
+            }else{
+                displayIndex = displayGoal;
+            }
+            iv.setX(getSquareX(displayIndex)*squareSize);
+            iv.setY(getSquareY(displayIndex)*squareSize);
+            iv.toFront();
+            System.out.println("("+iv.getX()+", "+iv.getY()+")");
+        }
+        return displayGoal == displayIndex;
     }
 
     private int getSquareX(int index){
@@ -146,6 +188,57 @@ class Pawn{
             return 119-index;
         }else{
             return 1;
+        }
+    }
+
+    //Gets the input on the spaces array based on row and column
+    public int getInput(int row, int col){
+        if(row == 0) { //Top row
+            return col;
+        }else if(row == 15){
+            return 75-col;
+        }else if(col == 0){
+            return 90-row;
+        }else if(col == 30){
+            return 30+row;
+        }else if(col == 7 && row <= 5){ //Red Safety
+            return row+89;
+        }else if(col == 22 && row <= 5){ //Orange Safety
+            return row+94;
+        }else if(row == 7 && col >= 25){ //Yellow Safety
+            return 104-col+25;
+        }else if(col == 23 && row >= 10){ //Green Safety
+            return 109-row+10;
+        }else if(col == 8 && row >= 10){ //Blue Safety
+            return 114-row+10;
+        }else if(row == 8 && col <= 5){ //Purple Safety
+            return 114+col;
+        }else if(row == 1 && col == 9){ //Red Start
+            return 120;
+        }else if(row == 1 && col == 24){ //Orange start
+            return 121;
+        }else if(row == 9 && col == 29){ //Yellow start
+            return 122;
+        }else if(row == 14 && col == 21){ //Green start
+            return 123;
+        }else if(row == 14 && col == 6){ //Blue start
+            return 124;
+        }else if(row == 6 && col == 1){ //Purple start
+            return 125;
+        }else if(row == 6 && col == 7){ //Red home
+            return 126;
+        }else if(row == 6 && col == 22){ //Orange home
+            return 127;
+        }else if(row == 7 && col == 24){ //Yellow home
+            return 128;
+        }else if(row == 9 && col == 23){ //Green home
+            return 129;
+        }else if(row == 9 && col == 8){ //Blue home
+            return 130;
+        }else if(row == 8 && col == 6){ //Purple home
+            return 131;
+        }else{
+            return -1;
         }
     }
 }

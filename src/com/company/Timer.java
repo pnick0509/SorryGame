@@ -5,11 +5,12 @@ public class Timer {
     long markTime; //The time when the timer was started
     long waitFor; //How much time to wait for in nano seconds
 
-    Timer(){
-        restart();
-    }
+    //Timer(){
+    //    restart();
+   // }
 
     Timer(double secs){
+        restart();
         set(secs);
     }
 
@@ -19,7 +20,7 @@ public class Timer {
 
     public void set(double secs){
         restart();
-        waitFor = (long)secs*1000000000;
+        waitFor = (long)(secs*1000000000);
     }
 
     public boolean checkTime(){
