@@ -11,6 +11,7 @@ class GameBoard{
     private int[] start;
     private int[] home;
     private int pawnNum;
+    private Sorry game;
 
     private int land = -1; //The space a pawn lands on through move pawn
 
@@ -19,7 +20,8 @@ class GameBoard{
         return spaces;
     }
     //Creates a default gameboard
-    public GameBoard(){
+    public GameBoard(Sorry game){
+        this.game = game;
         marginCount = 90;
         safeLength = 5;
         spaces = new Pawn[marginCount+safeLength*maxPlayers];
@@ -105,12 +107,14 @@ class GameBoard{
                 index = nextSpace(index,spaces[index].getPawnColor());
                 movePawnLoop(pre,index);
             }
+            game.addStat_slide(game.getTurn(),3);
         }else if(index%15 == 14 && index < 90 && (int)(index/15) != getValue(spaces[index].getPawnColor())){
             for(int i = 0; i < 4; i++){
                 int pre = index;
                 index = nextSpace(index,spaces[index].getPawnColor());
                 movePawnLoop(pre,index);
             }
+            game.addStat_slide(game.getTurn(),4);
         }
 
         return index;

@@ -21,11 +21,31 @@ class Sorry{
     private boolean cardCheats;
     private boolean colorBlind;
 
+    private int[] stat_forward = new int[6];
+    private int[] stat_backward = new int[6];
+    private int[] stat_slide = new int[6];
+
     private Main main;
+
+    public int[] getStat_forward() {
+        return stat_forward;
+    }
+
+    public int[] getStat_backward(){
+        return stat_backward;
+    }
+
+    public int[] getStat_slide(){
+        return stat_slide;
+    }
+
+    public void addStat_slide(int index, int amount){
+        stat_slide[index] += amount;
+    }
 
     //Starts a new game with six players
     public Sorry(Main main){
-        gb = new GameBoard();
+        gb = new GameBoard(this);
         players = 6;
         turn = -1; //0: Red, 1: Orange, 2: Yellow, 3: Green, 4: Blue, 5: Purple
         cards = new ArrayList<Integer>();
@@ -201,15 +221,19 @@ class Sorry{
                                 System.out.println("THIS: "+temp+" "+index+" "+gb.lastSpace(selected,temp.getPawnColor()));
                                 if(index == gb.lastSpace(selected,temp.getPawnColor())){
                                     temp.setAnimateType(1);
+                                    stat_backward[turn] += 1;
                                 }else{
                                     temp.setAnimateType(0);
+                                    stat_forward[turn] += 10;
                                 }
                             }else if(currCard == 4){
                                 Pawn temp = gb.getSpaces()[selected];
                                 temp.setAnimateType(1);
+                                stat_backward[turn] += 4;
                             }else{
                                 Pawn temp = gb.getSpaces()[selected];
                                 temp.setAnimateType(0);
+                                stat_forward[turn] += gb.distanceBetweenSpaces(selected,index, temp.getPawnColor());
                             }
                             index = gb.movePawn(selected,index);
                         }else{
@@ -218,6 +242,7 @@ class Sorry{
                             Pawn two = gb.getSpaces()[selected];
                             if(one == null){
                                 two.setAnimateType(0);
+                                stat_forward[turn] += 11;
                             }else{
                                 one.setAnimateType(2);
                                 two.setAnimateType(2);
@@ -264,6 +289,8 @@ class Sorry{
                     gb.destroyPawn(selected);
                     gb.homeAdd(getTurn());
                     options.clear();
+
+                    stat_forward[turn] += gb.distanceBetweenSpaces(selected,index, getTurnColor());
 
                     System.out.println("In");
 
@@ -362,7 +389,7 @@ class Sorry{
             newOrig = -1;
         }
         //Add exceptions
-        ArrayList<Integer> except = new ArrayList<Integer>();
+        ArrayList<Integer> except = new ArrayList<>();
         except.add(orig);
         //Add exeptions for slides
         if(newOrig == 6){
@@ -393,7 +420,7 @@ class Sorry{
             System.out.println("Added exception "+newOrig);
             newOrig = 39;
         }else if(newOrig == 44){
-            for(int i = 44; i < 18; i++){
+            for(int i = 44; i < 47; i++){
                 except.add(i);
             }
             System.out.println("Added exception "+newOrig);
@@ -601,10 +628,11 @@ class Sorry{
             gb.setStart(i,4);
             gb.setHome(i,0);
         }
-        gb.setStart(0,3);
+        gb.setStart(0,2);
         gb.setStart(2,3);
         gb.setStart(4,3);
         gb.newPawn(pColor.RED,13);
+        gb.newPawn(pColor.RED,50);
         gb.newPawn(pColor.YELLOW,36);
         gb.newPawn(pColor.BLUE,66);
     }

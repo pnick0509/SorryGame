@@ -515,14 +515,6 @@ public class Main extends Application {
         DrawBackground(Color.rgb(250,250,250));
 
         String s = "";
-        /*switch(game.getWinner()){
-            case 0: s = "Red"; break;
-            case 1: s = "Orange"; break;
-            case 2: s = "Yellow"; break;
-            case 3: s = "Green"; break;
-            case 4: s = "Blue"; break;
-            case 5: s = "Purple"; break;
-        }*/
         s += playerNames[game.getWinner()];
         s += " is the winner!";
 
@@ -538,7 +530,7 @@ public class Main extends Application {
 
         //Again Button
         Button again = new Button();
-        again.setLayoutX(650);
+        again.setLayoutX(450);
         again.setLayoutY(650);
         again.setMinSize(250,50);
         again.setMaxSize(250,50);
@@ -552,8 +544,24 @@ public class Main extends Application {
                 System.out.println("Handle!");
             }
         });
-
         root.getChildren().add(again);
+
+        //Again Button
+        Button stat = new Button();
+        stat.setLayoutX(850);
+        stat.setLayoutY(650);
+        stat.setMinSize(250,50);
+        stat.setMaxSize(250,50);
+        stat.setFont(getFont(20));
+        stat.setText("View Stats!");
+        stat.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                StatScreen(pStage,game);
+                System.out.println("Handle!");
+            }
+        });
+        root.getChildren().add(stat);
 
         primaryStage.setTitle(header);
         primaryStage.setScene(scene);
@@ -722,6 +730,54 @@ public class Main extends Application {
                     update(primaryStage);
                     System.out.println("Handle!");
                 }
+            }
+        });
+        root.getChildren().add(again);
+
+        primaryStage.setTitle(header);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void StatScreen(Stage primaryStage, Sorry game) {
+        screen = 3;
+        System.out.println("Stats");
+        root.getChildren().clear();
+
+        DrawBackground(Color.rgb(250,250,250));
+        placeImage(0,0,"Backdrop/Statscreen.png");
+
+        DrawText("Player Names",115,42,20,true);
+        for(int i = 0; i < 6; i++){
+            DrawText(playerNames[i],115+220*(i+1),42,20,true);
+        }
+        DrawText("Spaces Forward",115,42+50,20,true);
+        for(int i = 0; i < 6; i++){
+            DrawText(""+game.getStat_forward()[i],115+220*(i+1),42+50,20,true);
+        }
+        DrawText("Spaces Backward",115,42+50*2,20,true);
+        for(int i = 0; i < 6; i++){
+            DrawText(""+game.getStat_backward()[i],115+220*(i+1),42+50*2,20,true);
+        }
+        DrawText("Spaces Slid",115,42+50*3,20,true);
+        for(int i = 0; i < 6; i++){
+            DrawText(""+game.getStat_slide()[i],115+220*(i+1),42+50*3,20,true);
+        }
+
+        //Again Button
+        Button again = new Button();
+        again.setLayoutX(650);
+        again.setLayoutY(650);
+        again.setMinSize(250,50);
+        again.setMaxSize(250,50);
+        again.setFont(getFont(20));
+        again.setText("Play Again!");
+        again.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                game.reset();
+                update(primaryStage);
+                System.out.println("Handle!");
             }
         });
         root.getChildren().add(again);
