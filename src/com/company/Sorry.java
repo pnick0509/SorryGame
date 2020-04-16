@@ -101,31 +101,37 @@ class Sorry{
     //This script ensures that the turn is always set to an active player
     public void nextTurn()
     {
-        remainder = 0;
-        System.out.println("Reset Remainder A");
-        selected = -1;
-        if(TurnOrder.contains(turn)){
-            turn = TurnOrder.get((TurnOrder.indexOf(turn)+1)%TurnOrder.size());
-        }else if(TurnOrder.size() > 0){
-            turn = TurnOrder.get(0);
+        checkWinner();
+        System.out.println("Show winner? "+winner);
+        if(getWinner() != -1){
+            main.doWin();
         }else{
-            turn = 0;
+            remainder = 0;
+            System.out.println("Reset Remainder A");
+            selected = -1;
+            if(TurnOrder.contains(turn)){
+                turn = TurnOrder.get((TurnOrder.indexOf(turn)+1)%TurnOrder.size());
+            }else if(TurnOrder.size() > 0){
+                turn = TurnOrder.get(0);
+            }else{
+                turn = 0;
+            }
+
+            System.out.println("Turn: "+turn);
+            currCard = pullCard();
+
+            //Set options
+            startOptions();
+
+            //Do Ai stuffs
+            try{
+                main.queueAi(getAiTurn());
+                main.update();
+            }catch(Exception e){
+                System.out.println("CATCH");
+            }
+            System.out.println("Report Back");
         }
-
-        System.out.println("Turn: "+turn);
-        currCard = pullCard();
-
-        //Set options
-        startOptions();
-
-        //Do Ai stuffs
-        try{
-            main.queueAi(getAiTurn());
-            main.update();
-        }catch(Exception e){
-            System.out.println("CATCH");
-        }
-        System.out.println("Report Back");
     }
 
     //Check if it's an ai's turn
@@ -198,6 +204,12 @@ class Sorry{
                                 }else{
                                     temp.setAnimateType(0);
                                 }
+                            }else if(currCard == 4){
+                                Pawn temp = gb.getSpaces()[selected];
+                                temp.setAnimateType(1);
+                            }else{
+                                Pawn temp = gb.getSpaces()[selected];
+                                temp.setAnimateType(0);
                             }
                             index = gb.movePawn(selected,index);
                         }else{
@@ -256,11 +268,17 @@ class Sorry{
                     System.out.println("In");
 
                     //Check to see if win state
-                    if(gb.homeAmount(getTurn()) == 4){
-                        winner = getTurn();
-                    }
+                    checkWinner();
                     specialNext(index);
                 }
+            }
+        }
+    }
+
+    public void checkWinner(){
+        for(int i = 0; i < 6; i++){
+            if(gb.homeAmount(i) == 4){
+                winner = i;
             }
         }
     }
@@ -599,7 +617,7 @@ class Sorry{
 
     public void preset4(){
         selected = -1;
-        currCard = 11;
+        currCard = 13;
         startOptions();
     }
 

@@ -32,6 +32,9 @@ public class Main extends Application {
     String header = "Sorry! Cycle 3.2";
     int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer, 3 for "hard" computer
 
+    TextField[] nameField = new TextField[6];
+    String[] playerNames = new String[6];
+
     ArrayList<Pawn> pawnList = new ArrayList<>();
     Timer pawnTimer = new Timer(0);
 
@@ -57,6 +60,11 @@ public class Main extends Application {
         playerSetting[4] = 0;
         playerSetting[5] = 0;
 
+        //Names
+        for(int n = 0; n < 6; n++){
+            playerNames[n] = "Player "+(n+1);
+        }
+
         //Set points
         for(int i = 0; i < 6; i++){
             points[i] = 0;
@@ -74,16 +82,7 @@ public class Main extends Application {
                 if(game.getWinner() == -1){
                     update(primaryStage);
                 }else{
-                    //Add points
-                    for(int i = 0; i < 6; i++){
-                        if(i != game.getWinner()){
-                            points[i] += game.getBoard().homeAmount(i)*5;
-                        }else{
-                            points[i] += game.getBoard().homeAmount(i)*10;
-                        }
-                    }
-                    //Show screen
-                    WinScreen(primaryStage,game);
+                    doWin();
                 }
             }
         });
@@ -153,6 +152,19 @@ public class Main extends Application {
                 }
             }
         }.start();
+    }
+
+    public void doWin(){
+        //Add points
+        for(int i = 0; i < 6; i++){
+            if(i != game.getWinner()){
+                points[i] += game.getBoard().homeAmount(i)*5;
+            }else{
+                points[i] += game.getBoard().homeAmount(i)*10;
+            }
+        }
+        //Show screen
+        WinScreen(pStage,game);
     }
 
     public void queueAi(Ai a){
@@ -503,14 +515,15 @@ public class Main extends Application {
         DrawBackground(Color.rgb(250,250,250));
 
         String s = "";
-        switch(game.getWinner()){
+        /*switch(game.getWinner()){
             case 0: s = "Red"; break;
             case 1: s = "Orange"; break;
             case 2: s = "Yellow"; break;
             case 3: s = "Green"; break;
             case 4: s = "Blue"; break;
             case 5: s = "Purple"; break;
-        }
+        }*/
+        s += playerNames[game.getWinner()];
         s += " is the winner!";
 
         DrawText(s,scene.getWidth()/2,64,80,true);
@@ -600,10 +613,18 @@ public class Main extends Application {
             });
             root.getChildren().add(btn);
 
-            //
-            //TextField name = new TextField();
-
-
+            for(int n = 0; n < 6; n++){
+                nameField[n] = new TextField();
+                nameField[n].setPromptText("Player "+(n+1)+"'s Name");
+                nameField[n].setText(playerNames[n]);
+                nameField[n].setTranslateX(240);
+                nameField[n].setTranslateY(200+(75*n)+10);
+                nameField[n].setMinHeight(50-20);
+                nameField[n].setMaxHeight(50-20);
+                nameField[n].setMinWidth(250);
+                nameField[n].setMaxWidth(250);
+                root.getChildren().add(nameField[n]);
+            }
         }
 
         //Draw options
@@ -669,6 +690,7 @@ public class Main extends Application {
                 if(playerSetting[0] == 1 || playerSetting[1] == 1 || playerSetting[2] == 1 || playerSetting[3] == 1 || playerSetting[4] == 1 || playerSetting[5] == 1){
                     //Set up options
                     for(int b = 0; b < 6; b++){
+                        //Establish turn order
                         if(playerSetting[b] == 1){
                             game.addTurnOrder(b);
                         }else if(playerSetting[b] == 2){
@@ -678,6 +700,9 @@ public class Main extends Application {
                             game.addTurnOrder(b);
                             game.newAI(b,true);
                         }
+                        //Set name
+                        playerNames[b] = nameField[b].getText();
+                        System.out.println("b:: "+nameField[b].getText());
                     }
                     int c;
                     Random r = new Random();

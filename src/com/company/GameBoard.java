@@ -203,7 +203,7 @@ class GameBoard{
     }
 
     public int countForward(int index, int count, pColor c){
-        spaces[index].setAnimateType(0);
+        //spaces[index].setAnimateType(0);
         for(int i = 0; i < count; i++){
             index = nextSpace(index,c);
         }
@@ -211,7 +211,7 @@ class GameBoard{
     }
 
     public int countBackward(int index, int count, pColor c){
-        spaces[index].setAnimateType(1);
+        //spaces[index].setAnimateType(1);
         for(int i = 0; i < count; i++){
             index = lastSpace(index,c);
         }

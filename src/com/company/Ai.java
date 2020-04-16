@@ -138,7 +138,7 @@ public class Ai {
             {
                 int maxSpace=-1;
                 int minSpace=-1;
-                int homeIndex = game.getBoard().countBackward(game.getBoard().myStart(player),2,playerColor);//Outside home stretch
+                int homeIndex = game.getBoard().countBackward(game.getBoard().mySpawn(player),2,playerColor);//Outside home stretch
                 for(int i =0; i<myPawns.size();i++)
                 {
                     if(minSpace==-1)
@@ -191,7 +191,7 @@ public class Ai {
             if(card==13)
             {
                 int maxSpace=-1;
-                int homeIndex = game.getBoard().countBackward(game.getBoard().myStart(player),2,playerColor);//Outside home stretch
+                int homeIndex = game.getBoard().countBackward(game.getBoard().mySpawn(player),2,playerColor);//Outside home stretch
                 System.out.println("Home Index is "+homeIndex);
                 for(int j=0; j<game.getOptions().size(); j++)
                 {
@@ -203,9 +203,7 @@ public class Ai {
                         {
                             maxSpace=i;
                         }
-                        if((game.getBoard().distanceBetweenSpaces(i,homeIndex,playerColor))<(game.getBoard().distanceBetweenSpaces(maxSpace,homeIndex,playerColor))
-
-                        )
+                        if((game.getBoard().distanceBetweenSpaces(i,homeIndex,playerColor))<(game.getBoard().distanceBetweenSpaces(maxSpace,homeIndex,playerColor)))
                         {
                             maxSpace=i;
                         }
