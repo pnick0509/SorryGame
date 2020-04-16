@@ -18,7 +18,7 @@ class Pawn{
         pawnColor = c;
         this.gb = gb;
 
-        Image image = new Image(pawnImage(pawnColor,false,false));
+        Image image = new Image(pawnImage(pawnColor,gb.game.getColorblind(),false));
         iv = new ImageView(image);
         iv.setX(-1);
         iv.setY(-1);
@@ -40,6 +40,7 @@ class Pawn{
     }
 
     public String pawnImage(pColor c, boolean colorBlind, boolean selected){
+        System.out.println("Color blind? " +colorBlind);
         String s;
         if(colorBlind){
             s = "ColorBlind/";
@@ -72,7 +73,7 @@ class Pawn{
     }
 
     public void updateThisPawn(int index){
-        iv.setImage(new Image(pawnImage(pawnColor,false,false)));
+        iv.setImage(new Image(pawnImage(pawnColor,gb.game.getColorblind(),false)));
         displayGoal = index;
         if(iv.getX() != -1){
             displayIndex = getInput((int)iv.getY()/squareSize,(int)iv.getX()/squareSize);

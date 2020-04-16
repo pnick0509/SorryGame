@@ -11,7 +11,7 @@ class GameBoard{
     private int[] start;
     private int[] home;
     private int pawnNum;
-    private Sorry game;
+    public Sorry game;
 
     private int land = -1; //The space a pawn lands on through move pawn
 
@@ -83,6 +83,7 @@ class GameBoard{
     //Creates a new pawn and places it somewhere on the board
     public void newPawn(pColor c, int index){
         spaces[index] = new Pawn(c,this);
+        //spaces[index].pawnImage(c,game.getColorblind(),false);
         updatePawn(index);
     }
 

@@ -35,6 +35,10 @@ public class Main extends Application {
     TextField[] nameField = new TextField[6];
     String[] playerNames = new String[6];
 
+    String cardFrontImage = "";
+    String cardBackImage = "";
+    boolean cardUpdated = false;
+
     ArrayList<Pawn> pawnList = new ArrayList<>();
     Timer pawnTimer = new Timer(0);
 
@@ -150,6 +154,9 @@ public class Main extends Application {
                     }
                     pawnTimer.set(0.1);
                 }
+                if(!cardUpdated && pawnList.isEmpty() && screen == 1){
+                    updateCardImage();
+                }
             }
         }.start();
     }
@@ -181,6 +188,7 @@ public class Main extends Application {
         root.getChildren().clear();
 
         DrawBackground(Color.rgb(250,250,250));
+        placeImage(0,0,"Backdrop/MarbleBlackMark.png");
 
         pawnList.clear();
         for(int row = 0; row<rowNum; row++) {
@@ -198,7 +206,10 @@ public class Main extends Application {
                             //drawPawn(getInput(row,col));
                             root.getChildren().add(game.getBoard().getSpaces()[getInput(row,col)].getIv());
                             pawnList.add(game.getBoard().getSpaces()[getInput(row,col)]);
-                            System.out.println("PAWNLIST A"+pawnList);
+                            //System.out.println("PAWNLIST A"+pawnList);
+                            if(getInput(row,col) == game.getSelected()){
+                                placeTile(row,col,"Default/Selector.png");
+                            }
                         }
                     }
 
@@ -270,21 +281,25 @@ public class Main extends Application {
         root.getChildren().add(skip);
 
         //Draw and position the card in screen
-        Image cardBack = new Image(setNextBack(game.getTurn()));
-        ImageView backview = new ImageView(cardBack);
-        backview.setFitWidth(250);
-        backview.setFitHeight(350);
-        backview.setX(650);
-        backview.setY(225);
-        root.getChildren().add(backview);
+        if(cardBackImage == ""){
+            updateCardImage();
+        }else{
+            Image cardBack = new Image(cardBackImage);
+            ImageView backview = new ImageView(cardBack);
+            backview.setFitWidth(250);
+            backview.setFitHeight(350);
+            backview.setX(650);
+            backview.setY(225);
+            root.getChildren().add(backview);
 
-        Image cardImage = new Image(setNextCard(game.getCard()));
-        ImageView cardView = new ImageView(cardImage);
-        cardView.setFitWidth(250);
-        cardView.setFitHeight(350);
-        cardView.setX(650);
-        cardView.setY(225);
-        root.getChildren().add(cardView);
+            Image cardImage = new Image(cardFrontImage);
+            ImageView cardView = new ImageView(cardImage);
+            cardView.setFitWidth(250);
+            cardView.setFitHeight(350);
+            cardView.setX(650);
+            cardView.setY(225);
+            root.getChildren().add(cardView);
+        }
 
         //scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
         primaryStage.setTitle(header);
@@ -815,5 +830,27 @@ public class Main extends Application {
         r.setHeight(scene.getHeight());
         r.setFill(c);
         root.getChildren().add(r);
+    }
+
+    public void updateCardImage(){
+        cardUpdated = false;
+
+        cardBackImage = setNextBack(game.getTurn());
+        Image cardBack = new Image(cardBackImage);
+        ImageView backview = new ImageView(cardBack);
+        backview.setFitWidth(250);
+        backview.setFitHeight(350);
+        backview.setX(650);
+        backview.setY(225);
+        root.getChildren().add(backview);
+
+        cardFrontImage = setNextCard(game.getCard());
+        Image cardImage = new Image(cardFrontImage);
+        ImageView cardView = new ImageView(cardImage);
+        cardView.setFitWidth(250);
+        cardView.setFitHeight(350);
+        cardView.setX(650);
+        cardView.setY(225);
+        root.getChildren().add(cardView);
     }
 }
