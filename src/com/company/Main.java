@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -29,7 +30,7 @@ public class Main extends Application {
     int[] points = new int[6];
     int screen;
     String header = "Sorry! Cycle 3.2";
-    int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer
+    int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer, 3 for "hard" computer
 
     ArrayList<Pawn> pawnList = new ArrayList<>();
     Timer pawnTimer = new Timer(0);
@@ -581,7 +582,8 @@ public class Main extends Application {
             switch(playerSetting[i]){
                 case 0: txt += "Off"; break;
                 case 1: txt += "On"; break;
-                case 2: txt += "Com"; break;
+                case 2: txt += "Easy"; break;
+                case 3: txt += "Hard"; break;
             }
             btn.setText(txt);
             int k = i;
@@ -589,7 +591,7 @@ public class Main extends Application {
                 @Override
                 public void handle (ActionEvent event) {
                     playerSetting[k]++;
-                    if(playerSetting[k] > 2){
+                    if(playerSetting[k] > 3){
                         playerSetting[k] = 0;
                     }
                     StartScreen(primaryStage,game);
@@ -597,12 +599,17 @@ public class Main extends Application {
                 }
             });
             root.getChildren().add(btn);
+
+            //
+            //TextField name = new TextField();
+
+
         }
 
         //Draw options
         //Colorblind
         btn = new Button();
-        btn.setLayoutX(320);
+        btn.setLayoutX(1330);
         btn.setLayoutY(200);
         btn.setMinSize(200,50);
         btn.setMaxSize(200,50);
@@ -626,7 +633,7 @@ public class Main extends Application {
 
         //Infinite Deck
         btn = new Button();
-        btn.setLayoutX(320);
+        btn.setLayoutX(1330);
         btn.setLayoutY(200+75);
         btn.setMinSize(200,50);
         btn.setMaxSize(200,50);
@@ -667,6 +674,9 @@ public class Main extends Application {
                         }else if(playerSetting[b] == 2){
                             game.addTurnOrder(b);
                             game.newAI(b,false);
+                        }else if(playerSetting[b]==3){
+                            game.addTurnOrder(b);
+                            game.newAI(b,true);
                         }
                     }
                     int c;
