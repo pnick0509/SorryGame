@@ -585,6 +585,14 @@ public class Main extends Application {
 
     //Draw start screen
     public void StartScreen(Stage primaryStage, Sorry game) {
+        try{
+            for(int i = 0; i < 6; i++){
+                playerNames[i] = nameField[i].getText();
+            }
+        }catch (Exception e){
+
+        }
+
         screen = 0;
         System.out.println("Start screen");
         root.getChildren().clear();
