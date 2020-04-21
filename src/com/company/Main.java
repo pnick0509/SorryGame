@@ -630,7 +630,7 @@ public class Main extends Application {
             txt += ": ";
             switch(playerSetting[i]){
                 case 0: txt += "Off"; break;
-                case 1: txt += "On"; break;
+                case 1: txt += "Human"; break;
                 case 2: txt += "Easy"; break;
                 case 3: txt += "Hard"; break;
             }

@@ -78,8 +78,8 @@ class Sorry{
     public void createCards()
     {
         cards.clear();
-        for(int y=1; y<=13; y++) {
-            if(y==6||y==9){
+        for(int y=0; y<=13; y++) {
+            if(y==9){
                 y++;
             }
             for (int x=0; x<5; x++) {
@@ -202,13 +202,18 @@ class Sorry{
             if(currCard != 13){ //For every card but the Sorry! card
                 if(selected == -1){
                     if(gb.getSpaces()[index] != null){
-                        if(gb.getSpaces()[index].getPawnColor() == getTurnColor()){
+                        if(gb.getSpaces()[index].getPawnColor() == getTurnColor() && currCard != 6){
                             selected = index;
                             setOptions(selected,gb.getSpaces()[index].getPawnColor(),currCard);
                             if(options.size() == 0){
                                 selected = -1;
                             }
-
+                        }else if(gb.getSpaces()[index].getPawnColor() != getTurnColor() && currCard == 6){
+                            selected = index;
+                            setOptions(selected,gb.getSpaces()[index].getPawnColor(),currCard);
+                            if(options.size() == 0){
+                                selected = -1;
+                            }
                         }
                     }
                 }else{
@@ -230,6 +235,10 @@ class Sorry{
                                 Pawn temp = gb.getSpaces()[selected];
                                 temp.setAnimateType(1);
                                 stat_backward[turn] += 4;
+                            }else if(currCard == 6){
+                                Pawn temp = gb.getSpaces()[selected];
+                                temp.setAnimateType(1);
+                                //stat_backward[turn] += 6;
                             }else{
                                 Pawn temp = gb.getSpaces()[selected];
                                 temp.setAnimateType(0);
@@ -351,6 +360,8 @@ class Sorry{
             safeAdd(gb.countBackward(index, 4, c));
         }else if(card == 5){
             safeAdd(gb.countForward(index, 5, c));
+        }else if(card == 6){
+            safeAdd(gb.countBackward(index,6,gb.getSpaces()[index].getPawnColor()));
         }else if(card == 7){
             if(remainder == 0){
                 for(int i = 1; i <= 7; i++){
