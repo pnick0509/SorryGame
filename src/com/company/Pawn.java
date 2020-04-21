@@ -104,6 +104,11 @@ class Pawn{
         return displayGoal == displayIndex;
     }
 
+    public void ensurePosition(int index){
+        iv.setX(getSquareX(index)*squareSize);
+        iv.setY(getSquareY(index)*squareSize);
+    }
+
     private int getSquareX(int index){
         if(index <= 30){
             return index;

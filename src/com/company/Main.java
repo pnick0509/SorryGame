@@ -144,6 +144,11 @@ public class Main extends Application {
                             }
                         }
                     }else{
+                        for(int i = 0; i <= 119; i++){
+                            if(game.getBoard().getSpaces()[i] != null){
+                                game.getBoard().getSpaces()[i].ensurePosition(i);
+                            }
+                        }
                         System.out.println(aiQueued);
                         if(aiQueued != null){
                             Timer wait = new Timer(0.5);
