@@ -29,7 +29,7 @@ public class Main extends Application {
     Scene scene = new Scene(root, colNum*squareSize, rowNum*squareSize);
     int[] points = new int[6];
     int screen;
-    String header = "Sorry! Cycle 3.2";
+    String header = "Sorry! Cycle 3.3";
     int[] playerSetting = new int[6]; //0 for off, 1 for player, 2 for computer, 3 for "hard" computer
 
     TextField[] nameField = new TextField[6];
@@ -220,31 +220,31 @@ public class Main extends Application {
 
                     //Draw numbers
                     //Starts
-                    if(col == 9 && row == 1){
+                    if(col == 9 && row == 1 && playerSetting[0] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().startAmount(0)+".png");
-                    }else if(col == 24 && row == 1){
+                    }else if(col == 24 && row == 1 && playerSetting[1] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().startAmount(1)+".png");
-                    }else if(col == 29 && row == 9){
+                    }else if(col == 29 && row == 9 && playerSetting[2] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().startAmount(2)+".png");
-                    }else if(col == 21 && row == 14){
+                    }else if(col == 21 && row == 14 && playerSetting[3] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().startAmount(3)+".png");
-                    }else if(col == 6 && row == 14){
+                    }else if(col == 6 && row == 14 && playerSetting[4] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().startAmount(4)+".png");
-                    }else if(col == 1 && row == 6){
+                    }else if(col == 1 && row == 6 && playerSetting[5] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().startAmount(5)+".png");
                     }
                     //Homes
-                    else if(col == 7 && row == 6){
+                    else if(col == 7 && row == 6 && playerSetting[0] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().homeAmount(0)+".png");
-                    }else if(col == 22 && row == 6){
+                    }else if(col == 22 && row == 6 && playerSetting[1] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().homeAmount(1)+".png");
-                    }else if(col == 24 && row == 7){
+                    }else if(col == 24 && row == 7 && playerSetting[2] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().homeAmount(2)+".png");
-                    }else if(col == 23 && row == 9){
+                    }else if(col == 23 && row == 9 && playerSetting[3] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().homeAmount(3)+".png");
-                    }else if(col == 8 && row == 9){
+                    }else if(col == 8 && row == 9 && playerSetting[4] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().homeAmount(4)+".png");
-                    }else if(col == 6 && row == 8){
+                    }else if(col == 6 && row == 8 && playerSetting[5] != 0){
                         placeTile(row, col, "Board/"+game.getBoard().homeAmount(5)+".png");
                     }
                 }
@@ -317,34 +317,58 @@ public class Main extends Application {
     public String spaceImage(int index){
         String s = "Board/";
         if((index >= 90 && index <= 94) || index == 120 || index == 126){
-            s+= "Square_Red";
-            if(game.getColorblind()){
-                s += "_CB";
+            if(playerSetting[0] != 0){
+                s+= "Square_Red";
+                if(game.getColorblind()){
+                    s += "_CB";
+                }
+            }else{
+                s+= "Disabled";
             }
         }else if((index >= 95 && index <= 99) || index == 121 || index == 127){
-            s+= "Square_Orange";
-            if(game.getColorblind()){
-                s += "_CB";
+            if(playerSetting[1] != 0){
+                s+= "Square_Orange";
+                if(game.getColorblind()){
+                    s += "_CB";
+                }
+            }else{
+                s+= "Disabled";
             }
         }else if((index >= 100 && index <= 104) || index == 122 || index == 128){
-            s+= "Square_Yellow";
-            if(game.getColorblind()){
-                s += "_CB";
+            if(playerSetting[2] != 0){
+                s+= "Square_Yellow";
+                if(game.getColorblind()){
+                    s += "_CB";
+                }
+            }else{
+                s+= "Disabled";
             }
         }else if((index >= 105 && index <= 109) || index == 123 || index == 129){
-            s+= "Square_Green";
-            if(game.getColorblind()){
-                s += "_CB";
+            if(playerSetting[3] != 0){
+                s+= "Square_Green";
+                if(game.getColorblind()){
+                    s += "_CB";
+                }
+            }else{
+                s+= "Disabled";
             }
         }else if((index >= 110 && index <= 114) || index == 124 || index == 130){
-            s+= "Square_Blue";
-            if(game.getColorblind()){
-                s += "_CB";
+            if(playerSetting[4] != 0){
+                s+= "Square_Blue";
+                if(game.getColorblind()){
+                    s += "_CB";
+                }
+            }else{
+                s+= "Disabled";
             }
         }else if((index >= 115 && index <= 119) || index == 125 || index == 131){
-            s+= "Square_Purple";
-            if(game.getColorblind()){
-                s += "_CB";
+            if(playerSetting[5] != 0){
+                s+= "Square_Purple";
+                if(game.getColorblind()){
+                    s += "_CB";
+                }
+            }else{
+                s+= "Disabled";
             }
         }else if(index <= 89 && ((index%15 >= 6 && index%15 <= 9) || (index%15 >= 0 && index%15 <= 3) || index%15 >= 14)){
             s+= "Slide_";
