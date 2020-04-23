@@ -240,7 +240,8 @@ public class Ai {
                 Pawn[] spaces = game.getBoard().getSpaces();
                 for (int i = 0; i < spaces.length; i++) {
                     if (spaces[i] != null) {
-                        if (spaces[i].getPawnColor() == this.playerColor) {
+                        if (spaces[i].getPawnColor() == this.playerColor && card != 6 ||
+                            spaces[i].getPawnColor() != this.playerColor && card == 6) {
                             myPawns.add(i);
                         }
                     }
