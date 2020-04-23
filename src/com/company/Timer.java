@@ -6,12 +6,12 @@ public class Timer {
     long waitFor; //How much time to wait for in nano seconds
 
     Timer(double secs){
-        restart();
         set(secs);
     }
 
     public void restart(){
         markTime = System.nanoTime();
+        //System.out.println("Nano: "+markTime+" "+waitFor);
     }
 
     public void set(double secs){

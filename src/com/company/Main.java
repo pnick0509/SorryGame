@@ -135,7 +135,7 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 if(pawnTimer.checkTime() && screen == 1){
-                    System.out.println("PAWNLIST B"+pawnList);
+                    //System.out.println("PAWNLIST B"+pawnList);
                     if(pawnList.size() > 0){
                         for(int i = 0; i < pawnList.size(); i++){
                             if(pawnList.get(i).animate()){
@@ -149,7 +149,7 @@ public class Main extends Application {
                                 game.getBoard().getSpaces()[i].ensurePosition(i);
                             }
                         }
-                        System.out.println(aiQueued);
+                        //System.out.println(aiQueued);
                         if(aiQueued != null){
                             Timer wait = new Timer(0.5);
                             while(!wait.checkTime());
@@ -161,6 +161,7 @@ public class Main extends Application {
                 }
                 if(!cardUpdated && pawnList.isEmpty() && screen == 1){
                     updateCardImage();
+                    System.out.println("CarD");
                 }
             }
         }.start();
@@ -188,6 +189,8 @@ public class Main extends Application {
     }
 
     public void update(Stage primaryStage) {
+        cardUpdated = false;
+
         screen = 1;
         System.out.println("Update");
         root.getChildren().clear();
@@ -870,7 +873,7 @@ public class Main extends Application {
     }
 
     public void updateCardImage(){
-        cardUpdated = false;
+        cardUpdated = true;
 
         cardBackImage = setNextBack(game.getTurn());
         Image cardBack = new Image(cardBackImage);
