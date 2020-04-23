@@ -25,6 +25,8 @@ class Sorry{
     private int[] stat_forward = new int[6];
     private int[] stat_backward = new int[6];
     private int[] stat_slide = new int[6];
+    private int[] stat_pawnsOut = new int[6];
+    private int[] stat_swap = new int[6];
 
     private Main main;
 
@@ -40,8 +42,24 @@ class Sorry{
         return stat_slide;
     }
 
+    public int[] getStat_pawnsOut(){
+        return stat_pawnsOut;
+    }
+
+    public int[] getStat_swap(){
+        return stat_slide;
+    }
+
     public void addStat_slide(int index, int amount){
         stat_slide[index] += amount;
+    }
+
+    public void addStat_pawnsOut(int index, int amount){
+        stat_pawnsOut[index] += amount;
+    }
+
+    public void addStat_swap(int index, int amount){
+        stat_swap[index] += amount;
     }
 
     //Starts a new game with six players
@@ -256,6 +274,8 @@ class Sorry{
                                 stat_forward[turn] += 11;
                             }else{
                                 one.setAnimateType(2);
+                                addStat_swap(gb.getValue(one.getPawnColor()),1);
+                                addStat_swap(gb.getValue(two.getPawnColor()),1);
                                 two.setAnimateType(2);
                             }
                             gb.setSpace(index,two);

@@ -847,6 +847,14 @@ public class Main extends Application {
         for(int i = 0; i < 6; i++){
             DrawText(""+game.getStat_slide()[i],115+220*(i+1),42+50*3,20,true);
         }
+        DrawText("Pawns from Start",115,42+50*4,20,true);
+        for(int i = 0; i < 6; i++){
+            DrawText(""+game.getStat_pawnsOut()[i],115+220*(i+1),42+50*4,20,true);
+        }
+        DrawText("Times Swapped",115,42+50*5,20,true);
+        for(int i = 0; i < 6; i++){
+            DrawText(""+game.getStat_swap()[i],115+220*(i+1),42+50*5,20,true);
+        }
 
         //Again Button
         Button again = new Button();

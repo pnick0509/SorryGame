@@ -84,6 +84,7 @@ class GameBoard{
     public void newPawn(pColor c, int index){
         spaces[index] = new Pawn(c,this);
         //spaces[index].pawnImage(c,game.getColorblind(),false);
+        game.addStat_pawnsOut(getValue(c),1);
         updatePawn(index);
     }
 
