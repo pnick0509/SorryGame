@@ -20,6 +20,7 @@ class Sorry{
 
     private boolean cardCheats;
     private boolean colorBlind;
+    private boolean pawnStartOut;
 
     private int[] stat_forward = new int[6];
     private int[] stat_backward = new int[6];
@@ -63,6 +64,7 @@ class Sorry{
 
         cardCheats = true;
         colorBlind = false;
+        pawnStartOut = false;
 
         this.main = main;
     }
@@ -595,6 +597,14 @@ class Sorry{
         cardCheats = !cardCheats;
     }
 
+    public boolean getPawnStartOut(){
+        return pawnStartOut;
+    }
+
+    public void togglePawnStartOut(){
+        pawnStartOut = !pawnStartOut;
+    }
+
     public int getWinner(){
         return winner;
     }
@@ -678,6 +688,13 @@ class Sorry{
             }
         }
 
+    }
+
+    public void presetPawnStart(){
+        for(int i = 0; i < TurnOrder.size(); i++){
+            gb.setStart(TurnOrder.get(i),3);
+            gb.newPawn(pColor.values()[i],gb.mySpawn(i));
+        }
     }
 
     public Main getMain(){

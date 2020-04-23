@@ -693,10 +693,10 @@ public class Main extends Application {
         //Draw options
         //Colorblind
         btn = new Button();
-        btn.setLayoutX(1330);
+        btn.setLayoutX(1330-100);
         btn.setLayoutY(200);
-        btn.setMinSize(200,50);
-        btn.setMaxSize(200,50);
+        btn.setMinSize(200+100,50);
+        btn.setMaxSize(200+100,50);
         btn.setFont(getFont(20));
         String txt = "Color Blind: ";
         if(game.getColorblind()){
@@ -717,10 +717,10 @@ public class Main extends Application {
 
         //Infinite Deck
         btn = new Button();
-        btn.setLayoutX(1330);
+        btn.setLayoutX(1330-100);
         btn.setLayoutY(200+75);
-        btn.setMinSize(200,50);
-        btn.setMaxSize(200,50);
+        btn.setMinSize(200+100,50);
+        btn.setMaxSize(200+100,50);
         btn.setFont(getFont(20));
         txt = "Infinite Deck: ";
         if(!game.getCardCheats()){
@@ -733,6 +733,30 @@ public class Main extends Application {
             @Override
             public void handle (ActionEvent event) {
                 game.toggleCardCheats();
+                StartScreen(primaryStage,game);
+                System.out.println("Handle!");
+            }
+        });
+        root.getChildren().add(btn);
+
+        //Pawn Start Out
+        btn = new Button();
+        btn.setLayoutX(1330-100);
+        btn.setLayoutY(200+75*2);
+        btn.setMinSize(200+100,50);
+        btn.setMaxSize(200+100,50);
+        btn.setFont(getFont(20));
+        txt = "Start Pawn Out: ";
+        if(game.getPawnStartOut()){
+            txt += "On";
+        }else{
+            txt += "Off";
+        }
+        btn.setText(txt);
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                game.togglePawnStartOut();
                 StartScreen(primaryStage,game);
                 System.out.println("Handle!");
             }
@@ -767,6 +791,11 @@ public class Main extends Application {
                         playerNames[b] = nameField[b].getText();
                         System.out.println("b:: "+nameField[b].getText());
                     }
+
+                    if(game.getPawnStartOut()){
+                        game.presetPawnStart();
+                    }
+
                     int c;
                     Random r = new Random();
                     do{
